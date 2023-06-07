@@ -1,0 +1,130 @@
+{
+    "2023-06-07T09:10:40.268894": {
+        "node": [
+            {
+                "name": "1",
+                "der": "pcc",
+                "Vmag_phase_A_rms": 6923.82,
+                "Vmag_phase_B_rms": 6886.37,
+                "Vmag_phase_C_rms": 6886.87,
+                "Pmag_phase_A_rms": -102997.01,
+                "Pmag_phase_B_rms": -96656.63,
+                "Pmag_phase_C_rms": -103894.53,
+                "Qmag_phase_A_rms": -3010.67,
+                "Qmag_phase_B_rms": 2837.66,
+                "Qmag_phase_C_rms": 5529.64,
+                "SOC": 0.0
+            },
+            {
+                "name": "2",
+                "der": "genset",
+                "Vmag_phase_A_rms": 6922.7,
+                "Vmag_phase_B_rms": 6885.46,
+                "Vmag_phase_C_rms": 6884.57,
+                "Pmag_phase_A_rms": -2381.26,
+                "Pmag_phase_B_rms": 4565.09,
+                "Pmag_phase_C_rms": -2085.86,
+                "Qmag_phase_A_rms": -2625.41,
+                "Qmag_phase_B_rms": 2543.15,
+                "Qmag_phase_C_rms": 6325.7,
+                "SOC": 0.0
+            },
+            {
+                "name": "3",
+                "der": "load",
+                "Vmag_phase_A_rms": 6920.95,
+                "Vmag_phase_B_rms": 6884.3,
+                "Vmag_phase_C_rms": 6882.58,
+                "Pmag_phase_A_rms": 15815.44,
+                "Pmag_phase_B_rms": 16206.59,
+                "Pmag_phase_C_rms": 16491.75,
+                "Qmag_phase_A_rms": 7283.31,
+                "Qmag_phase_B_rms": 7425.33,
+                "Qmag_phase_C_rms": 7818.4,
+                "SOC": 0.0
+            },
+            {
+                "name": "4",
+                "der": "bess",
+                "Vmag_phase_A_rms": 6918.93,
+                "Vmag_phase_B_rms": 6882.4,
+                "Vmag_phase_C_rms": 6879.41,
+                "Pmag_phase_A_rms": 92431.66,
+                "Pmag_phase_B_rms": 91142.27,
+                "Pmag_phase_C_rms": 90021.88,
+                "Qmag_phase_A_rms": -772.77,
+                "Qmag_phase_B_rms": -977.53,
+                "Qmag_phase_C_rms": -349.99,
+                "SOC": 18.99
+            },
+            {
+                "name": "5",
+                "der": "pv",
+                "Vmag_phase_A_rms": 6923.87,
+                "Vmag_phase_B_rms": 6884.29,
+                "Vmag_phase_C_rms": 6882.17,
+                "Pmag_phase_A_rms": -246244.17,
+                "Pmag_phase_B_rms": -245299.92,
+                "Pmag_phase_C_rms": -245146.39,
+                "Qmag_phase_A_rms": -3985.96,
+                "Qmag_phase_B_rms": -2881.71,
+                "Qmag_phase_C_rms": -4969.18,
+                "SOC": 0.0
+            }
+        ],
+        "branch": [
+            {
+                "initial_node": "1",
+                "final_node": "2",
+                "Imag_phase_A_rms": 0.65,
+                "Imag_phase_B_rms": 0.81,
+                "Imag_phase_C_rms": 0.98,
+                "Active_power_flow_phase_A": 0.13,
+                "Active_power_flow_phase_B": -0.21,
+                "Active_power_flow_phase_C": 0.13,
+                "Reactive_power_flow_phase_A": 0.24,
+                "Reactive_power_flow_phase_B": 0.31,
+                "Reactive_power_flow_phase_C": 0.68
+            },
+            {
+                "initial_node": "1",
+                "final_node": "3",
+                "Imag_phase_A_rms": 4.77,
+                "Imag_phase_B_rms": 4.85,
+                "Imag_phase_C_rms": 4.91,
+                "Active_power_flow_phase_A": -9.29,
+                "Active_power_flow_phase_B": -9.7,
+                "Active_power_flow_phase_C": -9.88,
+                "Reactive_power_flow_phase_A": 9.29,
+                "Reactive_power_flow_phase_B": 8.96,
+                "Reactive_power_flow_phase_C": 9.42
+            },
+            {
+                "initial_node": "1",
+                "final_node": "4",
+                "Imag_phase_A_rms": 8.87,
+                "Imag_phase_B_rms": 8.75,
+                "Imag_phase_C_rms": 8.59,
+                "Active_power_flow_phase_A": -29.61,
+                "Active_power_flow_phase_B": -29.6,
+                "Active_power_flow_phase_C": -29.4,
+                "Reactive_power_flow_phase_A": 4.33,
+                "Reactive_power_flow_phase_B": 2.0,
+                "Reactive_power_flow_phase_C": 1.39
+            },
+            {
+                "initial_node": "1",
+                "final_node": "5",
+                "Imag_phase_A_rms": 31.86,
+                "Imag_phase_B_rms": 31.8,
+                "Imag_phase_C_rms": 31.68,
+                "Active_power_flow_phase_A": 411.74,
+                "Active_power_flow_phase_B": 410.84,
+                "Active_power_flow_phase_C": 407.55,
+                "Reactive_power_flow_phase_A": -40.13,
+                "Reactive_power_flow_phase_B": -9.98,
+                "Reactive_power_flow_phase_C": 0.3
+            }
+        ]
+    }
+}
