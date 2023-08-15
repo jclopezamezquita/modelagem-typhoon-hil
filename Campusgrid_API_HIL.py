@@ -7,14 +7,12 @@ import requests
 
 
 # Load model of the Typhoon HIL
-#hil.load_model(file=r'C:\Users\jessi\Downloads\Doutorado\MERGE\Etapas\E75 - Software de gestao de microrredes\HIL\e75-thyphoon-hil-main\e75-thyphoon-hil\9. CAMPUSGRID_Meters\CAMPUSGRID Target files\CAMPUSGRID.cpd', offlineMode=False, vhil_device=True)
 hil.load_model(file=r'C:\Users\jessi\Downloads\Doutorado\MERGE\Etapas\E75 - Software de gestao de microrredes\Modelagem Typhoon HIL\e75-thyphoon-hil\Modelagem Campusgrid no Typhoon\CAMPUSGRID Target files\CAMPUSGRID.cpd', offlineMode=False, vhil_device=True)
 
 #Load settings of model
-# hil.load_settings_file(file=r'C:\Users\jessi\Downloads\Doutorado\MERGE\Etapas\E75 - Software de gestao de microrredes\HIL\e75-thyphoon-hil-main\e75-thyphoon-hil\9. CAMPUSGRID_Meters\CAMPUSGRID Target files\init.runx')
 hil.load_settings_file(file=r'C:\Users\jessi\Downloads\Doutorado\MERGE\Etapas\E75 - Software de gestao de microrredes\Modelagem Typhoon HIL\e75-thyphoon-hil\Modelagem Campusgrid no Typhoon\CAMPUSGRID Target files\init.runx')
 
-hil.set_scada_input_value('Battery ESS (Generic) UI1.Initial SOC', 18.0)
+hil.set_scada_input_value('Battery ESS (Generic) UI1.Initial SOC', 40.0)
 
 # Start simulation
 hil.start_simulation()
