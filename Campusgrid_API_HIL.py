@@ -6,13 +6,11 @@ import math
 import requests
 
 
-# Load model of the Typhoon HIL
+# Load model of the Typhoon HIL - .cpd file
 hil.load_model(file=r'C:\Users\jessi\Downloads\Doutorado\MERGE\Etapas\E75 - Software de gestao de microrredes\Modelagem Typhoon HIL\e75-thyphoon-hil\Modelagem Campusgrid no Typhoon\CAMPUSGRID Target files\CAMPUSGRID.cpd', offlineMode=False, vhil_device=True)
 
-#Load settings of model
+# Load settings of model - .runx file
 hil.load_settings_file(file=r'C:\Users\jessi\Downloads\Doutorado\MERGE\Etapas\E75 - Software de gestao de microrredes\Modelagem Typhoon HIL\e75-thyphoon-hil\Modelagem Campusgrid no Typhoon\CAMPUSGRID Target files\init.runx')
-
-hil.set_scada_input_value('Battery ESS (Generic) UI1.Initial SOC', 40.0)
 
 # Start simulation
 hil.start_simulation()
@@ -28,8 +26,8 @@ hil.set_scada_input_value('Diesel Genset (Generic) UI1.Enable', 1.0) #DG contact
 hil.set_scada_input_value('PV Power Plant (Generic) UI1.Enable', 1.0) #PV contactor closed
 hil.set_scada_input_value('Variable Load (Generic) UI1.Enable', 1.0) #Load contactor closed
 
-#********************Inputs BESS***********************
-#
+#******************** Inputs BESS ***********************
+hil.set_scada_input_value('Battery ESS (Generic) UI1.Initial SOC', 40.0)
 hil.set_scada_input_value('Battery ESS (Generic) UI1.Initial SOH', 90.0)
 hil.set_scada_input_value('Battery ESS (Generic) UI1.Qref', 0.0)
 hil.set_scada_input_value('Battery ESS (Generic) UI1.Max SOC', 100.0)
@@ -39,7 +37,7 @@ hil.set_scada_input_value('Battery ESS (Generic) UI1.V alarm lower limit', 0.5)
 hil.set_scada_input_value('Battery ESS (Generic) UI1.V alarm upper limit', 1.5)
 hil.set_scada_input_value('Battery ESS (Generic) UI1.Converter mode', 0.0) #BESS in grid following mode
 
-#********************Inputs DG***********************
+#******************** Inputs Genset ***********************
 # hil.set_scada_input_value('Diesel Genset (Generic) UI1.Pref', 0.5)
 hil.set_scada_input_value('Diesel Genset (Generic) UI1.Fref', 1.0)
 hil.set_scada_input_value('Diesel Genset (Generic) UI1.Fref rate of change', 0.02)
@@ -53,7 +51,7 @@ hil.set_scada_input_value('Diesel Genset (Generic) UI1.Sync timeout', 20.0)
 hil.set_scada_input_value('Diesel Genset (Generic) UI1.V alarm lower limit', 0.5)
 hil.set_scada_input_value('Diesel Genset (Generic) UI1.Operation mode', 0.0) #DG in grid following mode
 
-#********************Inputs PV***********************
+#******************** Inputs PV ***********************
 # hil.set_scada_input_value('PV Power Plant (Generic) UI1.Irradiance', 1000.0)
 hil.set_scada_input_value('PV Power Plant (Generic) UI1.LVRT enable', 0.0)
 hil.set_scada_input_value('PV Power Plant (Generic) UI1.LVRT Q contribution', 2.0)
@@ -65,7 +63,7 @@ hil.set_scada_input_value('PV Power Plant (Generic) UI1.Pcurtailment rate of cha
 hil.set_scada_input_value('PV Power Plant (Generic) UI1.V alarm lower limit', 0.5)
 hil.set_scada_input_value('PV Power Plant (Generic) UI1.V alarm upper limit', 1.5)
 
-#********************Inputs Load***********************
+#******************** Inputs Load ***********************
 # hil.set_scada_input_value('Variable Load (Generic) UI1.Pref', 0.2)
 hil.set_scada_input_value('Variable Load (Generic) UI1.P dependency type', 0.0)
 hil.set_scada_input_value('Variable Load (Generic) UI1.P(f) k1', 0.0)
@@ -78,15 +76,17 @@ hil.set_scada_input_value('Variable Load (Generic) UI1.F alarm lower limit', 0.5
 hil.set_scada_input_value('Variable Load (Generic) UI1.V alarm lower limit', 0.5)
 hil.set_scada_input_value('Variable Load (Generic) UI1.V alarm upper limit', 1.5)
 
-# To compute active and reactive power flow
+# Line parameters file will be used to compute active and reactive power flow
 with open('Line_parameters.json') as json_file:
     impedance = json.load(json_file)
 
+# Create the new data dictionary
 new_data = {}
 
+# Local time
 # Time struct: YYYY, MM, DD, HH, Mim, Sec, wday, yday
-x = time.localtime()
-print(x)
+local_time = time.localtime()
+print("Time: ", local_time)
 
 # Sets initial time of the simulation
 initial_time = datetime.now()
@@ -155,25 +155,28 @@ while True:
     with open('dispatch_file.json') as json_file:
         dispatch_file = json.load(json_file)
 
-    # Time struct of the x: YYYY, MM, DD, HH, Mim, Sec, wday, yday
-    # x = [YYYY, MM, DD, HH, Mim, Sec, wday, yday]
-    index = x[3]
+    # Time struct of the local time = [YYYY, MM, DD, HH, Mim, Sec, wday, yday]
+    index = local_time[3]
+
+    # Insert reference power of the bess and genset with dispatch file
     Pref_bat = dispatch_file["bess"][index]
     Pref_genset = dispatch_file["genset"][index]
 
-    index_5min = ((index * 60) + x[4])//5
-    print("Possição da lista: ", index_5min, "-> Horário: ", time_now)
+    # Insert reference power of the pload and qload (active and reactive power) with profiles
+    index_5min = ((index * 60) + local_time[4])//5  # Define the index to 5 minutes
+    print("Step in the list: ", index_5min, "-> Hour: ", time_now)
     Pref_pload = profiles["pload"][index_5min]
     Pref_qload = profiles["qload"][index_5min]
     Irradiance = (profiles["irradiance"][index_5min]) * max_irradiance
     
-    print("Pref_bat:", Pref_bat)
-    print("Pref_genset:", Pref_genset)
-    print("Pref_pload:", Pref_pload)
-    print("Pref_qload:", Pref_qload)
-    print("Irradiance:", Irradiance)
+    print("Pref_bat: ", Pref_bat)
+    print("Pref_genset: ", Pref_genset)
+    print("Pref_pload: ", Pref_pload)
+    print("Pref_qload: ", Pref_qload)
+    print("Irradiance: ", Irradiance)
     print("------------------------\n")
 
+    # Sets the input value of the BESS, Genset, load and PV
     hil.set_scada_input_value('Battery ESS (Generic) UI1.Pref', Pref_bat)
 
     if Pref_bat == 0.0:
@@ -359,25 +362,26 @@ while True:
     if time_clean_data_logger <= time_now:
         first_register = next(iter(new_data))
         new_data.pop(first_register)
-        print("Irá limpar o registro:", first_register)
-        print("E adicionar o registro:", time_now)
+        print("Clean the register: ", first_register)
+        print("Add the register: ", time_now)
         
-    # Write the dictionary in a json file
+    # Write the dictionary data logger in a json file
     with open('data_logger.json', 'w') as outfile:
         json.dump(new_data, outfile, indent=4)
-
+    
     # Wait 60 seconds
     time.sleep(60)
 
     # Updates the current time 
-    x = time.localtime()
+    local_time = time.localtime()
 
-    # Update the dispatch at 23h e 59 min
-    if x[3] == 23 and x[4] == 59:
+    # Update the dispatch at 23h e 58 min
+    if local_time[3] == 23 and local_time[4] == 59:
         dispatch_requests()
 
+    # Define the hour of the stop simulation
     # Time struct: YYYY, MM, DD, HH, Mim, Sec, wday, yday
-    if x[1] == 2 and x[2] == 5 and x[3] == 15:
+    if local_time[1] == 2 and local_time[2] == 5 and local_time[3] == 15:
         break
 
 # Stop simulation
