@@ -1,0 +1,101 @@
+<ui_settings>
+    <version>2.8</version>
+    <model_locked>False</model_locked>
+    <canvas_bg_color>#ffffff</canvas_bg_color>
+    <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
+# available for use in all Macro and Expression scripts.
+# NOTE: This code is always executed prior to simulation start.
+
+# The variable 'SETTINGS_DIR' holds the directory where the loaded Panel .cus file is located.
+# Also you can call the 'get_settings_dir_path()' function in any
+# Macro and Expression script to get the same directory.
+SETTINGS_DIR = get_settings_dir_path()
+
+# The 'add_to_python_path(folder)' function can be used to add a custom folder
+# with Python files and packages to the PYTHONPATH. After a folder is added, all Python
+# files and Python packages from it can be imported into the SCADA Namespace.
+
+# HIL API is imported as 'hil'
+# SCADA API is imported as 'panel'
+# SCADA API constants are imported as 'api_const'
+# Numpy module is imported as 'np'
+# Scipy module is imported as 'sp'
+# Schematic Editor model namespace is imported as 'scm'
+# Function for printing to the HIL SCADA Message log is imported as 'printf'.
+
+]]></initialization_code>
+    <components>
+        <component_data>
+                <id>77361d41f82b11ee9f92a81e84522987</id>
+                <name><![CDATA[Check box]]></name>
+                <type>CheckBoxMacro</type>
+                <description><![CDATA[]]></description>
+                <on_use_code active="True"><![CDATA[# HIL API is imported as 'hil'
+# SCADA API is imported as 'panel'
+# SCADA API constants are imported as 'api_const'
+# 'WIDGET_HANDLE' constant holds the WidgetHandle object of this widget.
+# This object can be used as an argument in SCADA API functions.
+# NOTE: entered value is available through variable 'inputValue'
+
+if inputValue:
+    # do something when checkbox is checked
+    pass
+else:
+    # do something when checkbox is unchecked
+    pass
+
+]]></on_use_code>
+                <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
+# NOTE: Variables specified here will be available in other handlers.
+# HIL API is imported as 'hil'
+# SCADA API is imported as 'panel'
+# SCADA API constants are imported as 'api_const'
+# 'WIDGET_HANDLE' constant holds the WidgetHandle object of this widget.
+# This object can be used as an argument in SCADA API functions.
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it,
+# widget value won't be changed.
+widgetValue = None
+]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+# SCADA API is imported as 'panel'
+# SCADA API constants are imported as 'api_const'
+# 'WIDGET_HANDLE' constant holds the WidgetHandle object of this widget.
+# This object can be used as an argument in SCADA API functions.
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it,
+# widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
+                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
+# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+# SCADA API is imported as 'panel'
+# SCADA API constants are imported as 'api_const'
+# 'WIDGET_HANDLE' constant holds the WidgetHandle object of this widget.
+# This object can be used as an argument in SCADA API functions.
+
+# Change the widget value by setting this variable.
+# NOTE: If you do not specify a 'widgetValue' variable or assign 'None' to it,
+# the widget value will not be changed.
+widgetValue = None
+]]></on_timer_code>
+                <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
+                <inputValue><![CDATA[False]]></inputValue>
+                <widget_settings>
+                    <x>136</x>
+                    <y>96</y>
+                    <width>80</width>
+                    <height>32</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                    <hierarchy_position><![CDATA[1]]></hierarchy_position>
+                    <is_background><![CDATA[False]]></is_background>
+                    <label><![CDATA[]]></label>
+                    <use_label>False</use_label>
+                </widget_settings>
+            </component_data>
+        </components>
+</ui_settings>
