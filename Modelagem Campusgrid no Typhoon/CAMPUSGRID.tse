@@ -1,11 +1,10 @@
 version = 4.2
 
 //
-// Saved by sw version: 2022.1 SP1
-// Save timestamp: 01-Jun-2022 @ 03:35:06 PM
+// Saved by sw version: 2022.4 SP1
 //
 
-model "campusgrid" {
+model "CAMPUSGRID" {
     configuration {
         hil_device = "VHIL+"
         hil_configuration_id = 1
@@ -36,6 +35,7 @@ model "campusgrid" {
         cpl_dynamics_analysis = False
         export_ss_to_pickle = False
         ground_scope_core = True
+        dss_num_tol = 1e-15
         cce_platform = "generic"
         cce_use_relative_names = False
         cce_type_mapping_real = "double"
@@ -86,9 +86,13 @@ model "campusgrid" {
         ]
 
         component "core/Diesel Genset (Generic)" "Diesel Genset (Generic)1" {
+            Omega_nom = "1800"
             Pnom = "150e3"
             Snom = "160e3"
+            Vnom_LL = "480"
             Vnom_sec_LL = "11900"
+            fnom = "60"
+            include_transformer = "True"
         }
         [
             position = 7784, 9080
@@ -3067,6 +3071,1980 @@ model "campusgrid" {
             size = 48, 72
         ]
 
+        component "core/Variable Load (Generic)" "Variable EV1 (Generic)" {
+            Pnom = "40e3"
+            Snom = "41e3"
+            Vnom_LL = "480"
+            Vnom_sec_LL = "11900"
+            fnom = "60"
+            include_transformer = "True"
+            resistance_cont = "1.0"
+        }
+        [
+            position = 9408, 9088
+            size = 184, 144
+        ]
+
+        component Subsystem "Variable EV1 (Generic) UI" {
+            layout = dynamic
+            component gen_probe Enable_fb {
+            }
+            [
+                position = 7952, 8024
+            ]
+
+            component gen_probe PFmeas {
+                streaming_en = "True"
+            }
+            [
+                position = 7600, 8200
+            ]
+
+            component src_scada_input Qref {
+                execution_rate = "inherit"
+                max = "1e8"
+                min = "-1e8"
+                unit = "pu"
+            }
+            [
+                position = 8600, 7736
+            ]
+
+            component src_scada_input Enable {
+                execution_rate = "inherit"
+                max = "1"
+                min = "0"
+                unit = ""
+            }
+            [
+                position = 8600, 7568
+            ]
+
+            component src_scada_input Pref {
+                execution_rate = "inherit"
+                max = "1e8"
+                min = "0"
+                unit = "pu"
+            }
+            [
+                position = 8600, 7680
+            ]
+
+            component gen_probe Vload_rms_meas_V {
+                streaming_en = "True"
+            }
+            [
+                position = 7568, 8216
+            ]
+
+            component gen_probe Qmeas_kVAr {
+                streaming_en = "True"
+            }
+            [
+                position = 7664, 8168
+            ]
+
+            component gen_probe Smeas_kVA {
+            }
+            [
+                position = 7632, 8184
+            ]
+
+            component gen_probe Pnom_kW {
+            }
+            [
+                position = 7856, 8072
+            ]
+
+            component gen_probe Qref_fb_kVAr {
+                streaming_en = "True"
+            }
+            [
+                position = 7888, 8056
+            ]
+
+            component gen_probe Snom_kVA {
+            }
+            [
+                position = 7792, 8104
+            ]
+
+            component gen_probe Fmeas_Hz {
+                streaming_en = "True"
+            }
+            [
+                position = 7760, 8120
+            ]
+
+            component gen_probe Pref_fb_kW {
+                streaming_en = "True"
+            }
+            [
+                position = 7920, 8040
+            ]
+
+            component gen_probe Qnom_kVAr {
+            }
+            [
+                position = 7824, 8088
+            ]
+
+            component gen_probe Vgrid_rms_meas_kV {
+            }
+            [
+                position = 7728, 8136
+            ]
+
+            component gen_probe Pmeas_kW {
+                streaming_en = "True"
+            }
+            [
+                position = 7696, 8152
+            ]
+
+            component gen_probe MCB_status {
+            }
+            [
+                position = 7536, 8232
+            ]
+
+            component gen_probe alarm_msg {
+            }
+            [
+                position = 7504, 8248
+            ]
+
+            component src_scada_input "Reset alarms" {
+                execution_rate = "inherit"
+                max = "1"
+                min = "0"
+                unit = ""
+            }
+            [
+                position = 8600, 7624
+            ]
+
+            component src_scada_input "Pref rate of change" {
+                def_value = "0.1"
+                execution_rate = "inherit"
+                min = "0"
+                unit = "pu/s"
+            }
+            [
+                position = 8600, 7792
+            ]
+
+            component src_scada_input "Qref rate of change" {
+                def_value = "0.1"
+                execution_rate = "inherit"
+                min = "0"
+                unit = "pu/s"
+            }
+            [
+                position = 8600, 7848
+            ]
+
+            component src_scada_input "P dependency type" {
+                def_value = "0.0"
+                execution_rate = "inherit"
+                max = "2"
+                min = "0"
+                unit = ""
+            }
+            [
+                position = 8600, 7904
+            ]
+
+            component src_scada_input "Q dependency type" {
+                def_value = "0.0"
+                execution_rate = "inherit"
+                max = "2"
+                min = "0"
+                unit = ""
+            }
+            [
+                position = 8600, 7960
+            ]
+
+            component src_scada_input "P(V) k1" {
+                def_value = "0.0"
+                execution_rate = "inherit"
+                max = "100"
+                min = "-100"
+                unit = ""
+            }
+            [
+                position = 8600, 8016
+            ]
+
+            component src_scada_input "P(V) k2" {
+                def_value = "0.0"
+                execution_rate = "inherit"
+                max = "100"
+                min = "-100"
+                unit = "1/pu"
+            }
+            [
+                position = 8600, 8072
+            ]
+
+            component src_scada_input "Q(V) k1" {
+                def_value = "0.0"
+                execution_rate = "inherit"
+                max = "100"
+                min = "-100"
+                unit = ""
+            }
+            [
+                position = 8600, 8248
+            ]
+
+            component src_scada_input "Q(V) k2" {
+                def_value = "0.0"
+                execution_rate = "inherit"
+                max = "100"
+                min = "-100"
+                unit = "1/pu"
+            }
+            [
+                position = 8600, 8304
+            ]
+
+            component src_scada_input "P(f) k1" {
+                def_value = "0.0"
+                execution_rate = "inherit"
+                max = "100"
+                min = "-100"
+                unit = ""
+            }
+            [
+                position = 8600, 8128
+            ]
+
+            component src_scada_input "P(f) k2" {
+                def_value = "0.0"
+                execution_rate = "inherit"
+                max = "100"
+                min = "-100"
+                unit = "1/pu"
+            }
+            [
+                position = 8600, 8192
+            ]
+
+            component src_scada_input "Q(f) k1" {
+                def_value = "0.0"
+                execution_rate = "inherit"
+                max = "100"
+                min = "-100"
+                unit = ""
+            }
+            [
+                position = 8600, 8360
+            ]
+
+            component src_scada_input "Q(f) k2" {
+                def_value = "0.0"
+                execution_rate = "inherit"
+                max = "100"
+                min = "-100"
+                unit = "1/pu"
+            }
+            [
+                position = 8600, 8416
+            ]
+
+            component "core/DER (Generic) Control Join" "DER (Generic) Control Join" {
+                Enable = "True"
+                F_alarm_lower_limit = "True"
+                F_alarm_upper_limit = "True"
+                I_alarm_upper_limit = "True"
+                P_V_k1 = "True"
+                P_V_k2 = "True"
+                P_dependency_type = "True"
+                P_f_k1 = "True"
+                P_f_k2 = "True"
+                Pref = "True"
+                Pref_rate_of_change = "True"
+                Q_V_k1 = "True"
+                Q_V_k2 = "True"
+                Q_dependency_type = "True"
+                Q_f_k1 = "True"
+                Q_f_k2 = "True"
+                Qref = "True"
+                Qref_rate_of_change = "True"
+                Reset_alarms = "True"
+                S_alarm_upper_limit = "True"
+                V_alarm_lower_limit = "True"
+                V_alarm_upper_limit = "True"
+                component_select = "Variable Load"
+            }
+            [
+                position = 8952, 8160
+                size = 192, 368
+            ]
+
+            component "core/DER (Generic) Output Split" "DER (Generic) Output Split" {
+                Enable_fb = "True"
+                Fmeas_Hz = "True"
+                Fref_fb_Hz = "True"
+                MCB_status = "True"
+                PFmeas = "True"
+                Pmeas_kW = "True"
+                Pnom_kW = "True"
+                Pref_fb_kW = "True"
+                Qmeas_kVAr = "True"
+                Qnom_kVAr = "True"
+                Qref_fb_kVAr = "True"
+                Smeas_kVA = "True"
+                Snom_kVA = "True"
+                Vgrid_rms_meas_kV = "True"
+                Vload_rms_meas_V = "True"
+                Vrms_ref_fb_V = "True"
+                alarm_msg = "True"
+                component_select = "Variable Load"
+            }
+            [
+                position = 7312, 8136
+                size = 128, 288
+            ]
+
+            component "core/DER (Generic) External Join" "DER (Generic) External Join1" {
+                component_select = "Variable Load"
+            }
+            [
+                position = 8952, 8936
+                size = 192, 64
+            ]
+
+            component src_scada_input "V alarm upper limit" {
+                def_value = "1.5"
+                execution_rate = "inherit"
+                min = "1"
+                unit = "pu"
+            }
+            [
+                position = 8600, 8480
+            ]
+
+            component src_scada_input "V alarm lower limit" {
+                def_value = "0.5"
+                execution_rate = "inherit"
+                max = "1"
+                min = "0"
+                unit = "pu"
+            }
+            [
+                position = 8600, 8536
+            ]
+
+            component src_scada_input "F alarm upper limit" {
+                def_value = "1.5"
+                execution_rate = "inherit"
+                min = "1"
+                unit = "pu"
+            }
+            [
+                position = 8600, 8592
+            ]
+
+            component src_scada_input "F alarm lower limit" {
+                def_value = "0.5"
+                execution_rate = "inherit"
+                max = "1"
+                min = "0"
+                unit = "pu"
+            }
+            [
+                position = 8600, 8648
+            ]
+
+            component src_scada_input "S alarm upper limit" {
+                def_value = "1.5"
+                execution_rate = "inherit"
+                min = "1"
+                unit = "pu"
+            }
+            [
+                position = 8600, 8704
+            ]
+
+            component src_scada_input "I alarm upper limit" {
+                def_value = "1.5"
+                execution_rate = "inherit"
+                min = "1"
+                unit = "pu"
+            }
+            [
+                position = 8600, 8760
+            ]
+
+            port ui_in {
+                label = "ui_in"
+                position = right:1
+                kind = sp
+                direction =  out
+                sp_type {
+                    default = auto
+                    readonly = True
+                }
+            }
+            [
+                position = 7136, 8136
+            ]
+
+            port ui_out {
+                label = "ui_out"
+                position = right:2
+                kind = sp
+                direction =  in
+                sp_type {
+                    default = inherit
+                    readonly = True
+                }
+            }
+            [
+                position = 9112, 8160
+            ]
+
+            port ext {
+                label = "ext"
+                position = right:3
+                kind = sp
+                direction =  in
+                sp_type {
+                    default = inherit
+                    readonly = True
+                }
+            }
+            [
+                position = 9128, 8936
+            ]
+
+            connect "DER (Generic) Control Join.ui_out" ui_out as Connection2888
+            connect Enable.out "DER (Generic) Control Join.Enable" as Connection2889
+            connect "Reset alarms.out" "DER (Generic) Control Join.Reset alarms" as Connection2890
+            [
+                position = 0, 0
+                breakpoints = 8832, 7752; 8832, 8008
+            ]
+            connect Pref.out "DER (Generic) Control Join.Pref" as Connection2891
+            [
+                position = 0, 0
+                breakpoints = 8824, 7808; 8824, 8024
+            ]
+            connect Qref.out "DER (Generic) Control Join.Qref" as Connection2892
+            [
+                position = 0, 0
+                breakpoints = 8816, 7864; 8816, 8040
+            ]
+            connect "Pref rate of change.out" "DER (Generic) Control Join.Pref rate of change" as Connection2893
+            [
+                position = 0, 0
+                breakpoints = 8808, 7920; 8808, 8056
+            ]
+            connect "Qref rate of change.out" "DER (Generic) Control Join.Qref rate of change" as Connection2894
+            [
+                position = 0, 0
+                breakpoints = 8800, 7976; 8800, 8072
+            ]
+            connect "P dependency type.out" "DER (Generic) Control Join.P dependency type" as Connection2895
+            [
+                position = 0, 0
+                breakpoints = 8792, 8032; 8792, 8088
+            ]
+            connect "Q dependency type.out" "DER (Generic) Control Join.Q dependency type" as Connection2896
+            [
+                position = 0, 0
+                breakpoints = 8784, 8088; 8784, 8104
+            ]
+            connect "P(V) k1.out" "DER (Generic) Control Join.P(V) k1" as Connection2897
+            [
+                position = 0, 0
+                breakpoints = 8776, 8040; 8776, 8120
+            ]
+            connect "P(V) k2.out" "DER (Generic) Control Join.P(V) k2" as Connection2898
+            [
+                position = 0, 0
+                breakpoints = 8768, 8096; 8768, 8136
+            ]
+            connect "Q(f) k2.out" "DER (Generic) Control Join.Q(f) k2" as Connection2899
+            [
+                position = 0, 0
+                breakpoints = 8792, 8416; 8792, 8232
+            ]
+            connect "Q(f) k1.out" "DER (Generic) Control Join.Q(f) k1" as Connection2900
+            [
+                position = 0, 0
+                breakpoints = 8784, 8360; 8784, 8216
+            ]
+            connect "Q(V) k2.out" "DER (Generic) Control Join.Q(V) k2" as Connection2901
+            [
+                position = 0, 0
+                breakpoints = 8776, 8304; 8776, 8200
+            ]
+            connect "Q(V) k1.out" "DER (Generic) Control Join.Q(V) k1" as Connection2902
+            [
+                position = 0, 0
+                breakpoints = 8768, 8248; 8768, 8184
+            ]
+            connect "P(f) k2.out" "DER (Generic) Control Join.P(f) k2" as Connection2903
+            [
+                position = 0, 0
+                breakpoints = 8760, 8192; 8760, 8168
+            ]
+            connect "P(f) k1.out" "DER (Generic) Control Join.P(f) k1" as Connection2904
+            [
+                position = 0, 0
+                breakpoints = 8632, 8128; 8760, 8128; 8760, 8152
+            ]
+            connect ui_in "DER (Generic) Output Split.ui_in" as Connection2905
+            connect Enable_fb.in "DER (Generic) Output Split.Enable_fb" as Connection2906
+            connect "DER (Generic) Output Split.Pref_fb_kW" Pref_fb_kW.in as Connection2907
+            connect Qref_fb_kVAr.in "DER (Generic) Output Split.Qref_fb_kVAr" as Connection2908
+            connect "DER (Generic) Output Split.Pnom_kW" Pnom_kW.in as Connection2911
+            connect Qnom_kVAr.in "DER (Generic) Output Split.Qnom_kVAr" as Connection2912
+            connect "DER (Generic) Output Split.Snom_kVA" Snom_kVA.in as Connection2913
+            connect Fmeas_Hz.in "DER (Generic) Output Split.Fmeas_Hz" as Connection2914
+            connect "DER (Generic) Output Split.Vgrid_rms_meas_kV" Vgrid_rms_meas_kV.in as Connection2915
+            connect "DER (Generic) Output Split.Pmeas_kW" Pmeas_kW.in as Connection2916
+            connect Qmeas_kVAr.in "DER (Generic) Output Split.Qmeas_kVAr" as Connection2917
+            connect "DER (Generic) Output Split.Smeas_kVA" Smeas_kVA.in as Connection2918
+            connect PFmeas.in "DER (Generic) Output Split.PFmeas" as Connection2919
+            connect "DER (Generic) Output Split.Vload_rms_meas_V" Vload_rms_meas_V.in as Connection2920
+            connect MCB_status.in "DER (Generic) Output Split.MCB_status" as Connection2921
+            connect "DER (Generic) Output Split.alarm_msg" alarm_msg.in as Connection2922
+            connect ext "DER (Generic) External Join1.ext" as Connection2923
+            connect "V alarm upper limit.out" "DER (Generic) Control Join.V alarm upper limit" as Connection2924
+            [
+                position = 0, 0
+                breakpoints = 8800, 8480; 8800, 8248
+            ]
+            connect "V alarm lower limit.out" "DER (Generic) Control Join.V alarm lower limit" as Connection2925
+            [
+                position = 0, 0
+                breakpoints = 8808, 8536; 8808, 8264
+            ]
+            connect "F alarm upper limit.out" "DER (Generic) Control Join.F alarm upper limit" as Connection2926
+            [
+                position = 0, 0
+                breakpoints = 8816, 8592; 8816, 8280
+            ]
+            connect "F alarm lower limit.out" "DER (Generic) Control Join.F alarm lower limit" as Connection2927
+            [
+                position = 0, 0
+                breakpoints = 8824, 8648; 8824, 8296
+            ]
+            connect "S alarm upper limit.out" "DER (Generic) Control Join.S alarm upper limit" as Connection2928
+            [
+                position = 0, 0
+                breakpoints = 8832, 8704; 8832, 8312
+            ]
+            connect "I alarm upper limit.out" "DER (Generic) Control Join.I alarm upper limit" as Connection2929
+
+            mask {
+                icon = "image(\'variable_load_generic_ui.svg\')"
+                description = "<html><head><meta name=\"qrichtext\" content=\"1\"></meta><style type=\"text/css\">p, li { white-space: pre-wrap; }</style></head><body style=\"\"><p style=\"margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">User Interface subsystem intended to be used with \"Load (Generic)\" component.</p></body></html>"
+
+                CODE open
+                    from typhoon.apps.schematic_editor.dialogs.component_property_dialogs.general import RegularComponentPropertiesDialog
+                
+                    dialog = RegularComponentPropertiesDialog(
+                        component=component,
+                        property_container=component.masks[-1],
+                        current_diagram=current_diagram
+                    )
+                    dialog.exec_()
+                    
+                ENDCODE
+            }
+        }
+        [
+            position = 9248, 9088
+            size = 56, 136
+        ]
+
+        component "core/Transmission Line" "RL coupled Load1" {
+            C_sequence_metric = "[[10.55e-9, -7.717343574912541e-25, -7.717343574912541e-25], [-5.6170616882174405e-25, 17.95e-9, -1.1234123376434881e-24], [0.0, -5.6170616882174405e-25, 17.95e-9]]"
+            L_metric = "[[0.00189, 0.00109, 0.00109], [0.00109, 0.00189, 0.00109], [0.00109, 0.00109, 0.00189]]"
+            L_sequence_metric = "[[6.09e-3, 0.0, 0.0], [0.0, 2.38e-3, 0.0], [0.0, 0.0, 2.38e-3]]"
+            Length_metric = "0.2898"
+            R_metric = "[[0.3570, 0.0451, 0.0451], [0.0451, 0.3570, 0.0451], [0.0451, 0.0451, 0.3570]]"
+            R_sequence_metric = "[[0.5157, 0.0, 0.0], [0.0,  0.20631, 0.0], [0.0, 0.0,  0.20631]]"
+            model_def = "RLC"
+            unit_sys = "metric"
+        }
+        [
+            position = 9384, 8720
+            rotation = left
+            size = 256, 72
+        ]
+
+        component Subsystem "Meter (EV1)" {
+            layout = dynamic
+            component gen_probe VAn {
+            }
+            [
+                position = 7872, 7424
+                rotation = left
+            ]
+
+            component gen_probe VBn {
+            }
+            [
+                position = 7896, 7456
+                rotation = left
+            ]
+
+            component gen_probe VCn {
+            }
+            [
+                position = 7920, 7488
+                rotation = left
+            ]
+
+            component gen_probe VAB {
+            }
+            [
+                position = 7944, 7528
+                rotation = left
+            ]
+
+            component gen_probe VBC {
+            }
+            [
+                position = 7968, 7560
+                rotation = left
+            ]
+
+            component gen_probe VCA {
+            }
+            [
+                position = 7992, 7592
+                rotation = left
+            ]
+
+            component gen_probe VAn_RMS1 {
+            }
+            [
+                position = 8016, 7624
+                rotation = left
+            ]
+
+            component gen_probe VBn_RMS1 {
+            }
+            [
+                position = 8016, 7752
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe VCn_RMS1 {
+            }
+            [
+                position = 7992, 7784
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe VLn_RMS {
+            }
+            [
+                position = 7968, 7816
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe VAB_RMS1 {
+            }
+            [
+                position = 7944, 7848
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe VBC_RMS1 {
+            }
+            [
+                position = 7920, 7880
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe VCA_RMS1 {
+            }
+            [
+                position = 7896, 7912
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe VLL_RMS1 {
+            }
+            [
+                position = 7864, 7936
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe IA {
+            }
+            [
+                position = 7896, 8024
+                rotation = left
+            ]
+
+            component gen_probe IB {
+            }
+            [
+                position = 7920, 8056
+                rotation = left
+            ]
+
+            component gen_probe IC {
+            }
+            [
+                position = 7944, 8096
+                rotation = left
+            ]
+
+            component gen_probe Freq {
+            }
+            [
+                position = 7968, 8128
+                rotation = left
+            ]
+
+            component gen_probe IA_RMS1 {
+            }
+            [
+                position = 7992, 8160
+                rotation = left
+            ]
+
+            component gen_probe IB_RMS1 {
+            }
+            [
+                position = 8016, 8192
+                rotation = left
+            ]
+
+            component gen_probe IC_RMS1 {
+            }
+            [
+                position = 8016, 8320
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe I_RMS1 {
+            }
+            [
+                position = 7992, 8352
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe POWER_P1 {
+            }
+            [
+                position = 7968, 8384
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe POWER_Q1 {
+            }
+            [
+                position = 7944, 8416
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe POWER_S1 {
+            }
+            [
+                position = 7920, 8448
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe POWER_PF1 {
+            }
+            [
+                position = 7896, 8480
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component "core/Meter Split" "Meter Split2" {
+                vab = "True"
+                vab_rms = "True"
+                van_rms = "True"
+                vbc = "True"
+                vbc_rms = "True"
+                vbn_rms = "True"
+                vca = "True"
+                vca_rms = "True"
+                vcn_rms = "True"
+                vll_rms = "True"
+                vln_rms = "True"
+            }
+            [
+                position = 7768, 7688
+                size = 96, 240
+            ]
+
+            component "core/Meter Split" "Meter Split3" {
+                freq = "True"
+                i_rms = "True"
+                ia = "True"
+                ia_rms = "True"
+                ib = "True"
+                ib_rms = "True"
+                ic = "True"
+                ic_rms = "True"
+                power_p = "True"
+                power_pf = "True"
+                power_q = "True"
+                power_s = "True"
+                van = "False"
+                vbn = "False"
+                vcn = "False"
+            }
+            [
+                position = 7776, 8240
+                size = 96, 240
+            ]
+
+            component "core/Three-phase Meter" "Three-phase Meter" {
+                I_avg_rms = "True"
+                I_rms = "True"
+                P_meas = "True"
+                P_method = "RMS based"
+                R = "10e3"
+                VAB = "True"
+                VBC = "True"
+                VCA = "True"
+                VLL_avg_rms = "True"
+                VLL_rms = "True"
+                VLn_avg_rms = "True"
+                VLn_rms = "True"
+                freq = "True"
+            }
+            [
+                position = 7360, 7936
+                size = 56, 240
+            ]
+
+            port C {
+                position = left:auto
+                kind = pe
+            }
+            [
+                position = 7224, 8032
+            ]
+
+            port c {
+                position = right:auto
+                kind = pe
+            }
+            [
+                position = 7504, 8032
+                scale = -1, 1
+            ]
+
+            port B {
+                position = left:auto
+                kind = pe
+            }
+            [
+                position = 7224, 7936
+            ]
+
+            port b {
+                position = right:auto
+                kind = pe
+            }
+            [
+                position = 7496, 7936
+                scale = -1, 1
+            ]
+
+            port A {
+                position = left:auto
+                kind = pe
+            }
+            [
+                position = 7224, 7840
+            ]
+
+            port a {
+                position = right:auto
+                kind = pe
+            }
+            [
+                position = 7496, 7840
+                scale = -1, 1
+            ]
+
+            tag Goto2 {
+                value = "Out"
+                scope = local
+                kind = sp
+                direction = in
+            }
+            [
+                position = 7432, 7776
+                hide_name = True
+                size = 60, 20
+            ]
+
+            tag From2 {
+                value = "Out"
+                scope = local
+                kind = sp
+                direction = out
+            }
+            [
+                position = 7616, 7688
+                hide_name = True
+                size = 60, 20
+            ]
+
+            tag From3 {
+                value = "Out"
+                scope = local
+                kind = sp
+                direction = out
+            }
+            [
+                position = 7640, 8240
+                hide_name = True
+                size = 60, 20
+            ]
+
+            connect From2 "Meter Split2.Input" as Connection63
+            connect From3 "Meter Split3.Input" as Connection29
+            connect Goto2 "Three-phase Meter.Out" as Connection27
+            connect IA_RMS1.in "Meter Split3.IA_RMS" as Connection38
+            connect I_RMS1.in "Meter Split3.I_RMS" as Connection44
+            connect "Meter Split3.Freq" Freq.in as Connection39
+            connect "Meter Split3.IA" IA.in as Connection42
+            connect "Meter Split3.IB" IB.in as Connection41
+            connect "Meter Split3.IB_RMS" IB_RMS1.in as Connection37
+            connect "Meter Split3.IC" IC.in as Connection40
+            connect "Meter Split3.IC_RMS" IC_RMS1.in as Connection43
+            connect POWER_P1.in "Meter Split3.POWER_P" as Connection45
+            connect POWER_PF1.in "Meter Split3.POWER_PF" as Connection48
+            connect POWER_Q1.in "Meter Split3.POWER_Q" as Connection46
+            connect POWER_S1.in "Meter Split3.POWER_S" as Connection47
+            connect VAB.in "Meter Split2.VAB" as Connection23
+            connect VAB_RMS1.in "Meter Split2.VAB_RMS" as Connection64
+            connect VAn.in "Meter Split2.VAn" as Connection20
+            connect VAn_RMS1.in "Meter Split2.VAn_RMS" as Connection26
+            connect VBC.in "Meter Split2.VBC" as Connection24
+            connect VBC_RMS1.in "Meter Split2.VBC_RMS" as Connection65
+            connect VBn.in "Meter Split2.VBn" as Connection21
+            connect VBn_RMS1.in "Meter Split2.VBn_RMS" as Connection30
+            connect VCA.in "Meter Split2.VCA" as Connection25
+            connect VCA_RMS1.in "Meter Split2.VCA_RMS" as Connection66
+            connect VCn.in "Meter Split2.VCn" as Connection22
+            connect VCn_RMS1.in "Meter Split2.VCn_RMS" as Connection31
+            connect VLL_RMS1.in "Meter Split2.VLL_RMS" as Connection36
+            connect VLn_RMS.in "Meter Split2.VLn_RMS" as Connection32
+            connect "Three-phase Meter.A-" a as Connection67
+            connect A "Three-phase Meter.A+" as Connection68
+            connect "Three-phase Meter.B+" B as Connection69
+            connect "Three-phase Meter.B-" b as Connection70
+            connect c "Three-phase Meter.C-" as Connection71
+            connect "Three-phase Meter.C+" C as Connection72
+        }
+        [
+            position = 9384, 8952
+            rotation = right
+            size = 48, 136
+        ]
+
+        component "core/Variable Load (Generic)" "Variable EV2 (Generic)" {
+            Pnom = "40e3"
+            Snom = "41e3"
+            Vnom_LL = "480"
+            Vnom_sec_LL = "11900"
+            fnom = "60"
+            include_transformer = "True"
+            resistance_cont = "1.0"
+        }
+        [
+            position = 9776, 9096
+            size = 184, 144
+        ]
+
+        component Subsystem "Variable EV2 (Generic) UI" {
+            layout = dynamic
+            component gen_probe Enable_fb {
+            }
+            [
+                position = 7952, 8024
+            ]
+
+            component gen_probe PFmeas {
+                streaming_en = "True"
+            }
+            [
+                position = 7600, 8200
+            ]
+
+            component src_scada_input Qref {
+                execution_rate = "inherit"
+                max = "1e8"
+                min = "-1e8"
+                unit = "pu"
+            }
+            [
+                position = 8600, 7736
+            ]
+
+            component src_scada_input Enable {
+                execution_rate = "inherit"
+                max = "1"
+                min = "0"
+                unit = ""
+            }
+            [
+                position = 8600, 7568
+            ]
+
+            component src_scada_input Pref {
+                execution_rate = "inherit"
+                max = "1e8"
+                min = "0"
+                unit = "pu"
+            }
+            [
+                position = 8600, 7680
+            ]
+
+            component gen_probe Vload_rms_meas_V {
+                streaming_en = "True"
+            }
+            [
+                position = 7568, 8216
+            ]
+
+            component gen_probe Qmeas_kVAr {
+                streaming_en = "True"
+            }
+            [
+                position = 7664, 8168
+            ]
+
+            component gen_probe Smeas_kVA {
+            }
+            [
+                position = 7632, 8184
+            ]
+
+            component gen_probe Pnom_kW {
+            }
+            [
+                position = 7856, 8072
+            ]
+
+            component gen_probe Qref_fb_kVAr {
+                streaming_en = "True"
+            }
+            [
+                position = 7888, 8056
+            ]
+
+            component gen_probe Snom_kVA {
+            }
+            [
+                position = 7792, 8104
+            ]
+
+            component gen_probe Fmeas_Hz {
+                streaming_en = "True"
+            }
+            [
+                position = 7760, 8120
+            ]
+
+            component gen_probe Pref_fb_kW {
+                streaming_en = "True"
+            }
+            [
+                position = 7920, 8040
+            ]
+
+            component gen_probe Qnom_kVAr {
+            }
+            [
+                position = 7824, 8088
+            ]
+
+            component gen_probe Vgrid_rms_meas_kV {
+            }
+            [
+                position = 7728, 8136
+            ]
+
+            component gen_probe Pmeas_kW {
+                streaming_en = "True"
+            }
+            [
+                position = 7696, 8152
+            ]
+
+            component gen_probe MCB_status {
+            }
+            [
+                position = 7536, 8232
+            ]
+
+            component gen_probe alarm_msg {
+            }
+            [
+                position = 7504, 8248
+            ]
+
+            component src_scada_input "Reset alarms" {
+                execution_rate = "inherit"
+                max = "1"
+                min = "0"
+                unit = ""
+            }
+            [
+                position = 8600, 7624
+            ]
+
+            component src_scada_input "Pref rate of change" {
+                def_value = "0.1"
+                execution_rate = "inherit"
+                min = "0"
+                unit = "pu/s"
+            }
+            [
+                position = 8600, 7792
+            ]
+
+            component src_scada_input "Qref rate of change" {
+                def_value = "0.1"
+                execution_rate = "inherit"
+                min = "0"
+                unit = "pu/s"
+            }
+            [
+                position = 8600, 7848
+            ]
+
+            component src_scada_input "P dependency type" {
+                def_value = "0.0"
+                execution_rate = "inherit"
+                max = "2"
+                min = "0"
+                unit = ""
+            }
+            [
+                position = 8600, 7904
+            ]
+
+            component src_scada_input "Q dependency type" {
+                def_value = "0.0"
+                execution_rate = "inherit"
+                max = "2"
+                min = "0"
+                unit = ""
+            }
+            [
+                position = 8600, 7960
+            ]
+
+            component src_scada_input "P(V) k1" {
+                def_value = "0.0"
+                execution_rate = "inherit"
+                max = "100"
+                min = "-100"
+                unit = ""
+            }
+            [
+                position = 8600, 8016
+            ]
+
+            component src_scada_input "P(V) k2" {
+                def_value = "0.0"
+                execution_rate = "inherit"
+                max = "100"
+                min = "-100"
+                unit = "1/pu"
+            }
+            [
+                position = 8600, 8072
+            ]
+
+            component src_scada_input "Q(V) k1" {
+                def_value = "0.0"
+                execution_rate = "inherit"
+                max = "100"
+                min = "-100"
+                unit = ""
+            }
+            [
+                position = 8600, 8248
+            ]
+
+            component src_scada_input "Q(V) k2" {
+                def_value = "0.0"
+                execution_rate = "inherit"
+                max = "100"
+                min = "-100"
+                unit = "1/pu"
+            }
+            [
+                position = 8600, 8304
+            ]
+
+            component src_scada_input "P(f) k1" {
+                def_value = "0.0"
+                execution_rate = "inherit"
+                max = "100"
+                min = "-100"
+                unit = ""
+            }
+            [
+                position = 8600, 8128
+            ]
+
+            component src_scada_input "P(f) k2" {
+                def_value = "0.0"
+                execution_rate = "inherit"
+                max = "100"
+                min = "-100"
+                unit = "1/pu"
+            }
+            [
+                position = 8600, 8192
+            ]
+
+            component src_scada_input "Q(f) k1" {
+                def_value = "0.0"
+                execution_rate = "inherit"
+                max = "100"
+                min = "-100"
+                unit = ""
+            }
+            [
+                position = 8600, 8360
+            ]
+
+            component src_scada_input "Q(f) k2" {
+                def_value = "0.0"
+                execution_rate = "inherit"
+                max = "100"
+                min = "-100"
+                unit = "1/pu"
+            }
+            [
+                position = 8600, 8416
+            ]
+
+            component "core/DER (Generic) Control Join" "DER (Generic) Control Join" {
+                Enable = "True"
+                F_alarm_lower_limit = "True"
+                F_alarm_upper_limit = "True"
+                I_alarm_upper_limit = "True"
+                P_V_k1 = "True"
+                P_V_k2 = "True"
+                P_dependency_type = "True"
+                P_f_k1 = "True"
+                P_f_k2 = "True"
+                Pref = "True"
+                Pref_rate_of_change = "True"
+                Q_V_k1 = "True"
+                Q_V_k2 = "True"
+                Q_dependency_type = "True"
+                Q_f_k1 = "True"
+                Q_f_k2 = "True"
+                Qref = "True"
+                Qref_rate_of_change = "True"
+                Reset_alarms = "True"
+                S_alarm_upper_limit = "True"
+                V_alarm_lower_limit = "True"
+                V_alarm_upper_limit = "True"
+                component_select = "Variable Load"
+            }
+            [
+                position = 8952, 8160
+                size = 192, 368
+            ]
+
+            component "core/DER (Generic) Output Split" "DER (Generic) Output Split" {
+                Enable_fb = "True"
+                Fmeas_Hz = "True"
+                Fref_fb_Hz = "True"
+                MCB_status = "True"
+                PFmeas = "True"
+                Pmeas_kW = "True"
+                Pnom_kW = "True"
+                Pref_fb_kW = "True"
+                Qmeas_kVAr = "True"
+                Qnom_kVAr = "True"
+                Qref_fb_kVAr = "True"
+                Smeas_kVA = "True"
+                Snom_kVA = "True"
+                Vgrid_rms_meas_kV = "True"
+                Vload_rms_meas_V = "True"
+                Vrms_ref_fb_V = "True"
+                alarm_msg = "True"
+                component_select = "Variable Load"
+            }
+            [
+                position = 7312, 8136
+                size = 128, 288
+            ]
+
+            component "core/DER (Generic) External Join" "DER (Generic) External Join1" {
+                component_select = "Variable Load"
+            }
+            [
+                position = 8952, 8936
+                size = 192, 64
+            ]
+
+            component src_scada_input "V alarm upper limit" {
+                def_value = "1.5"
+                execution_rate = "inherit"
+                min = "1"
+                unit = "pu"
+            }
+            [
+                position = 8600, 8480
+            ]
+
+            component src_scada_input "V alarm lower limit" {
+                def_value = "0.5"
+                execution_rate = "inherit"
+                max = "1"
+                min = "0"
+                unit = "pu"
+            }
+            [
+                position = 8600, 8536
+            ]
+
+            component src_scada_input "F alarm upper limit" {
+                def_value = "1.5"
+                execution_rate = "inherit"
+                min = "1"
+                unit = "pu"
+            }
+            [
+                position = 8600, 8592
+            ]
+
+            component src_scada_input "F alarm lower limit" {
+                def_value = "0.5"
+                execution_rate = "inherit"
+                max = "1"
+                min = "0"
+                unit = "pu"
+            }
+            [
+                position = 8600, 8648
+            ]
+
+            component src_scada_input "S alarm upper limit" {
+                def_value = "1.5"
+                execution_rate = "inherit"
+                min = "1"
+                unit = "pu"
+            }
+            [
+                position = 8600, 8704
+            ]
+
+            component src_scada_input "I alarm upper limit" {
+                def_value = "1.5"
+                execution_rate = "inherit"
+                min = "1"
+                unit = "pu"
+            }
+            [
+                position = 8600, 8760
+            ]
+
+            port ui_in {
+                label = "ui_in"
+                position = right:1
+                kind = sp
+                direction =  out
+                sp_type {
+                    default = auto
+                    readonly = True
+                }
+            }
+            [
+                position = 7136, 8136
+            ]
+
+            port ui_out {
+                label = "ui_out"
+                position = right:2
+                kind = sp
+                direction =  in
+                sp_type {
+                    default = inherit
+                    readonly = True
+                }
+            }
+            [
+                position = 9112, 8160
+            ]
+
+            port ext {
+                label = "ext"
+                position = right:3
+                kind = sp
+                direction =  in
+                sp_type {
+                    default = inherit
+                    readonly = True
+                }
+            }
+            [
+                position = 9128, 8936
+            ]
+
+            connect "DER (Generic) Control Join.ui_out" ui_out as Connection2888
+            connect Enable.out "DER (Generic) Control Join.Enable" as Connection2889
+            connect "Reset alarms.out" "DER (Generic) Control Join.Reset alarms" as Connection2890
+            [
+                position = 0, 0
+                breakpoints = 8832, 7752; 8832, 8008
+            ]
+            connect Pref.out "DER (Generic) Control Join.Pref" as Connection2891
+            [
+                position = 0, 0
+                breakpoints = 8824, 7808; 8824, 8024
+            ]
+            connect Qref.out "DER (Generic) Control Join.Qref" as Connection2892
+            [
+                position = 0, 0
+                breakpoints = 8816, 7864; 8816, 8040
+            ]
+            connect "Pref rate of change.out" "DER (Generic) Control Join.Pref rate of change" as Connection2893
+            [
+                position = 0, 0
+                breakpoints = 8808, 7920; 8808, 8056
+            ]
+            connect "Qref rate of change.out" "DER (Generic) Control Join.Qref rate of change" as Connection2894
+            [
+                position = 0, 0
+                breakpoints = 8800, 7976; 8800, 8072
+            ]
+            connect "P dependency type.out" "DER (Generic) Control Join.P dependency type" as Connection2895
+            [
+                position = 0, 0
+                breakpoints = 8792, 8032; 8792, 8088
+            ]
+            connect "Q dependency type.out" "DER (Generic) Control Join.Q dependency type" as Connection2896
+            [
+                position = 0, 0
+                breakpoints = 8784, 8088; 8784, 8104
+            ]
+            connect "P(V) k1.out" "DER (Generic) Control Join.P(V) k1" as Connection2897
+            [
+                position = 0, 0
+                breakpoints = 8776, 8040; 8776, 8120
+            ]
+            connect "P(V) k2.out" "DER (Generic) Control Join.P(V) k2" as Connection2898
+            [
+                position = 0, 0
+                breakpoints = 8768, 8096; 8768, 8136
+            ]
+            connect "Q(f) k2.out" "DER (Generic) Control Join.Q(f) k2" as Connection2899
+            [
+                position = 0, 0
+                breakpoints = 8792, 8416; 8792, 8232
+            ]
+            connect "Q(f) k1.out" "DER (Generic) Control Join.Q(f) k1" as Connection2900
+            [
+                position = 0, 0
+                breakpoints = 8784, 8360; 8784, 8216
+            ]
+            connect "Q(V) k2.out" "DER (Generic) Control Join.Q(V) k2" as Connection2901
+            [
+                position = 0, 0
+                breakpoints = 8776, 8304; 8776, 8200
+            ]
+            connect "Q(V) k1.out" "DER (Generic) Control Join.Q(V) k1" as Connection2902
+            [
+                position = 0, 0
+                breakpoints = 8768, 8248; 8768, 8184
+            ]
+            connect "P(f) k2.out" "DER (Generic) Control Join.P(f) k2" as Connection2903
+            [
+                position = 0, 0
+                breakpoints = 8760, 8192; 8760, 8168
+            ]
+            connect "P(f) k1.out" "DER (Generic) Control Join.P(f) k1" as Connection2904
+            [
+                position = 0, 0
+                breakpoints = 8632, 8128; 8760, 8128; 8760, 8152
+            ]
+            connect ui_in "DER (Generic) Output Split.ui_in" as Connection2905
+            connect Enable_fb.in "DER (Generic) Output Split.Enable_fb" as Connection2906
+            connect "DER (Generic) Output Split.Pref_fb_kW" Pref_fb_kW.in as Connection2907
+            connect Qref_fb_kVAr.in "DER (Generic) Output Split.Qref_fb_kVAr" as Connection2908
+            connect "DER (Generic) Output Split.Pnom_kW" Pnom_kW.in as Connection2911
+            connect Qnom_kVAr.in "DER (Generic) Output Split.Qnom_kVAr" as Connection2912
+            connect "DER (Generic) Output Split.Snom_kVA" Snom_kVA.in as Connection2913
+            connect Fmeas_Hz.in "DER (Generic) Output Split.Fmeas_Hz" as Connection2914
+            connect "DER (Generic) Output Split.Vgrid_rms_meas_kV" Vgrid_rms_meas_kV.in as Connection2915
+            connect "DER (Generic) Output Split.Pmeas_kW" Pmeas_kW.in as Connection2916
+            connect Qmeas_kVAr.in "DER (Generic) Output Split.Qmeas_kVAr" as Connection2917
+            connect "DER (Generic) Output Split.Smeas_kVA" Smeas_kVA.in as Connection2918
+            connect PFmeas.in "DER (Generic) Output Split.PFmeas" as Connection2919
+            connect "DER (Generic) Output Split.Vload_rms_meas_V" Vload_rms_meas_V.in as Connection2920
+            connect MCB_status.in "DER (Generic) Output Split.MCB_status" as Connection2921
+            connect "DER (Generic) Output Split.alarm_msg" alarm_msg.in as Connection2922
+            connect ext "DER (Generic) External Join1.ext" as Connection2923
+            connect "V alarm upper limit.out" "DER (Generic) Control Join.V alarm upper limit" as Connection2924
+            [
+                position = 0, 0
+                breakpoints = 8800, 8480; 8800, 8248
+            ]
+            connect "V alarm lower limit.out" "DER (Generic) Control Join.V alarm lower limit" as Connection2925
+            [
+                position = 0, 0
+                breakpoints = 8808, 8536; 8808, 8264
+            ]
+            connect "F alarm upper limit.out" "DER (Generic) Control Join.F alarm upper limit" as Connection2926
+            [
+                position = 0, 0
+                breakpoints = 8816, 8592; 8816, 8280
+            ]
+            connect "F alarm lower limit.out" "DER (Generic) Control Join.F alarm lower limit" as Connection2927
+            [
+                position = 0, 0
+                breakpoints = 8824, 8648; 8824, 8296
+            ]
+            connect "S alarm upper limit.out" "DER (Generic) Control Join.S alarm upper limit" as Connection2928
+            [
+                position = 0, 0
+                breakpoints = 8832, 8704; 8832, 8312
+            ]
+            connect "I alarm upper limit.out" "DER (Generic) Control Join.I alarm upper limit" as Connection2929
+
+            mask {
+                icon = "image(\'variable_load_generic_ui.svg\')"
+                description = "<html><head><meta name=\"qrichtext\" content=\"1\"></meta><style type=\"text/css\">p, li { white-space: pre-wrap; }</style></head><body style=\"\"><p style=\"margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">User Interface subsystem intended to be used with \"Load (Generic)\" component.</p></body></html>"
+
+                CODE open
+                    from typhoon.apps.schematic_editor.dialogs.component_property_dialogs.general import RegularComponentPropertiesDialog
+                
+                    dialog = RegularComponentPropertiesDialog(
+                        component=component,
+                        property_container=component.masks[-1],
+                        current_diagram=current_diagram
+                    )
+                    dialog.exec_()
+                    
+                ENDCODE
+            }
+        }
+        [
+            position = 9616, 9096
+            size = 56, 136
+        ]
+
+        component Subsystem "Meter (EV2)" {
+            layout = dynamic
+            component gen_probe VAn {
+            }
+            [
+                position = 7872, 7424
+                rotation = left
+            ]
+
+            component gen_probe VBn {
+            }
+            [
+                position = 7896, 7456
+                rotation = left
+            ]
+
+            component gen_probe VCn {
+            }
+            [
+                position = 7920, 7488
+                rotation = left
+            ]
+
+            component gen_probe VAB {
+            }
+            [
+                position = 7944, 7528
+                rotation = left
+            ]
+
+            component gen_probe VBC {
+            }
+            [
+                position = 7968, 7560
+                rotation = left
+            ]
+
+            component gen_probe VCA {
+            }
+            [
+                position = 7992, 7592
+                rotation = left
+            ]
+
+            component gen_probe VAn_RMS1 {
+            }
+            [
+                position = 8016, 7624
+                rotation = left
+            ]
+
+            component gen_probe VBn_RMS1 {
+            }
+            [
+                position = 8016, 7752
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe VCn_RMS1 {
+            }
+            [
+                position = 7992, 7784
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe VLn_RMS {
+            }
+            [
+                position = 7968, 7816
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe VAB_RMS1 {
+            }
+            [
+                position = 7944, 7848
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe VBC_RMS1 {
+            }
+            [
+                position = 7920, 7880
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe VCA_RMS1 {
+            }
+            [
+                position = 7896, 7912
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe VLL_RMS1 {
+            }
+            [
+                position = 7864, 7936
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe IA {
+            }
+            [
+                position = 7896, 8024
+                rotation = left
+            ]
+
+            component gen_probe IB {
+            }
+            [
+                position = 7920, 8056
+                rotation = left
+            ]
+
+            component gen_probe IC {
+            }
+            [
+                position = 7944, 8096
+                rotation = left
+            ]
+
+            component gen_probe Freq {
+            }
+            [
+                position = 7968, 8128
+                rotation = left
+            ]
+
+            component gen_probe IA_RMS1 {
+            }
+            [
+                position = 7992, 8160
+                rotation = left
+            ]
+
+            component gen_probe IB_RMS1 {
+            }
+            [
+                position = 8016, 8192
+                rotation = left
+            ]
+
+            component gen_probe IC_RMS1 {
+            }
+            [
+                position = 8016, 8320
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe I_RMS1 {
+            }
+            [
+                position = 7992, 8352
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe POWER_P1 {
+            }
+            [
+                position = 7968, 8384
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe POWER_Q1 {
+            }
+            [
+                position = 7944, 8416
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe POWER_S1 {
+            }
+            [
+                position = 7920, 8448
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe POWER_PF1 {
+            }
+            [
+                position = 7896, 8480
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component "core/Meter Split" "Meter Split2" {
+                vab = "True"
+                vab_rms = "True"
+                van_rms = "True"
+                vbc = "True"
+                vbc_rms = "True"
+                vbn_rms = "True"
+                vca = "True"
+                vca_rms = "True"
+                vcn_rms = "True"
+                vll_rms = "True"
+                vln_rms = "True"
+            }
+            [
+                position = 7768, 7688
+                size = 96, 240
+            ]
+
+            component "core/Meter Split" "Meter Split3" {
+                freq = "True"
+                i_rms = "True"
+                ia = "True"
+                ia_rms = "True"
+                ib = "True"
+                ib_rms = "True"
+                ic = "True"
+                ic_rms = "True"
+                power_p = "True"
+                power_pf = "True"
+                power_q = "True"
+                power_s = "True"
+                van = "False"
+                vbn = "False"
+                vcn = "False"
+            }
+            [
+                position = 7776, 8240
+                size = 96, 240
+            ]
+
+            component "core/Three-phase Meter" "Three-phase Meter" {
+                I_avg_rms = "True"
+                I_rms = "True"
+                P_meas = "True"
+                P_method = "RMS based"
+                R = "10e3"
+                VAB = "True"
+                VBC = "True"
+                VCA = "True"
+                VLL_avg_rms = "True"
+                VLL_rms = "True"
+                VLn_avg_rms = "True"
+                VLn_rms = "True"
+                freq = "True"
+            }
+            [
+                position = 7360, 7936
+                size = 56, 240
+            ]
+
+            port C {
+                position = left:auto
+                kind = pe
+            }
+            [
+                position = 7224, 8032
+            ]
+
+            port c {
+                position = right:auto
+                kind = pe
+            }
+            [
+                position = 7504, 8032
+                scale = -1, 1
+            ]
+
+            port B {
+                position = left:auto
+                kind = pe
+            }
+            [
+                position = 7224, 7936
+            ]
+
+            port b {
+                position = right:auto
+                kind = pe
+            }
+            [
+                position = 7496, 7936
+                scale = -1, 1
+            ]
+
+            port A {
+                position = left:auto
+                kind = pe
+            }
+            [
+                position = 7224, 7840
+            ]
+
+            port a {
+                position = right:auto
+                kind = pe
+            }
+            [
+                position = 7496, 7840
+                scale = -1, 1
+            ]
+
+            tag Goto2 {
+                value = "Out"
+                scope = local
+                kind = sp
+                direction = in
+            }
+            [
+                position = 7432, 7776
+                hide_name = True
+                size = 60, 20
+            ]
+
+            tag From2 {
+                value = "Out"
+                scope = local
+                kind = sp
+                direction = out
+            }
+            [
+                position = 7616, 7688
+                hide_name = True
+                size = 60, 20
+            ]
+
+            tag From3 {
+                value = "Out"
+                scope = local
+                kind = sp
+                direction = out
+            }
+            [
+                position = 7640, 8240
+                hide_name = True
+                size = 60, 20
+            ]
+
+            connect From2 "Meter Split2.Input" as Connection63
+            connect From3 "Meter Split3.Input" as Connection29
+            connect Goto2 "Three-phase Meter.Out" as Connection27
+            connect IA_RMS1.in "Meter Split3.IA_RMS" as Connection38
+            connect I_RMS1.in "Meter Split3.I_RMS" as Connection44
+            connect "Meter Split3.Freq" Freq.in as Connection39
+            connect "Meter Split3.IA" IA.in as Connection42
+            connect "Meter Split3.IB" IB.in as Connection41
+            connect "Meter Split3.IB_RMS" IB_RMS1.in as Connection37
+            connect "Meter Split3.IC" IC.in as Connection40
+            connect "Meter Split3.IC_RMS" IC_RMS1.in as Connection43
+            connect POWER_P1.in "Meter Split3.POWER_P" as Connection45
+            connect POWER_PF1.in "Meter Split3.POWER_PF" as Connection48
+            connect POWER_Q1.in "Meter Split3.POWER_Q" as Connection46
+            connect POWER_S1.in "Meter Split3.POWER_S" as Connection47
+            connect VAB.in "Meter Split2.VAB" as Connection23
+            connect VAB_RMS1.in "Meter Split2.VAB_RMS" as Connection64
+            connect VAn.in "Meter Split2.VAn" as Connection20
+            connect VAn_RMS1.in "Meter Split2.VAn_RMS" as Connection26
+            connect VBC.in "Meter Split2.VBC" as Connection24
+            connect VBC_RMS1.in "Meter Split2.VBC_RMS" as Connection65
+            connect VBn.in "Meter Split2.VBn" as Connection21
+            connect VBn_RMS1.in "Meter Split2.VBn_RMS" as Connection30
+            connect VCA.in "Meter Split2.VCA" as Connection25
+            connect VCA_RMS1.in "Meter Split2.VCA_RMS" as Connection66
+            connect VCn.in "Meter Split2.VCn" as Connection22
+            connect VCn_RMS1.in "Meter Split2.VCn_RMS" as Connection31
+            connect VLL_RMS1.in "Meter Split2.VLL_RMS" as Connection36
+            connect VLn_RMS.in "Meter Split2.VLn_RMS" as Connection32
+            connect "Three-phase Meter.A-" a as Connection67
+            connect A "Three-phase Meter.A+" as Connection68
+            connect "Three-phase Meter.B+" B as Connection69
+            connect "Three-phase Meter.B-" b as Connection70
+            connect c "Three-phase Meter.C-" as Connection71
+            connect "Three-phase Meter.C+" C as Connection72
+        }
+        [
+            position = 9752, 8960
+            rotation = right
+            size = 48, 136
+        ]
+
         junction Junction4 pe
         [
             position = 8144, 8504
@@ -3112,6 +5090,36 @@ model "campusgrid" {
             position = 8176, 8544
         ]
 
+        junction Junction14 pe
+        [
+            position = 8992, 8496
+        ]
+
+        junction Junction15 pe
+        [
+            position = 9008, 8528
+        ]
+
+        junction Junction16 pe
+        [
+            position = 9024, 8544
+        ]
+
+        junction Junction17 pe
+        [
+            position = 9336, 8904
+        ]
+
+        junction Junction18 pe
+        [
+            position = 9384, 8888
+        ]
+
+        junction Junction19 pe
+        [
+            position = 9440, 8872
+        ]
+
         connect "Grid UI1.ui_in" Grid1.ui_in as Connection7
         connect "Grid UI1.ui_out" Grid1.ui_out as Connection8
         connect "Diesel Genset (Generic)1.Out1" "Diesel Genset (Generic) UI1.ui_in" as Connection554
@@ -3139,17 +5147,14 @@ model "campusgrid" {
         connect "RL coupled DG.b_out" Junction5 as Connection874
         connect "RL coupled BESS.a_out" Junction7 as Connection883
         connect Junction7 Junction4 as Connection884
-        connect "RL coupled PV.a_out" Junction7 as Connection885
         connect "RL coupled BESS.b_out" Junction8 as Connection890
         connect Junction8 Junction5 as Connection891
-        connect "RL coupled PV.b_out" Junction8 as Connection892
         connect Junction9 "RL coupled DG.c_out" as Connection903
         [
             breakpoints = 8176, 8544; 8176, 8544
         ]
         connect "RL coupled BESS.c_out" Junction10 as Connection905
         connect Junction10 Junction9 as Connection906
-        connect "RL coupled PV.c_out" Junction10 as Connection907
         connect "Meter (DG).A" "RL coupled DG.a_in" as Connection908
         connect "RL coupled DG.b_in" "Meter (DG).B" as Connection909
         connect "RL coupled DG.c_in" "Meter (DG).C" as Connection910
@@ -3213,10 +5218,50 @@ model "campusgrid" {
             breakpoints = 8176, 8544; 8176, 8544
         ]
         connect "Meter (PCC).c" Junction13 as Connection952
+        connect "Variable EV1 (Generic) UI.ui_in" "Variable EV1 (Generic).Out1" as Connection953
+        connect "Variable EV1 (Generic).In2" "Variable EV1 (Generic) UI.ui_out" as Connection954
+        connect "Variable EV1 (Generic).ext" "Variable EV1 (Generic) UI.ext" as Connection955
+        connect "Meter (EV1).a" "Variable EV1 (Generic).A" as Connection959
+        connect "Meter (EV1).b" "Variable EV1 (Generic).B" as Connection960
+        connect "Meter (EV1).c" "Variable EV1 (Generic).C" as Connection961
+        connect "Variable EV2 (Generic) UI.ui_in" "Variable EV2 (Generic).Out1" as Connection962
+        connect "Variable EV2 (Generic).In2" "Variable EV2 (Generic) UI.ui_out" as Connection963
+        connect "Variable EV2 (Generic).ext" "Variable EV2 (Generic) UI.ext" as Connection964
+        connect "Meter (EV2).a" "Variable EV2 (Generic).A" as Connection965
+        connect "Meter (EV2).b" "Variable EV2 (Generic).B" as Connection966
+        connect "Meter (EV2).c" "Variable EV2 (Generic).C" as Connection967
+        connect "RL coupled PV.a_out" Junction14 as Connection968
+        connect Junction14 Junction7 as Connection969
+        connect "RL coupled Load1.a_out" Junction14 as Connection970
+        connect "RL coupled PV.b_out" Junction15 as Connection971
+        connect Junction15 Junction8 as Connection972
+        connect "RL coupled Load1.b_out" Junction15 as Connection973
+        connect "RL coupled PV.c_out" Junction16 as Connection974
+        connect Junction16 Junction10 as Connection975
+        connect "RL coupled Load1.c_out" Junction16 as Connection976
+        connect "RL coupled Load1.a_in" Junction17 as Connection977
+        [
+            breakpoints = 9368, 8872; 9336, 8872
+        ]
+        connect Junction17 "Meter (EV1).A" as Connection978
+        connect "Meter (EV2).A" Junction17 as Connection979
+        connect "Meter (EV1).B" Junction18 as Connection980
+        connect Junction18 "RL coupled Load1.b_in" as Connection981
+        connect "Meter (EV2).B" Junction18 as Connection982
+        connect "RL coupled Load1.c_in" Junction19 as Connection983
+        [
+            breakpoints = 9400, 8872
+        ]
+        connect Junction19 "Meter (EV1).C" as Connection984
+        [
+            breakpoints = 9432, 8872
+        ]
+        connect "Meter (EV2).C" Junction19 as Connection985
     }
 
     default {
         gen_probe {
+            signal_access = "inherit"
             addr = "0"
             override_signal_name = "False"
             signal_name = ""
@@ -3415,17 +5460,17 @@ model "campusgrid" {
         "core/Diesel Genset (Generic)" {
             Pnom = "1.2e6"
             Snom = "1.3e6"
-            Vnom_LL = "480"
-            fnom = "60"
-            include_transformer = "True"
-            Vnom_sec_LL = "4800"
+            Vnom_LL = "400"
+            fnom = "50"
+            include_transformer = "False"
+            Vnom_sec_LL = "400"
             Ls_pu = "0.1"
             wL_pu = "0"
             Zt_pu = "0.04"
             Rshunt_pu = "2000"
             Tfast = "100e-6"
             Tslow = "500e-6"
-            Omega_nom = "1800"
+            Omega_nom = "1500"
         }
 
         "core/Grid" {
@@ -3446,6 +5491,8 @@ model "campusgrid" {
             vbn_rms = "False"
             vcn_rms = "False"
             vln_rms = "False"
+            vn = "False"
+            vn_rms = "False"
             vab = "False"
             vbc = "False"
             vca = "False"
@@ -3460,6 +5507,8 @@ model "campusgrid" {
             ib_rms = "False"
             ic_rms = "False"
             i_rms = "False"
+            ineutral = "False"
+            in_rms = "False"
             freq = "False"
             power_p = "False"
             power_q = "False"
@@ -3539,22 +5588,28 @@ model "campusgrid" {
             enable_probes = "True"
             enable_out = "True"
             remove_snubber = "False"
+            enable_bandwidth = "False"
+            bandwidth = "10e3"
             VAn = "True"
             VBn = "True"
             VCn = "True"
             VAB = "False"
             VBC = "False"
             VCA = "False"
+            VN = "False"
             IA = "True"
             IB = "True"
             IC = "True"
+            IN = "False"
             freq = "False"
             VLn_rms = "False"
             VLL_rms = "False"
             VLn_avg_rms = "False"
             VLL_avg_rms = "False"
+            VN_rms = "False"
             I_rms = "False"
             I_avg_rms = "False"
+            IN_rms = "False"
             P_method = "alpha-beta"
             enable_extra_out = "False"
             P_meas = "False"
@@ -3565,6 +5620,7 @@ model "campusgrid" {
             num_of_phases = "3"
             model_def = "Geometry"
             unit_sys = "imperial"
+            unit_sys_edited_flag = "0"
             Length_metric = "100.0"
             Length_miles = "62.1371"
             Frequency = "60.0"
@@ -3626,6 +5682,7 @@ model "campusgrid" {
         }
 
         "core/Triple Pole Single Throw Contactor" {
+            signal_access = "inherit"
             ctrl_src = "Digital input"
             Sa = "1"
             Sa_logic = "active high"
