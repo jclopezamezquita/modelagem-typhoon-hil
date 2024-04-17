@@ -7,10 +7,12 @@ import requests
 
 
 # Load model of the Typhoon HIL - .cpd file
-hil.load_model(file=r'C:\Users\deria\OneDrive\Code\modelagem-typhoon-hil\Modelagem Campusgrid no Typhoon\CAMPUSGRID - EV Target files\CAMPUSGRID - EV.cpd', offlineMode=False, vhil_device=True)
+#hil.load_model(file=r'C:\Users\deria\OneDrive\Code\modelagem-typhoon-hil\Modelagem Campusgrid no Typhoon\CAMPUSGRID - EV Target files\CAMPUSGRID - EV.cpd', offlineMode=False, vhil_device=True)
+hil.load_model(file=r'C:\Users\jessi\Downloads\Pós Doc\Atividades Derian\API_Campusgrid_Typhoon_HIL\modelagem-typhoon-hil\Modelagem Campusgrid no Typhoon\CAMPUSGRID - EV Target files\CAMPUSGRID - EV.cpd', offlineMode=False, vhil_device=True)
 
 # Load settings of model - .runx file
-hil.load_settings_file(file=r'C:\Users\deria\OneDrive\Code\modelagem-typhoon-hil\Modelagem Campusgrid no Typhoon\CAMPUSGRID - EV Target files\init.runx')
+#hil.load_settings_file(file=r'C:\Users\deria\OneDrive\Code\modelagem-typhoon-hil\Modelagem Campusgrid no Typhoon\CAMPUSGRID - EV Target files\init.runx')
+hil.load_settings_file(file=r'C:\Users\jessi\Downloads\Pós Doc\Atividades Derian\API_Campusgrid_Typhoon_HIL\modelagem-typhoon-hil\Modelagem Campusgrid no Typhoon\CAMPUSGRID - EV Target files\init.runx')
 
 # Start simulation
 hil.start_simulation()
@@ -25,6 +27,8 @@ hil.set_scada_input_value('Battery ESS (Generic) UI1.Enable', 1.0) #BESS contact
 hil.set_scada_input_value('Diesel Genset (Generic) UI1.Enable', 1.0) #DG contactor closed
 hil.set_scada_input_value('PV Power Plant (Generic) UI1.Enable', 1.0) #PV contactor closed
 hil.set_scada_input_value('Variable Load (Generic) UI1.Enable', 1.0) #Load contactor closed
+hil.set_scada_input_value('Variable EV1 (Generic) UI.Enable', 1.0) #EV1 contactor closed
+hil.set_scada_input_value('Variable EV2 (Generic) UI.Enable', 1.0) #EV2 contactor closed
 
 #******************** Inputs BESS ***********************
 hil.set_scada_input_value('Battery ESS (Generic) UI1.Initial SOC', 40.0)
@@ -78,29 +82,29 @@ hil.set_scada_input_value('Variable Load (Generic) UI1.V alarm upper limit', 1.5
 
 #******************** Inputs EV 1 ***********************
 # hil.set_scada_input_value('Variable Load (Generic) UI1.Pref', 0.2)
-hil.set_scada_input_value('EV 1 (Generic) UI1.P dependency type', 0.0)
-hil.set_scada_input_value('EV 1 (Generic) UI1.P(f) k1', 0.0)
-hil.set_scada_input_value('EV 1 (Generic) UI1.P(f) k2', 0.0)
-hil.set_scada_input_value('EV 1 (Generic) UI1.P(V) k1', 0.0)
-hil.set_scada_input_value('EV 1 (Generic) UI1.P(V) k2', 0.0)
-hil.set_scada_input_value('EV 1 (Generic) UI1.I alarm upper limit', 1.5)
-hil.set_scada_input_value('EV 1 (Generic) UI1.F alarm upper limit', 1.5)
-hil.set_scada_input_value('EV 1 (Generic) UI1.F alarm lower limit', 0.5)
-hil.set_scada_input_value('EV 1 (Generic) UI1.V alarm lower limit', 0.5)
-hil.set_scada_input_value('EV 1 (Generic) UI1.V alarm upper limit', 1.5)
+hil.set_scada_input_value('Variable EV1 (Generic) UI.P dependency type', 0.0)
+hil.set_scada_input_value('Variable EV1 (Generic) UI.P(f) k1', 0.0)
+hil.set_scada_input_value('Variable EV1 (Generic) UI.P(f) k2', 0.0)
+hil.set_scada_input_value('Variable EV1 (Generic) UI.P(V) k1', 0.0)
+hil.set_scada_input_value('Variable EV1 (Generic) UI.P(V) k2', 0.0)
+hil.set_scada_input_value('Variable EV1 (Generic) UI.I alarm upper limit', 1.5)
+hil.set_scada_input_value('Variable EV1 (Generic) UI.F alarm upper limit', 1.5)
+hil.set_scada_input_value('Variable EV1 (Generic) UI.F alarm lower limit', 0.5)
+hil.set_scada_input_value('Variable EV1 (Generic) UI.V alarm lower limit', 0.5)
+hil.set_scada_input_value('Variable EV1 (Generic) UI.V alarm upper limit', 1.5)
 
 #******************** Inputs EV 2 ***********************
 # hil.set_scada_input_value('Variable Load (Generic) UI1.Pref', 0.2)
-""" hil.set_scada_input_value('EV 2 (Generic) UI2.P dependency type', 0.0)
-hil.set_scada_input_value('EV 2 (Generic) UI2.P(f) k1', 0.0)
-hil.set_scada_input_value('EV 2 (Generic) UI2.P(f) k2', 0.0)
-hil.set_scada_input_value('EV 2 (Generic) UI2.P(V) k1', 0.0)
-hil.set_scada_input_value('EV 2 (Generic) UI2.P(V) k2', 0.0)
-hil.set_scada_input_value('EV 2 (Generic) UI2.I alarm upper limit', 1.5)
-hil.set_scada_input_value('EV 2 (Generic) UI2.F alarm upper limit', 1.5)
-hil.set_scada_input_value('EV 2 (Generic) UI2.F alarm lower limit', 0.5)
-hil.set_scada_input_value('EV 2 (Generic) UI2.V alarm lower limit', 0.5)
-hil.set_scada_input_value('EV 2 (Generic) UI2.V alarm upper limit', 1.5) """
+hil.set_scada_input_value('Variable EV2 (Generic) UI.P dependency type', 0.0)
+hil.set_scada_input_value('Variable EV2 (Generic) UI.P(f) k1', 0.0)
+hil.set_scada_input_value('Variable EV2 (Generic) UI.P(f) k2', 0.0)
+hil.set_scada_input_value('Variable EV2 (Generic) UI.P(V) k1', 0.0)
+hil.set_scada_input_value('Variable EV2 (Generic) UI.P(V) k2', 0.0)
+hil.set_scada_input_value('Variable EV2 (Generic) UI.I alarm upper limit', 1.5)
+hil.set_scada_input_value('Variable EV2 (Generic) UI.F alarm upper limit', 1.5)
+hil.set_scada_input_value('Variable EV2 (Generic) UI.F alarm lower limit', 0.5)
+hil.set_scada_input_value('Variable EV2 (Generic) UI.V alarm lower limit', 0.5)
+hil.set_scada_input_value('Variable EV2 (Generic) UI.V alarm upper limit', 1.5)
 
 # Line parameters file will be used to compute active and reactive power flow
 with open('Line_parameters.json') as json_file:
@@ -167,11 +171,11 @@ def dispatch_requests():
         dispatch_file["ev_1_power"].append(dispatch_EMS[0]['ev_1_power_t0' + str(x)])
     for x in range(10,24):
         dispatch_file["ev_1_power"].append(dispatch_EMS[0]['ev_1_power_t' + str(x)])
-    # dispatch_file["ev_2_power"] = []
-    # for x in range(0,10):
-    #     dispatch_file["ev_2_power"].append(dispatch_EMS[0]['ev_2_power_t0' + str(x)]/20)
-    # for x in range(10,24):
-    #     dispatch_file["ev_2_power"].append(dispatch_EMS[0]['ev_2_power_t' + str(x)]/20) 
+    dispatch_file["ev_2_power"] = []
+    for x in range(0,10):
+        dispatch_file["ev_2_power"].append(dispatch_EMS[0]['ev_2_power_t0' + str(x)]/20)
+    for x in range(10,24):
+        dispatch_file["ev_2_power"].append(dispatch_EMS[0]['ev_2_power_t' + str(x)]/20) 
 
     with open('dispatch_file.json', 'w') as outfile:
 	    json.dump(dispatch_file, outfile, indent=1)
@@ -186,7 +190,7 @@ while True:
             dispatch_requests()
             print('Dispatch file updated')
         except:
-            print('EMS is not available')
+            print('Dispatch file is not updated because EMS is not available!')
             pass
         time.sleep(60)
 
@@ -203,7 +207,7 @@ while True:
     Pref_bat = dispatch_file["bess"][index]
     Pref_genset = dispatch_file["genset"][index]
     Pref_ev_1 = dispatch_file["ev_1_power"][index]
-    # Pref_ev_2 = dispatch_file["ev_2_power"][index]
+    Pref_ev_2 = dispatch_file["ev_2_power"][index]
 
     # Insert reference power of the pload and qload (active and reactive power) with profiles
     index_5min = ((index * 60) + local_time[4])//5  # Define the index to 5 minutes
@@ -218,7 +222,7 @@ while True:
     print("Pref_qload: ", Pref_qload)
     print("Irradiance: ", Irradiance)
     print("Pref_EV_1: ", Pref_ev_1)
-    # print("Pref_EV_2: ", Pref_ev_2)
+    print("Pref_EV_2: ", Pref_ev_2)
     print("------------------------\n")
 
     # Sets the input value of the EV 1, EV 2, BESS, Genset, load and PV
@@ -227,8 +231,8 @@ while True:
     hil.set_scada_input_value('Variable Load (Generic) UI1.Pref', Pref_pload)
     hil.set_scada_input_value('Variable Load (Generic) UI1.Qref', Pref_qload)
     hil.set_scada_input_value('PV Power Plant (Generic) UI1.Irradiance', Irradiance)
-    hil.set_scada_input_value('EV 1 (Generic) UI1.Pref', Pref_ev_1)
-    # hil.set_scada_input_value('EV 2 (Generic) UI2.Pref', Pref_ev_2)
+    hil.set_scada_input_value('Variable EV1 (Generic) UI.Pref', Pref_ev_1)
+    hil.set_scada_input_value('Variable EV2 (Generic) UI.Pref', Pref_ev_2)
 
     # To compute angles and power flow at each node 
     PF_PCC_A  = hil.read_analog_signal(name='Meter (PCC).Three-phase Meter.POWER_PFA')
@@ -250,9 +254,9 @@ while True:
     PF_EV1_A = hil.read_analog_signal(name='Meter (EV1).Three-phase Meter.POWER_PFA')
     PF_EV1_B = hil.read_analog_signal(name='Meter (EV1).Three-phase Meter.POWER_PFB')
     PF_EV1_C = hil.read_analog_signal(name='Meter (EV1).Three-phase Meter.POWER_PFC')
-    # PF_EV2_A = hil.read_analog_signal(name='Meter (EV2).Three-phase Meter.POWER_PFA')
-    # PF_EV2_B = hil.read_analog_signal(name='Meter (EV2).Three-phase Meter.POWER_PFB')
-    # PF_EV2_C = hil.read_analog_signal(name='Meter (EV2).Three-phase Meter.POWER_PFC')
+    PF_EV2_A = hil.read_analog_signal(name='Meter (EV2).Three-phase Meter.POWER_PFA')
+    PF_EV2_B = hil.read_analog_signal(name='Meter (EV2).Three-phase Meter.POWER_PFB')
+    PF_EV2_C = hil.read_analog_signal(name='Meter (EV2).Three-phase Meter.POWER_PFC')
 
     angl_PCC_A  = math.acos(PF_PCC_A)
     angl_PCC_B  = math.acos(PF_PCC_B)
@@ -273,9 +277,9 @@ while True:
     angl_EV1_A = math.acos(PF_EV1_A)
     angl_EV1_B = math.acos(PF_EV1_B)
     angl_EV1_C = math.acos(PF_EV1_C)
-    # angl_EV2_A = math.acos(PF_EV2_A)
-    # angl_EV2_B = math.acos(PF_EV2_B)
-    # angl_EV2_C = math.acos(PF_EV2_C)
+    angl_EV2_A = math.acos(PF_EV2_A)
+    angl_EV2_B = math.acos(PF_EV2_B)
+    angl_EV2_C = math.acos(PF_EV2_C)
 
     # Get measurements of node 1 - PCC
     new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')] = {}
@@ -357,7 +361,7 @@ while True:
     # Get measurements of node 6 - EV 1
     new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'].append({})
     new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'][5]['name'] = "6"
-    new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'][5]['der'] = "ev"
+    new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'][5]['der'] = "ev1"
     new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'][5]['Vmag_phase_A_rms'] = round(hil.read_analog_signal(name='Meter (EV1).Three-phase Meter.VAn_RMS'),2)
     new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'][5]['Vmag_phase_B_rms'] = round(hil.read_analog_signal(name='Meter (EV1).Three-phase Meter.VBn_RMS'),2)
     new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'][5]['Vmag_phase_C_rms'] = round(hil.read_analog_signal(name='Meter (EV1).Three-phase Meter.VCn_RMS'),2)
@@ -370,20 +374,19 @@ while True:
     new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'][5]['SOC'] = 0.00
 
     # Get measurements of node 6 - EV 2
-
-    # new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'].append({})
-    # new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'][6]['name'] = "6.2"
-    # new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'][6]['der'] = "ev2"
-    # new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'][6]['Vmag_phase_A_rms'] = round(hil.read_analog_signal(name='Meter (EV2).Three-phase Meter.VAn_RMS'),2)
-    # new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'][6]['Vmag_phase_B_rms'] = round(hil.read_analog_signal(name='Meter (EV2).Three-phase Meter.VBn_RMS'),2)
-    # new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'][6]['Vmag_phase_C_rms'] = round(hil.read_analog_signal(name='Meter (EV2).Three-phase Meter.VCn_RMS'),2)
-    # new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'][6]['Pmag_phase_A_rms'] = round(hil.read_analog_signal(name='Meter (EV2).Three-phase Meter.POWER_PA'),2)
-    # new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'][6]['Pmag_phase_B_rms'] = round(hil.read_analog_signal(name='Meter (EV2).Three-phase Meter.POWER_PB'),2)
-    # new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'][6]['Pmag_phase_C_rms'] = round(hil.read_analog_signal(name='Meter (EV2).Three-phase Meter.POWER_PC'),2)
-    # new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'][6]['Qmag_phase_A_rms'] = round(hil.read_analog_signal(name='Meter (EV2).Three-phase Meter.POWER_QA'),2)
-    # new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'][6]['Qmag_phase_B_rms'] = round(hil.read_analog_signal(name='Meter (EV2).Three-phase Meter.POWER_QB'),2)
-    # new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'][6]['Qmag_phase_C_rms'] = round(hil.read_analog_signal(name='Meter (EV2).Three-phase Meter.POWER_QC'),2)
-    # new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'][6]['SOC'] = 0.00
+    new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'].append({})
+    new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'][6]['name'] = "7"
+    new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'][6]['der'] = "ev2"
+    new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'][6]['Vmag_phase_A_rms'] = round(hil.read_analog_signal(name='Meter (EV2).Three-phase Meter.VAn_RMS'),2)
+    new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'][6]['Vmag_phase_B_rms'] = round(hil.read_analog_signal(name='Meter (EV2).Three-phase Meter.VBn_RMS'),2)
+    new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'][6]['Vmag_phase_C_rms'] = round(hil.read_analog_signal(name='Meter (EV2).Three-phase Meter.VCn_RMS'),2)
+    new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'][6]['Pmag_phase_A_rms'] = round(hil.read_analog_signal(name='Meter (EV2).Three-phase Meter.POWER_PA'),2)
+    new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'][6]['Pmag_phase_B_rms'] = round(hil.read_analog_signal(name='Meter (EV2).Three-phase Meter.POWER_PB'),2)
+    new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'][6]['Pmag_phase_C_rms'] = round(hil.read_analog_signal(name='Meter (EV2).Three-phase Meter.POWER_PC'),2)
+    new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'][6]['Qmag_phase_A_rms'] = round(hil.read_analog_signal(name='Meter (EV2).Three-phase Meter.POWER_QA'),2)
+    new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'][6]['Qmag_phase_B_rms'] = round(hil.read_analog_signal(name='Meter (EV2).Three-phase Meter.POWER_QB'),2)
+    new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'][6]['Qmag_phase_C_rms'] = round(hil.read_analog_signal(name='Meter (EV2).Three-phase Meter.POWER_QC'),2)
+    new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['node'][6]['SOC'] = 0.00
 
 
     # Get measurements of branch 1 - 2
@@ -458,18 +461,18 @@ while True:
     new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['branch'][4]['Reactive_power_flow_phase_C'] = round((hil.read_analog_signal(name='Meter (EV1).IC_RMS1'))**2*impedance["Xcc"]*(math.sin(angl_PCC_C - angl_EV1_C)),2)
 
     # Get measurements of branch 1 - 6 ev2
-    # new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['branch'].append({})
-    # new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['branch'][5]['initial_node'] = "1"
-    # new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['branch'][5]['final_node'] = "6.2"
-    # new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['branch'][5]['Imag_phase_A_rms'] = round(hil.read_analog_signal(name='Meter (EV2).IA_RMS1'),2)
-    # new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['branch'][5]['Imag_phase_B_rms'] = round(hil.read_analog_signal(name='Meter (EV2).IB_RMS1'),2)
-    # new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['branch'][5]['Imag_phase_C_rms'] = round(hil.read_analog_signal(name='Meter (EV2).IC_RMS1'),2)
-    # new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['branch'][5]['Active_power_flow_phase_A'] = round((hil.read_analog_signal(name='Meter (EV2).IA_RMS1'))**2*impedance["Raa"]*(math.cos(angl_PCC_A - angl_EV2_A)),2)
-    # new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['branch'][5]['Active_power_flow_phase_B'] = round((hil.read_analog_signal(name='Meter (EV2).IB_RMS1'))**2*impedance["Rbb"]*(math.cos(angl_PCC_B - angl_EV2_B)),2)
-    # new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['branch'][5]['Active_power_flow_phase_C'] = round((hil.read_analog_signal(name='Meter (EV2).IC_RMS1'))**2*impedance["Rcc"]*(math.cos(angl_PCC_C - angl_EV2_C)),2)
-    # new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['branch'][5]['Reactive_power_flow_phase_A'] = round((hil.read_analog_signal(name='Meter (EV2).IA_RMS1'))**2*impedance["Xaa"]*(math.sin(angl_PCC_A - angl_EV2_A)),2)
-    # new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['branch'][5]['Reactive_power_flow_phase_B'] = round((hil.read_analog_signal(name='Meter (EV2).IB_RMS1'))**2*impedance["Xbb"]*(math.sin(angl_PCC_B - angl_EV2_B)),2)
-    # new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['branch'][5]['Reactive_power_flow_phase_C'] = round((hil.read_analog_signal(name='Meter (EV2).IC_RMS1'))**2*impedance["Xcc"]*(math.sin(angl_PCC_C - angl_EV2_C)),2)
+    new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['branch'].append({})
+    new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['branch'][5]['initial_node'] = "1"
+    new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['branch'][5]['final_node'] = "7"
+    new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['branch'][5]['Imag_phase_A_rms'] = round(hil.read_analog_signal(name='Meter (EV2).IA_RMS1'),2)
+    new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['branch'][5]['Imag_phase_B_rms'] = round(hil.read_analog_signal(name='Meter (EV2).IB_RMS1'),2)
+    new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['branch'][5]['Imag_phase_C_rms'] = round(hil.read_analog_signal(name='Meter (EV2).IC_RMS1'),2)
+    new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['branch'][5]['Active_power_flow_phase_A'] = round((hil.read_analog_signal(name='Meter (EV2).IA_RMS1'))**2*impedance["Raa"]*(math.cos(angl_PCC_A - angl_EV2_A)),2)
+    new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['branch'][5]['Active_power_flow_phase_B'] = round((hil.read_analog_signal(name='Meter (EV2).IB_RMS1'))**2*impedance["Rbb"]*(math.cos(angl_PCC_B - angl_EV2_B)),2)
+    new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['branch'][5]['Active_power_flow_phase_C'] = round((hil.read_analog_signal(name='Meter (EV2).IC_RMS1'))**2*impedance["Rcc"]*(math.cos(angl_PCC_C - angl_EV2_C)),2)
+    new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['branch'][5]['Reactive_power_flow_phase_A'] = round((hil.read_analog_signal(name='Meter (EV2).IA_RMS1'))**2*impedance["Xaa"]*(math.sin(angl_PCC_A - angl_EV2_A)),2)
+    new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['branch'][5]['Reactive_power_flow_phase_B'] = round((hil.read_analog_signal(name='Meter (EV2).IB_RMS1'))**2*impedance["Xbb"]*(math.sin(angl_PCC_B - angl_EV2_B)),2)
+    new_data[time_now.strftime('%Y-%m-%dT%H:%M:%S.%f%z')]['branch'][5]['Reactive_power_flow_phase_C'] = round((hil.read_analog_signal(name='Meter (EV2).IC_RMS1'))**2*impedance["Xcc"]*(math.sin(angl_PCC_C - angl_EV2_C)),2)
 
     # Update the dictionary new_data with the new measurements
     new_data.update(new_data)

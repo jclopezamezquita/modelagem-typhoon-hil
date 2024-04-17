@@ -1,4 +1,4 @@
-Model campusgrid - ev
+Model CAMPUSGRID - EV
 
 
 REM LUT solver inputs...

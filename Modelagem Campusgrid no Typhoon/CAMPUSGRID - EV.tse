@@ -1,10 +1,10 @@
 version = 4.2
 
 //
-// Saved by sw version: 2024.1
+// Saved by sw version: 2022.4 SP1
 //
 
-model "campusgrid - ev" {
+model "CAMPUSGRID" {
     configuration {
         hil_device = "VHIL+"
         hil_configuration_id = 1
@@ -18,7 +18,6 @@ model "campusgrid - ev" {
         show_modes = False
         device_ao_limit_enable = False
         reset_analog_outputs_on_sim_stop = True
-        reset_analog_outputs_on_sim_stop_mode = Offset values
         reset_digital_outputs_on_sim_stop = True
         vhil_adio_loopback = False
         cpl_stb = True
@@ -42,11 +41,6 @@ model "campusgrid - ev" {
         cce_type_mapping_real = "double"
         cce_type_mapping_uint = "unsigned int"
         cce_type_mapping_int = "int"
-        cce_platform = "generic"
-        cce_use_relative_names = False
-        cce_type_mapping_real = "double"
-        cce_type_mapping_uint = "unsigned int"
-        cce_type_mapping_int = "int"
         cce_directory = "D:\project\t_sw\thcc"
         cce_custom_type_int = ""
         cce_custom_type_uint = ""
@@ -56,21 +50,10 @@ model "campusgrid - ev" {
         sig_stim = "off"
         export_resource_list = ""
         export_dependency_list = ""
-        excluded_resource_list = ""
         export_out_file = ""
         export_lock_top_level = True
         export_encrypt_library = True
         export_encrypt_resources = True
-        dae_solver = "BDF"
-        max_sim_step = 1e-4
-        simulation_time = 1.0
-        abs_tol = 1e-3
-        rel_tol = 1e-3
-        init_sim_step = 1e-6
-        r_on_sw = 1e-3
-        v_on_diode = 0.2
-        data_sampling_rate = 0
-        feedthrough_validation_error_level = warning
     }
 
     component Subsystem Root {
@@ -81,7 +64,7 @@ model "campusgrid - ev" {
             resistance_cont = "10.0"
         }
         [
-            position = 8008, 8248
+            position = 7384, 8168
             rotation = down
             size = 144, 136
         ]
@@ -89,7 +72,7 @@ model "campusgrid - ev" {
         component "core/Grid UI" "Grid UI1" {
         }
         [
-            position = 7872, 8248
+            position = 7208, 8168
             rotation = down
             scale = -1, 1
             size = 56, 136
@@ -132,20 +115,20 @@ model "campusgrid - ev" {
 
         component Subsystem "Variable Load (Generic) UI1" {
             layout = dynamic
-            component "core/Probe" Enable_fb {
+            component gen_probe Enable_fb {
             }
             [
                 position = 7952, 8024
             ]
 
-            component "core/Probe" PFmeas {
+            component gen_probe PFmeas {
                 streaming_en = "True"
             }
             [
                 position = 7600, 8200
             ]
 
-            component "core/SCADA Input" Qref {
+            component src_scada_input Qref {
                 execution_rate = "inherit"
                 max = "1e8"
                 min = "-1e8"
@@ -155,7 +138,7 @@ model "campusgrid - ev" {
                 position = 8600, 7736
             ]
 
-            component "core/SCADA Input" Enable {
+            component src_scada_input Enable {
                 execution_rate = "inherit"
                 max = "1"
                 min = "0"
@@ -165,7 +148,7 @@ model "campusgrid - ev" {
                 position = 8600, 7568
             ]
 
-            component "core/SCADA Input" Pref {
+            component src_scada_input Pref {
                 execution_rate = "inherit"
                 max = "1e8"
                 min = "0"
@@ -175,91 +158,91 @@ model "campusgrid - ev" {
                 position = 8600, 7680
             ]
 
-            component "core/Probe" Vload_rms_meas_V {
+            component gen_probe Vload_rms_meas_V {
                 streaming_en = "True"
             }
             [
                 position = 7568, 8216
             ]
 
-            component "core/Probe" Qmeas_kVAr {
+            component gen_probe Qmeas_kVAr {
                 streaming_en = "True"
             }
             [
                 position = 7664, 8168
             ]
 
-            component "core/Probe" Smeas_kVA {
+            component gen_probe Smeas_kVA {
             }
             [
                 position = 7632, 8184
             ]
 
-            component "core/Probe" Pnom_kW {
+            component gen_probe Pnom_kW {
             }
             [
                 position = 7856, 8072
             ]
 
-            component "core/Probe" Qref_fb_kVAr {
+            component gen_probe Qref_fb_kVAr {
                 streaming_en = "True"
             }
             [
                 position = 7888, 8056
             ]
 
-            component "core/Probe" Snom_kVA {
+            component gen_probe Snom_kVA {
             }
             [
                 position = 7792, 8104
             ]
 
-            component "core/Probe" Fmeas_Hz {
+            component gen_probe Fmeas_Hz {
                 streaming_en = "True"
             }
             [
                 position = 7760, 8120
             ]
 
-            component "core/Probe" Pref_fb_kW {
+            component gen_probe Pref_fb_kW {
                 streaming_en = "True"
             }
             [
                 position = 7920, 8040
             ]
 
-            component "core/Probe" Qnom_kVAr {
+            component gen_probe Qnom_kVAr {
             }
             [
                 position = 7824, 8088
             ]
 
-            component "core/Probe" Vgrid_rms_meas_kV {
+            component gen_probe Vgrid_rms_meas_kV {
             }
             [
                 position = 7728, 8136
             ]
 
-            component "core/Probe" Pmeas_kW {
+            component gen_probe Pmeas_kW {
                 streaming_en = "True"
             }
             [
                 position = 7696, 8152
             ]
 
-            component "core/Probe" MCB_status {
+            component gen_probe MCB_status {
             }
             [
                 position = 7536, 8232
             ]
 
-            component "core/Probe" alarm_msg {
+            component gen_probe alarm_msg {
             }
             [
                 position = 7504, 8248
             ]
 
-            component "core/SCADA Input" "Reset alarms" {
+            component src_scada_input "Reset alarms" {
                 execution_rate = "inherit"
                 max = "1"
                 min = "0"
@@ -269,7 +252,7 @@ model "campusgrid - ev" {
                 position = 8600, 7624
             ]
 
-            component "core/SCADA Input" "Pref rate of change" {
+            component src_scada_input "Pref rate of change" {
                 def_value = "0.1"
                 execution_rate = "inherit"
                 min = "0"
@@ -279,7 +262,7 @@ model "campusgrid - ev" {
                 position = 8600, 7792
             ]
 
-            component "core/SCADA Input" "Qref rate of change" {
+            component src_scada_input "Qref rate of change" {
                 def_value = "0.1"
                 execution_rate = "inherit"
                 min = "0"
@@ -289,7 +272,7 @@ model "campusgrid - ev" {
                 position = 8600, 7848
             ]
 
-            component "core/SCADA Input" "P dependency type" {
+            component src_scada_input "P dependency type" {
                 def_value = "0.0"
                 execution_rate = "inherit"
                 max = "2"
@@ -300,7 +283,7 @@ model "campusgrid - ev" {
                 position = 8600, 7904
             ]
 
-            component "core/SCADA Input" "Q dependency type" {
+            component src_scada_input "Q dependency type" {
                 def_value = "0.0"
                 execution_rate = "inherit"
                 max = "2"
@@ -311,7 +294,7 @@ model "campusgrid - ev" {
                 position = 8600, 7960
             ]
 
-            component "core/SCADA Input" "P(V) k1" {
+            component src_scada_input "P(V) k1" {
                 def_value = "0.0"
                 execution_rate = "inherit"
                 max = "100"
@@ -322,7 +305,7 @@ model "campusgrid - ev" {
                 position = 8600, 8016
             ]
 
-            component "core/SCADA Input" "P(V) k2" {
+            component src_scada_input "P(V) k2" {
                 def_value = "0.0"
                 execution_rate = "inherit"
                 max = "100"
@@ -333,7 +316,7 @@ model "campusgrid - ev" {
                 position = 8600, 8072
             ]
 
-            component "core/SCADA Input" "Q(V) k1" {
+            component src_scada_input "Q(V) k1" {
                 def_value = "0.0"
                 execution_rate = "inherit"
                 max = "100"
@@ -344,7 +327,7 @@ model "campusgrid - ev" {
                 position = 8600, 8248
             ]
 
-            component "core/SCADA Input" "Q(V) k2" {
+            component src_scada_input "Q(V) k2" {
                 def_value = "0.0"
                 execution_rate = "inherit"
                 max = "100"
@@ -355,7 +338,7 @@ model "campusgrid - ev" {
                 position = 8600, 8304
             ]
 
-            component "core/SCADA Input" "P(f) k1" {
+            component src_scada_input "P(f) k1" {
                 def_value = "0.0"
                 execution_rate = "inherit"
                 max = "100"
@@ -366,7 +349,7 @@ model "campusgrid - ev" {
                 position = 8600, 8128
             ]
 
-            component "core/SCADA Input" "P(f) k2" {
+            component src_scada_input "P(f) k2" {
                 def_value = "0.0"
                 execution_rate = "inherit"
                 max = "100"
@@ -377,7 +360,7 @@ model "campusgrid - ev" {
                 position = 8600, 8192
             ]
 
-            component "core/SCADA Input" "Q(f) k1" {
+            component src_scada_input "Q(f) k1" {
                 def_value = "0.0"
                 execution_rate = "inherit"
                 max = "100"
@@ -388,7 +371,7 @@ model "campusgrid - ev" {
                 position = 8600, 8360
             ]
 
-            component "core/SCADA Input" "Q(f) k2" {
+            component src_scada_input "Q(f) k2" {
                 def_value = "0.0"
                 execution_rate = "inherit"
                 max = "100"
@@ -462,7 +445,7 @@ model "campusgrid - ev" {
                 size = 192, 64
             ]
 
-            component "core/SCADA Input" "V alarm upper limit" {
+            component src_scada_input "V alarm upper limit" {
                 def_value = "1.5"
                 execution_rate = "inherit"
                 min = "1"
@@ -472,7 +455,7 @@ model "campusgrid - ev" {
                 position = 8600, 8480
             ]
 
-            component "core/SCADA Input" "V alarm lower limit" {
+            component src_scada_input "V alarm lower limit" {
                 def_value = "0.5"
                 execution_rate = "inherit"
                 max = "1"
@@ -483,7 +466,7 @@ model "campusgrid - ev" {
                 position = 8600, 8536
             ]
 
-            component "core/SCADA Input" "F alarm upper limit" {
+            component src_scada_input "F alarm upper limit" {
                 def_value = "1.5"
                 execution_rate = "inherit"
                 min = "1"
@@ -493,7 +476,7 @@ model "campusgrid - ev" {
                 position = 8600, 8592
             ]
 
-            component "core/SCADA Input" "F alarm lower limit" {
+            component src_scada_input "F alarm lower limit" {
                 def_value = "0.5"
                 execution_rate = "inherit"
                 max = "1"
@@ -504,7 +487,7 @@ model "campusgrid - ev" {
                 position = 8600, 8648
             ]
 
-            component "core/SCADA Input" "S alarm upper limit" {
+            component src_scada_input "S alarm upper limit" {
                 def_value = "1.5"
                 execution_rate = "inherit"
                 min = "1"
@@ -514,7 +497,7 @@ model "campusgrid - ev" {
                 position = 8600, 8704
             ]
 
-            component "core/SCADA Input" "I alarm upper limit" {
+            component src_scada_input "I alarm upper limit" {
                 def_value = "1.5"
                 execution_rate = "inherit"
                 min = "1"
@@ -778,7 +761,7 @@ model "campusgrid - ev" {
             connect c S1.a_in as Connection6
         }
         [
-            position = 8384, 8352
+            position = 7888, 8304
             size = 48, 80
         ]
 
@@ -840,7 +823,7 @@ model "campusgrid - ev" {
 
             component Subsystem "RC Snubber" {
                 layout = dynamic
-                component "core/Resistor" R2 {
+                component pas_resistor R2 {
                     resistance = "R"
                 }
                 [
@@ -848,7 +831,7 @@ model "campusgrid - ev" {
                     rotation = right
                 ]
 
-                component "core/Capacitor" C3 {
+                component pas_capacitor C3 {
                     capacitance = "C"
                 }
                 [
@@ -856,7 +839,7 @@ model "campusgrid - ev" {
                     rotation = right
                 ]
 
-                component "core/Capacitor" C1 {
+                component pas_capacitor C1 {
                     capacitance = "C"
                 }
                 [
@@ -864,7 +847,7 @@ model "campusgrid - ev" {
                     rotation = right
                 ]
 
-                component "core/Resistor" R1 {
+                component pas_resistor R1 {
                     resistance = "R"
                 }
                 [
@@ -872,7 +855,7 @@ model "campusgrid - ev" {
                     rotation = right
                 ]
 
-                component "core/Resistor" R3 {
+                component pas_resistor R3 {
                     resistance = "R"
                 }
                 [
@@ -880,7 +863,7 @@ model "campusgrid - ev" {
                     rotation = right
                 ]
 
-                component "core/Capacitor" C2 {
+                component pas_capacitor C2 {
                     capacitance = "C"
                 }
                 [
@@ -1090,7 +1073,7 @@ model "campusgrid - ev" {
             unit_sys = "metric"
         }
         [
-            position = 8160, 8352
+            position = 7616, 8304
             size = 256, 72
         ]
 
@@ -1160,56 +1143,56 @@ model "campusgrid - ev" {
 
         component Subsystem "Meter (DG)" {
             layout = dynamic
-            component "core/Probe" VAn {
+            component gen_probe VAn {
             }
             [
                 position = 9320, 7448
                 rotation = left
             ]
 
-            component "core/Probe" VBn {
+            component gen_probe VBn {
             }
             [
                 position = 9344, 7480
                 rotation = left
             ]
 
-            component "core/Probe" VCn {
+            component gen_probe VCn {
             }
             [
                 position = 9368, 7512
                 rotation = left
             ]
 
-            component "core/Probe" VAB {
+            component gen_probe VAB {
             }
             [
                 position = 9392, 7552
                 rotation = left
             ]
 
-            component "core/Probe" VBC {
+            component gen_probe VBC {
             }
             [
                 position = 9416, 7584
                 rotation = left
             ]
 
-            component "core/Probe" VCA {
+            component gen_probe VCA {
             }
             [
                 position = 9440, 7616
                 rotation = left
             ]
 
-            component "core/Probe" VAn_RMS1 {
+            component gen_probe VAn_RMS1 {
             }
             [
                 position = 9464, 7648
                 rotation = left
             ]
 
-            component "core/Probe" VBn_RMS1 {
+            component gen_probe VBn_RMS1 {
             }
             [
                 position = 9464, 7776
@@ -1217,7 +1200,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VCn_RMS1 {
+            component gen_probe VCn_RMS1 {
             }
             [
                 position = 9440, 7808
@@ -1225,7 +1208,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VLn_RMS {
+            component gen_probe VLn_RMS {
             }
             [
                 position = 9416, 7840
@@ -1233,7 +1216,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VAB_RMS1 {
+            component gen_probe VAB_RMS1 {
             }
             [
                 position = 9392, 7872
@@ -1241,7 +1224,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VBC_RMS1 {
+            component gen_probe VBC_RMS1 {
             }
             [
                 position = 9368, 7904
@@ -1249,7 +1232,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VCA_RMS1 {
+            component gen_probe VCA_RMS1 {
             }
             [
                 position = 9344, 7936
@@ -1257,7 +1240,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VLL_RMS1 {
+            component gen_probe VLL_RMS1 {
             }
             [
                 position = 9312, 7960
@@ -1265,49 +1248,49 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" IA {
+            component gen_probe IA {
             }
             [
                 position = 9344, 8048
                 rotation = left
             ]
 
-            component "core/Probe" IB {
+            component gen_probe IB {
             }
             [
                 position = 9368, 8080
                 rotation = left
             ]
 
-            component "core/Probe" IC {
+            component gen_probe IC {
             }
             [
                 position = 9392, 8120
                 rotation = left
             ]
 
-            component "core/Probe" Freq {
+            component gen_probe Freq {
             }
             [
                 position = 9416, 8152
                 rotation = left
             ]
 
-            component "core/Probe" IA_RMS1 {
+            component gen_probe IA_RMS1 {
             }
             [
                 position = 9440, 8184
                 rotation = left
             ]
 
-            component "core/Probe" IB_RMS1 {
+            component gen_probe IB_RMS1 {
             }
             [
                 position = 9464, 8216
                 rotation = left
             ]
 
-            component "core/Probe" IC_RMS1 {
+            component gen_probe IC_RMS1 {
             }
             [
                 position = 9464, 8344
@@ -1315,7 +1298,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" I_RMS1 {
+            component gen_probe I_RMS1 {
             }
             [
                 position = 9440, 8376
@@ -1323,7 +1306,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" POWER_P1 {
+            component gen_probe POWER_P1 {
             }
             [
                 position = 9416, 8408
@@ -1331,7 +1314,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" POWER_Q1 {
+            component gen_probe POWER_Q1 {
             }
             [
                 position = 9392, 8440
@@ -1339,7 +1322,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" POWER_S1 {
+            component gen_probe POWER_S1 {
             }
             [
                 position = 9368, 8472
@@ -1347,7 +1330,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" POWER_PF1 {
+            component gen_probe POWER_PF1 {
             }
             [
                 position = 9344, 8504
@@ -1546,56 +1529,56 @@ model "campusgrid - ev" {
 
         component Subsystem "Meter (Load)" {
             layout = dynamic
-            component "core/Probe" VAn {
+            component gen_probe VAn {
             }
             [
                 position = 7872, 7424
                 rotation = left
             ]
 
-            component "core/Probe" VBn {
+            component gen_probe VBn {
             }
             [
                 position = 7896, 7456
                 rotation = left
             ]
 
-            component "core/Probe" VCn {
+            component gen_probe VCn {
             }
             [
                 position = 7920, 7488
                 rotation = left
             ]
 
-            component "core/Probe" VAB {
+            component gen_probe VAB {
             }
             [
                 position = 7944, 7528
                 rotation = left
             ]
 
-            component "core/Probe" VBC {
+            component gen_probe VBC {
             }
             [
                 position = 7968, 7560
                 rotation = left
             ]
 
-            component "core/Probe" VCA {
+            component gen_probe VCA {
             }
             [
                 position = 7992, 7592
                 rotation = left
             ]
 
-            component "core/Probe" VAn_RMS1 {
+            component gen_probe VAn_RMS1 {
             }
             [
                 position = 8016, 7624
                 rotation = left
             ]
 
-            component "core/Probe" VBn_RMS1 {
+            component gen_probe VBn_RMS1 {
             }
             [
                 position = 8016, 7752
@@ -1603,7 +1586,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VCn_RMS1 {
+            component gen_probe VCn_RMS1 {
             }
             [
                 position = 7992, 7784
@@ -1611,7 +1594,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VLn_RMS {
+            component gen_probe VLn_RMS {
             }
             [
                 position = 7968, 7816
@@ -1619,7 +1602,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VAB_RMS1 {
+            component gen_probe VAB_RMS1 {
             }
             [
                 position = 7944, 7848
@@ -1627,7 +1610,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VBC_RMS1 {
+            component gen_probe VBC_RMS1 {
             }
             [
                 position = 7920, 7880
@@ -1635,7 +1618,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VCA_RMS1 {
+            component gen_probe VCA_RMS1 {
             }
             [
                 position = 7896, 7912
@@ -1643,7 +1626,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VLL_RMS1 {
+            component gen_probe VLL_RMS1 {
             }
             [
                 position = 7864, 7936
@@ -1651,49 +1634,49 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" IA {
+            component gen_probe IA {
             }
             [
                 position = 7896, 8024
                 rotation = left
             ]
 
-            component "core/Probe" IB {
+            component gen_probe IB {
             }
             [
                 position = 7920, 8056
                 rotation = left
             ]
 
-            component "core/Probe" IC {
+            component gen_probe IC {
             }
             [
                 position = 7944, 8096
                 rotation = left
             ]
 
-            component "core/Probe" Freq {
+            component gen_probe Freq {
             }
             [
                 position = 7968, 8128
                 rotation = left
             ]
 
-            component "core/Probe" IA_RMS1 {
+            component gen_probe IA_RMS1 {
             }
             [
                 position = 7992, 8160
                 rotation = left
             ]
 
-            component "core/Probe" IB_RMS1 {
+            component gen_probe IB_RMS1 {
             }
             [
                 position = 8016, 8192
                 rotation = left
             ]
 
-            component "core/Probe" IC_RMS1 {
+            component gen_probe IC_RMS1 {
             }
             [
                 position = 8016, 8320
@@ -1701,7 +1684,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" I_RMS1 {
+            component gen_probe I_RMS1 {
             }
             [
                 position = 7992, 8352
@@ -1709,7 +1692,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" POWER_P1 {
+            component gen_probe POWER_P1 {
             }
             [
                 position = 7968, 8384
@@ -1717,7 +1700,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" POWER_Q1 {
+            component gen_probe POWER_Q1 {
             }
             [
                 position = 7944, 8416
@@ -1725,7 +1708,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" POWER_S1 {
+            component gen_probe POWER_S1 {
             }
             [
                 position = 7920, 8448
@@ -1733,7 +1716,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" POWER_PF1 {
+            component gen_probe POWER_PF1 {
             }
             [
                 position = 7896, 8480
@@ -1932,56 +1915,56 @@ model "campusgrid - ev" {
 
         component Subsystem "Meter (BESS)" {
             layout = dynamic
-            component "core/Probe" VAn {
+            component gen_probe VAn {
             }
             [
                 position = 7928, 7456
                 rotation = left
             ]
 
-            component "core/Probe" VBn {
+            component gen_probe VBn {
             }
             [
                 position = 7952, 7488
                 rotation = left
             ]
 
-            component "core/Probe" VCn {
+            component gen_probe VCn {
             }
             [
                 position = 7976, 7520
                 rotation = left
             ]
 
-            component "core/Probe" VAB {
+            component gen_probe VAB {
             }
             [
                 position = 8000, 7560
                 rotation = left
             ]
 
-            component "core/Probe" VBC {
+            component gen_probe VBC {
             }
             [
                 position = 8024, 7592
                 rotation = left
             ]
 
-            component "core/Probe" VCA {
+            component gen_probe VCA {
             }
             [
                 position = 8048, 7624
                 rotation = left
             ]
 
-            component "core/Probe" VAn_RMS1 {
+            component gen_probe VAn_RMS1 {
             }
             [
                 position = 8072, 7656
                 rotation = left
             ]
 
-            component "core/Probe" VBn_RMS1 {
+            component gen_probe VBn_RMS1 {
             }
             [
                 position = 8072, 7784
@@ -1989,7 +1972,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VCn_RMS1 {
+            component gen_probe VCn_RMS1 {
             }
             [
                 position = 8048, 7816
@@ -1997,7 +1980,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VLn_RMS {
+            component gen_probe VLn_RMS {
             }
             [
                 position = 8024, 7848
@@ -2005,7 +1988,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VAB_RMS1 {
+            component gen_probe VAB_RMS1 {
             }
             [
                 position = 8000, 7880
@@ -2013,7 +1996,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VBC_RMS1 {
+            component gen_probe VBC_RMS1 {
             }
             [
                 position = 7976, 7912
@@ -2021,7 +2004,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VCA_RMS1 {
+            component gen_probe VCA_RMS1 {
             }
             [
                 position = 7952, 7944
@@ -2029,7 +2012,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VLL_RMS1 {
+            component gen_probe VLL_RMS1 {
             }
             [
                 position = 7920, 7968
@@ -2037,49 +2020,49 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" IA {
+            component gen_probe IA {
             }
             [
                 position = 7952, 8056
                 rotation = left
             ]
 
-            component "core/Probe" IB {
+            component gen_probe IB {
             }
             [
                 position = 7976, 8088
                 rotation = left
             ]
 
-            component "core/Probe" IC {
+            component gen_probe IC {
             }
             [
                 position = 8000, 8128
                 rotation = left
             ]
 
-            component "core/Probe" Freq {
+            component gen_probe Freq {
             }
             [
                 position = 8024, 8160
                 rotation = left
             ]
 
-            component "core/Probe" IA_RMS1 {
+            component gen_probe IA_RMS1 {
             }
             [
                 position = 8048, 8192
                 rotation = left
             ]
 
-            component "core/Probe" IB_RMS1 {
+            component gen_probe IB_RMS1 {
             }
             [
                 position = 8072, 8224
                 rotation = left
             ]
 
-            component "core/Probe" IC_RMS1 {
+            component gen_probe IC_RMS1 {
             }
             [
                 position = 8072, 8352
@@ -2087,7 +2070,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" I_RMS1 {
+            component gen_probe I_RMS1 {
             }
             [
                 position = 8048, 8384
@@ -2095,7 +2078,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" POWER_P1 {
+            component gen_probe POWER_P1 {
             }
             [
                 position = 8024, 8416
@@ -2103,7 +2086,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" POWER_Q1 {
+            component gen_probe POWER_Q1 {
             }
             [
                 position = 8000, 8448
@@ -2111,7 +2094,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" POWER_S1 {
+            component gen_probe POWER_S1 {
             }
             [
                 position = 7976, 8480
@@ -2119,7 +2102,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" POWER_PF1 {
+            component gen_probe POWER_PF1 {
             }
             [
                 position = 7952, 8512
@@ -2318,56 +2301,56 @@ model "campusgrid - ev" {
 
         component Subsystem "Meter (PV)" {
             layout = dynamic
-            component "core/Probe" VAn {
+            component gen_probe VAn {
             }
             [
                 position = 7960, 7464
                 rotation = left
             ]
 
-            component "core/Probe" VBn {
+            component gen_probe VBn {
             }
             [
                 position = 7984, 7496
                 rotation = left
             ]
 
-            component "core/Probe" VCn {
+            component gen_probe VCn {
             }
             [
                 position = 8008, 7528
                 rotation = left
             ]
 
-            component "core/Probe" VAB {
+            component gen_probe VAB {
             }
             [
                 position = 8032, 7568
                 rotation = left
             ]
 
-            component "core/Probe" VBC {
+            component gen_probe VBC {
             }
             [
                 position = 8056, 7600
                 rotation = left
             ]
 
-            component "core/Probe" VCA {
+            component gen_probe VCA {
             }
             [
                 position = 8080, 7632
                 rotation = left
             ]
 
-            component "core/Probe" VAn_RMS1 {
+            component gen_probe VAn_RMS1 {
             }
             [
                 position = 8104, 7664
                 rotation = left
             ]
 
-            component "core/Probe" VBn_RMS1 {
+            component gen_probe VBn_RMS1 {
             }
             [
                 position = 8104, 7792
@@ -2375,7 +2358,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VCn_RMS1 {
+            component gen_probe VCn_RMS1 {
             }
             [
                 position = 8080, 7824
@@ -2383,7 +2366,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VLn_RMS {
+            component gen_probe VLn_RMS {
             }
             [
                 position = 8056, 7856
@@ -2391,7 +2374,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VAB_RMS1 {
+            component gen_probe VAB_RMS1 {
             }
             [
                 position = 8032, 7888
@@ -2399,7 +2382,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VBC_RMS1 {
+            component gen_probe VBC_RMS1 {
             }
             [
                 position = 8008, 7920
@@ -2407,7 +2390,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VCA_RMS1 {
+            component gen_probe VCA_RMS1 {
             }
             [
                 position = 7984, 7952
@@ -2415,7 +2398,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VLL_RMS1 {
+            component gen_probe VLL_RMS1 {
             }
             [
                 position = 7952, 7976
@@ -2423,49 +2406,49 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" IA {
+            component gen_probe IA {
             }
             [
                 position = 7984, 8064
                 rotation = left
             ]
 
-            component "core/Probe" IB {
+            component gen_probe IB {
             }
             [
                 position = 8008, 8096
                 rotation = left
             ]
 
-            component "core/Probe" IC {
+            component gen_probe IC {
             }
             [
                 position = 8032, 8136
                 rotation = left
             ]
 
-            component "core/Probe" Freq {
+            component gen_probe Freq {
             }
             [
                 position = 8056, 8168
                 rotation = left
             ]
 
-            component "core/Probe" IA_RMS1 {
+            component gen_probe IA_RMS1 {
             }
             [
                 position = 8080, 8200
                 rotation = left
             ]
 
-            component "core/Probe" IB_RMS1 {
+            component gen_probe IB_RMS1 {
             }
             [
                 position = 8104, 8232
                 rotation = left
             ]
 
-            component "core/Probe" IC_RMS1 {
+            component gen_probe IC_RMS1 {
             }
             [
                 position = 8104, 8360
@@ -2473,7 +2456,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" I_RMS1 {
+            component gen_probe I_RMS1 {
             }
             [
                 position = 8080, 8392
@@ -2481,7 +2464,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" POWER_P1 {
+            component gen_probe POWER_P1 {
             }
             [
                 position = 8056, 8424
@@ -2489,7 +2472,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" POWER_Q1 {
+            component gen_probe POWER_Q1 {
             }
             [
                 position = 8032, 8456
@@ -2497,7 +2480,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" POWER_S1 {
+            component gen_probe POWER_S1 {
             }
             [
                 position = 8008, 8488
@@ -2505,7 +2488,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" POWER_PF1 {
+            component gen_probe POWER_PF1 {
             }
             [
                 position = 7984, 8520
@@ -2704,56 +2687,56 @@ model "campusgrid - ev" {
 
         component Subsystem "Meter (PCC)" {
             layout = dynamic
-            component "core/Probe" VAn {
+            component gen_probe VAn {
             }
             [
                 position = 7752, 7416
                 rotation = left
             ]
 
-            component "core/Probe" VBn {
+            component gen_probe VBn {
             }
             [
                 position = 7776, 7448
                 rotation = left
             ]
 
-            component "core/Probe" VCn {
+            component gen_probe VCn {
             }
             [
                 position = 7800, 7480
                 rotation = left
             ]
 
-            component "core/Probe" VAB {
+            component gen_probe VAB {
             }
             [
                 position = 7824, 7520
                 rotation = left
             ]
 
-            component "core/Probe" VBC {
+            component gen_probe VBC {
             }
             [
                 position = 7848, 7552
                 rotation = left
             ]
 
-            component "core/Probe" VCA {
+            component gen_probe VCA {
             }
             [
                 position = 7872, 7584
                 rotation = left
             ]
 
-            component "core/Probe" VAn_RMS1 {
+            component gen_probe VAn_RMS1 {
             }
             [
                 position = 7896, 7616
                 rotation = left
             ]
 
-            component "core/Probe" VBn_RMS1 {
+            component gen_probe VBn_RMS1 {
             }
             [
                 position = 7896, 7744
@@ -2761,7 +2744,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VCn_RMS1 {
+            component gen_probe VCn_RMS1 {
             }
             [
                 position = 7872, 7776
@@ -2769,7 +2752,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VLn_RMS {
+            component gen_probe VLn_RMS {
             }
             [
                 position = 7848, 7808
@@ -2777,7 +2760,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VAB_RMS1 {
+            component gen_probe VAB_RMS1 {
             }
             [
                 position = 7824, 7840
@@ -2785,7 +2768,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VBC_RMS1 {
+            component gen_probe VBC_RMS1 {
             }
             [
                 position = 7800, 7872
@@ -2793,7 +2776,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VCA_RMS1 {
+            component gen_probe VCA_RMS1 {
             }
             [
                 position = 7776, 7904
@@ -2801,7 +2784,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VLL_RMS1 {
+            component gen_probe VLL_RMS1 {
             }
             [
                 position = 7744, 7928
@@ -2809,49 +2792,49 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" IA {
+            component gen_probe IA {
             }
             [
                 position = 7776, 8016
                 rotation = left
             ]
 
-            component "core/Probe" IB {
+            component gen_probe IB {
             }
             [
                 position = 7800, 8048
                 rotation = left
             ]
 
-            component "core/Probe" IC {
+            component gen_probe IC {
             }
             [
                 position = 7824, 8088
                 rotation = left
             ]
 
-            component "core/Probe" Freq {
+            component gen_probe Freq {
             }
             [
                 position = 7848, 8120
                 rotation = left
             ]
 
-            component "core/Probe" IA_RMS1 {
+            component gen_probe IA_RMS1 {
             }
             [
                 position = 7872, 8152
                 rotation = left
             ]
 
-            component "core/Probe" IB_RMS1 {
+            component gen_probe IB_RMS1 {
             }
             [
                 position = 7896, 8184
                 rotation = left
             ]
 
-            component "core/Probe" IC_RMS1 {
+            component gen_probe IC_RMS1 {
             }
             [
                 position = 7896, 8312
@@ -2859,7 +2842,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" I_RMS1 {
+            component gen_probe I_RMS1 {
             }
             [
                 position = 7872, 8344
@@ -2867,7 +2850,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" POWER_P1 {
+            component gen_probe POWER_P1 {
             }
             [
                 position = 7848, 8376
@@ -2875,7 +2858,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" POWER_Q1 {
+            component gen_probe POWER_Q1 {
             }
             [
                 position = 7824, 8408
@@ -2883,7 +2866,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" POWER_S1 {
+            component gen_probe POWER_S1 {
             }
             [
                 position = 7800, 8440
@@ -2891,7 +2874,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" POWER_PF1 {
+            component gen_probe POWER_PF1 {
             }
             [
                 position = 7776, 8472
@@ -3083,14 +3066,14 @@ model "campusgrid - ev" {
             connect "Three-phase Meter.C+" C as Connection72
         }
         [
-            position = 8504, 8448
+            position = 8160, 8408
             rotation = right
             size = 48, 72
         ]
 
-        component "core/Variable Load (Generic)" "EV 1" {
-            Pnom = "20000"
-            Snom = "25000"
+        component "core/Variable Load (Generic)" "Variable EV1 (Generic)" {
+            Pnom = "40e3"
+            Snom = "41e3"
             Vnom_LL = "480"
             Vnom_sec_LL = "11900"
             fnom = "60"
@@ -3098,26 +3081,26 @@ model "campusgrid - ev" {
             resistance_cont = "1.0"
         }
         [
-            position = 9376, 9272
+            position = 9408, 9088
             size = 184, 144
         ]
 
-        component Subsystem "EV 1 (Generic) UI1" {
+        component Subsystem "Variable EV1 (Generic) UI" {
             layout = dynamic
-            component "core/Probe" Enable_fb {
+            component gen_probe Enable_fb {
             }
             [
                 position = 7952, 8024
             ]
 
-            component "core/Probe" PFmeas {
+            component gen_probe PFmeas {
                 streaming_en = "True"
             }
             [
                 position = 7600, 8200
             ]
 
-            component "core/SCADA Input" Qref {
+            component src_scada_input Qref {
                 execution_rate = "inherit"
                 max = "1e8"
                 min = "-1e8"
@@ -3127,7 +3110,7 @@ model "campusgrid - ev" {
                 position = 8600, 7736
             ]
 
-            component "core/SCADA Input" Enable {
+            component src_scada_input Enable {
                 execution_rate = "inherit"
                 max = "1"
                 min = "0"
@@ -3137,7 +3120,7 @@ model "campusgrid - ev" {
                 position = 8600, 7568
             ]
 
-            component "core/SCADA Input" Pref {
+            component src_scada_input Pref {
                 execution_rate = "inherit"
                 max = "1e8"
                 min = "0"
@@ -3147,91 +3130,91 @@ model "campusgrid - ev" {
                 position = 8600, 7680
             ]
 
-            component "core/Probe" Vload_rms_meas_V {
+            component gen_probe Vload_rms_meas_V {
                 streaming_en = "True"
             }
             [
                 position = 7568, 8216
             ]
 
-            component "core/Probe" Qmeas_kVAr {
+            component gen_probe Qmeas_kVAr {
                 streaming_en = "True"
             }
             [
                 position = 7664, 8168
             ]
 
-            component "core/Probe" Smeas_kVA {
+            component gen_probe Smeas_kVA {
             }
             [
                 position = 7632, 8184
             ]
 
-            component "core/Probe" Pnom_kW {
+            component gen_probe Pnom_kW {
             }
             [
                 position = 7856, 8072
             ]
 
-            component "core/Probe" Qref_fb_kVAr {
+            component gen_probe Qref_fb_kVAr {
                 streaming_en = "True"
             }
             [
                 position = 7888, 8056
             ]
 
-            component "core/Probe" Snom_kVA {
+            component gen_probe Snom_kVA {
             }
             [
                 position = 7792, 8104
             ]
 
-            component "core/Probe" Fmeas_Hz {
+            component gen_probe Fmeas_Hz {
                 streaming_en = "True"
             }
             [
                 position = 7760, 8120
             ]
 
-            component "core/Probe" Pref_fb_kW {
+            component gen_probe Pref_fb_kW {
                 streaming_en = "True"
             }
             [
                 position = 7920, 8040
             ]
 
-            component "core/Probe" Qnom_kVAr {
+            component gen_probe Qnom_kVAr {
             }
             [
                 position = 7824, 8088
             ]
 
-            component "core/Probe" Vgrid_rms_meas_kV {
+            component gen_probe Vgrid_rms_meas_kV {
             }
             [
                 position = 7728, 8136
             ]
 
-            component "core/Probe" Pmeas_kW {
+            component gen_probe Pmeas_kW {
                 streaming_en = "True"
             }
             [
                 position = 7696, 8152
             ]
 
-            component "core/Probe" MCB_status {
+            component gen_probe MCB_status {
             }
             [
                 position = 7536, 8232
             ]
 
-            component "core/Probe" alarm_msg {
+            component gen_probe alarm_msg {
             }
             [
                 position = 7504, 8248
             ]
 
-            component "core/SCADA Input" "Reset alarms" {
+            component src_scada_input "Reset alarms" {
                 execution_rate = "inherit"
                 max = "1"
                 min = "0"
@@ -3241,7 +3224,7 @@ model "campusgrid - ev" {
                 position = 8600, 7624
             ]
 
-            component "core/SCADA Input" "Pref rate of change" {
+            component src_scada_input "Pref rate of change" {
                 def_value = "0.1"
                 execution_rate = "inherit"
                 min = "0"
@@ -3251,7 +3234,7 @@ model "campusgrid - ev" {
                 position = 8600, 7792
             ]
 
-            component "core/SCADA Input" "Qref rate of change" {
+            component src_scada_input "Qref rate of change" {
                 def_value = "0.1"
                 execution_rate = "inherit"
                 min = "0"
@@ -3261,7 +3244,7 @@ model "campusgrid - ev" {
                 position = 8600, 7848
             ]
 
-            component "core/SCADA Input" "P dependency type" {
+            component src_scada_input "P dependency type" {
                 def_value = "0.0"
                 execution_rate = "inherit"
                 max = "2"
@@ -3272,7 +3255,7 @@ model "campusgrid - ev" {
                 position = 8600, 7904
             ]
 
-            component "core/SCADA Input" "Q dependency type" {
+            component src_scada_input "Q dependency type" {
                 def_value = "0.0"
                 execution_rate = "inherit"
                 max = "2"
@@ -3283,7 +3266,7 @@ model "campusgrid - ev" {
                 position = 8600, 7960
             ]
 
-            component "core/SCADA Input" "P(V) k1" {
+            component src_scada_input "P(V) k1" {
                 def_value = "0.0"
                 execution_rate = "inherit"
                 max = "100"
@@ -3294,7 +3277,7 @@ model "campusgrid - ev" {
                 position = 8600, 8016
             ]
 
-            component "core/SCADA Input" "P(V) k2" {
+            component src_scada_input "P(V) k2" {
                 def_value = "0.0"
                 execution_rate = "inherit"
                 max = "100"
@@ -3305,7 +3288,7 @@ model "campusgrid - ev" {
                 position = 8600, 8072
             ]
 
-            component "core/SCADA Input" "Q(V) k1" {
+            component src_scada_input "Q(V) k1" {
                 def_value = "0.0"
                 execution_rate = "inherit"
                 max = "100"
@@ -3316,7 +3299,7 @@ model "campusgrid - ev" {
                 position = 8600, 8248
             ]
 
-            component "core/SCADA Input" "Q(V) k2" {
+            component src_scada_input "Q(V) k2" {
                 def_value = "0.0"
                 execution_rate = "inherit"
                 max = "100"
@@ -3327,7 +3310,7 @@ model "campusgrid - ev" {
                 position = 8600, 8304
             ]
 
-            component "core/SCADA Input" "P(f) k1" {
+            component src_scada_input "P(f) k1" {
                 def_value = "0.0"
                 execution_rate = "inherit"
                 max = "100"
@@ -3338,7 +3321,7 @@ model "campusgrid - ev" {
                 position = 8600, 8128
             ]
 
-            component "core/SCADA Input" "P(f) k2" {
+            component src_scada_input "P(f) k2" {
                 def_value = "0.0"
                 execution_rate = "inherit"
                 max = "100"
@@ -3349,7 +3332,7 @@ model "campusgrid - ev" {
                 position = 8600, 8192
             ]
 
-            component "core/SCADA Input" "Q(f) k1" {
+            component src_scada_input "Q(f) k1" {
                 def_value = "0.0"
                 execution_rate = "inherit"
                 max = "100"
@@ -3360,7 +3343,7 @@ model "campusgrid - ev" {
                 position = 8600, 8360
             ]
 
-            component "core/SCADA Input" "Q(f) k2" {
+            component src_scada_input "Q(f) k2" {
                 def_value = "0.0"
                 execution_rate = "inherit"
                 max = "100"
@@ -3434,7 +3417,7 @@ model "campusgrid - ev" {
                 size = 192, 64
             ]
 
-            component "core/SCADA Input" "V alarm upper limit" {
+            component src_scada_input "V alarm upper limit" {
                 def_value = "1.5"
                 execution_rate = "inherit"
                 min = "1"
@@ -3444,7 +3427,7 @@ model "campusgrid - ev" {
                 position = 8600, 8480
             ]
 
-            component "core/SCADA Input" "V alarm lower limit" {
+            component src_scada_input "V alarm lower limit" {
                 def_value = "0.5"
                 execution_rate = "inherit"
                 max = "1"
@@ -3455,7 +3438,7 @@ model "campusgrid - ev" {
                 position = 8600, 8536
             ]
 
-            component "core/SCADA Input" "F alarm upper limit" {
+            component src_scada_input "F alarm upper limit" {
                 def_value = "1.5"
                 execution_rate = "inherit"
                 min = "1"
@@ -3465,7 +3448,7 @@ model "campusgrid - ev" {
                 position = 8600, 8592
             ]
 
-            component "core/SCADA Input" "F alarm lower limit" {
+            component src_scada_input "F alarm lower limit" {
                 def_value = "0.5"
                 execution_rate = "inherit"
                 max = "1"
@@ -3476,7 +3459,7 @@ model "campusgrid - ev" {
                 position = 8600, 8648
             ]
 
-            component "core/SCADA Input" "S alarm upper limit" {
+            component src_scada_input "S alarm upper limit" {
                 def_value = "1.5"
                 execution_rate = "inherit"
                 min = "1"
@@ -3486,7 +3469,7 @@ model "campusgrid - ev" {
                 position = 8600, 8704
             ]
 
-            component "core/SCADA Input" "I alarm upper limit" {
+            component src_scada_input "I alarm upper limit" {
                 def_value = "1.5"
                 execution_rate = "inherit"
                 min = "1"
@@ -3677,11 +3660,11 @@ model "campusgrid - ev" {
             }
         }
         [
-            position = 9216, 9272
+            position = 9248, 9088
             size = 56, 136
         ]
 
-        component "core/Transmission Line" "RL coupled EV" {
+        component "core/Transmission Line" "RL coupled Load1" {
             C_sequence_metric = "[[10.55e-9, -7.717343574912541e-25, -7.717343574912541e-25], [-5.6170616882174405e-25, 17.95e-9, -1.1234123376434881e-24], [0.0, -5.6170616882174405e-25, 17.95e-9]]"
             L_metric = "[[0.00189, 0.00109, 0.00109], [0.00109, 0.00189, 0.00109], [0.00109, 0.00109, 0.00189]]"
             L_sequence_metric = "[[6.09e-3, 0.0, 0.0], [0.0, 2.38e-3, 0.0], [0.0, 0.0, 2.38e-3]]"
@@ -3692,14 +3675,400 @@ model "campusgrid - ev" {
             unit_sys = "metric"
         }
         [
-            position = 9352, 8744
+            position = 9384, 8720
             rotation = left
             size = 256, 72
         ]
 
-        component "core/Variable Load (Generic)" "EV 2" {
-            Pnom = "20e3"
-            Snom = "25e3"
+        component Subsystem "Meter (EV1)" {
+            layout = dynamic
+            component gen_probe VAn {
+            }
+            [
+                position = 7872, 7424
+                rotation = left
+            ]
+
+            component gen_probe VBn {
+            }
+            [
+                position = 7896, 7456
+                rotation = left
+            ]
+
+            component gen_probe VCn {
+            }
+            [
+                position = 7920, 7488
+                rotation = left
+            ]
+
+            component gen_probe VAB {
+            }
+            [
+                position = 7944, 7528
+                rotation = left
+            ]
+
+            component gen_probe VBC {
+            }
+            [
+                position = 7968, 7560
+                rotation = left
+            ]
+
+            component gen_probe VCA {
+            }
+            [
+                position = 7992, 7592
+                rotation = left
+            ]
+
+            component gen_probe VAn_RMS1 {
+            }
+            [
+                position = 8016, 7624
+                rotation = left
+            ]
+
+            component gen_probe VBn_RMS1 {
+            }
+            [
+                position = 8016, 7752
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe VCn_RMS1 {
+            }
+            [
+                position = 7992, 7784
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe VLn_RMS {
+            }
+            [
+                position = 7968, 7816
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe VAB_RMS1 {
+            }
+            [
+                position = 7944, 7848
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe VBC_RMS1 {
+            }
+            [
+                position = 7920, 7880
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe VCA_RMS1 {
+            }
+            [
+                position = 7896, 7912
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe VLL_RMS1 {
+            }
+            [
+                position = 7864, 7936
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe IA {
+            }
+            [
+                position = 7896, 8024
+                rotation = left
+            ]
+
+            component gen_probe IB {
+            }
+            [
+                position = 7920, 8056
+                rotation = left
+            ]
+
+            component gen_probe IC {
+            }
+            [
+                position = 7944, 8096
+                rotation = left
+            ]
+
+            component gen_probe Freq {
+            }
+            [
+                position = 7968, 8128
+                rotation = left
+            ]
+
+            component gen_probe IA_RMS1 {
+            }
+            [
+                position = 7992, 8160
+                rotation = left
+            ]
+
+            component gen_probe IB_RMS1 {
+            }
+            [
+                position = 8016, 8192
+                rotation = left
+            ]
+
+            component gen_probe IC_RMS1 {
+            }
+            [
+                position = 8016, 8320
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe I_RMS1 {
+            }
+            [
+                position = 7992, 8352
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe POWER_P1 {
+            }
+            [
+                position = 7968, 8384
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe POWER_Q1 {
+            }
+            [
+                position = 7944, 8416
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe POWER_S1 {
+            }
+            [
+                position = 7920, 8448
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component gen_probe POWER_PF1 {
+            }
+            [
+                position = 7896, 8480
+                rotation = left
+                scale = -1, -1
+            ]
+
+            component "core/Meter Split" "Meter Split2" {
+                vab = "True"
+                vab_rms = "True"
+                van_rms = "True"
+                vbc = "True"
+                vbc_rms = "True"
+                vbn_rms = "True"
+                vca = "True"
+                vca_rms = "True"
+                vcn_rms = "True"
+                vll_rms = "True"
+                vln_rms = "True"
+            }
+            [
+                position = 7768, 7688
+                size = 96, 240
+            ]
+
+            component "core/Meter Split" "Meter Split3" {
+                freq = "True"
+                i_rms = "True"
+                ia = "True"
+                ia_rms = "True"
+                ib = "True"
+                ib_rms = "True"
+                ic = "True"
+                ic_rms = "True"
+                power_p = "True"
+                power_pf = "True"
+                power_q = "True"
+                power_s = "True"
+                van = "False"
+                vbn = "False"
+                vcn = "False"
+            }
+            [
+                position = 7776, 8240
+                size = 96, 240
+            ]
+
+            component "core/Three-phase Meter" "Three-phase Meter" {
+                I_avg_rms = "True"
+                I_rms = "True"
+                P_meas = "True"
+                P_method = "RMS based"
+                R = "10e3"
+                VAB = "True"
+                VBC = "True"
+                VCA = "True"
+                VLL_avg_rms = "True"
+                VLL_rms = "True"
+                VLn_avg_rms = "True"
+                VLn_rms = "True"
+                freq = "True"
+            }
+            [
+                position = 7360, 7936
+                size = 56, 240
+            ]
+
+            port C {
+                position = left:auto
+                kind = pe
+            }
+            [
+                position = 7224, 8032
+            ]
+
+            port c {
+                position = right:auto
+                kind = pe
+            }
+            [
+                position = 7504, 8032
+                scale = -1, 1
+            ]
+
+            port B {
+                position = left:auto
+                kind = pe
+            }
+            [
+                position = 7224, 7936
+            ]
+
+            port b {
+                position = right:auto
+                kind = pe
+            }
+            [
+                position = 7496, 7936
+                scale = -1, 1
+            ]
+
+            port A {
+                position = left:auto
+                kind = pe
+            }
+            [
+                position = 7224, 7840
+            ]
+
+            port a {
+                position = right:auto
+                kind = pe
+            }
+            [
+                position = 7496, 7840
+                scale = -1, 1
+            ]
+
+            tag Goto2 {
+                value = "Out"
+                scope = local
+                kind = sp
+                direction = in
+            }
+            [
+                position = 7432, 7776
+                hide_name = True
+                size = 60, 20
+            ]
+
+            tag From2 {
+                value = "Out"
+                scope = local
+                kind = sp
+                direction = out
+            }
+            [
+                position = 7616, 7688
+                hide_name = True
+                size = 60, 20
+            ]
+
+            tag From3 {
+                value = "Out"
+                scope = local
+                kind = sp
+                direction = out
+            }
+            [
+                position = 7640, 8240
+                hide_name = True
+                size = 60, 20
+            ]
+
+            connect From2 "Meter Split2.Input" as Connection63
+            connect From3 "Meter Split3.Input" as Connection29
+            connect Goto2 "Three-phase Meter.Out" as Connection27
+            connect IA_RMS1.in "Meter Split3.IA_RMS" as Connection38
+            connect I_RMS1.in "Meter Split3.I_RMS" as Connection44
+            connect "Meter Split3.Freq" Freq.in as Connection39
+            connect "Meter Split3.IA" IA.in as Connection42
+            connect "Meter Split3.IB" IB.in as Connection41
+            connect "Meter Split3.IB_RMS" IB_RMS1.in as Connection37
+            connect "Meter Split3.IC" IC.in as Connection40
+            connect "Meter Split3.IC_RMS" IC_RMS1.in as Connection43
+            connect POWER_P1.in "Meter Split3.POWER_P" as Connection45
+            connect POWER_PF1.in "Meter Split3.POWER_PF" as Connection48
+            connect POWER_Q1.in "Meter Split3.POWER_Q" as Connection46
+            connect POWER_S1.in "Meter Split3.POWER_S" as Connection47
+            connect VAB.in "Meter Split2.VAB" as Connection23
+            connect VAB_RMS1.in "Meter Split2.VAB_RMS" as Connection64
+            connect VAn.in "Meter Split2.VAn" as Connection20
+            connect VAn_RMS1.in "Meter Split2.VAn_RMS" as Connection26
+            connect VBC.in "Meter Split2.VBC" as Connection24
+            connect VBC_RMS1.in "Meter Split2.VBC_RMS" as Connection65
+            connect VBn.in "Meter Split2.VBn" as Connection21
+            connect VBn_RMS1.in "Meter Split2.VBn_RMS" as Connection30
+            connect VCA.in "Meter Split2.VCA" as Connection25
+            connect VCA_RMS1.in "Meter Split2.VCA_RMS" as Connection66
+            connect VCn.in "Meter Split2.VCn" as Connection22
+            connect VCn_RMS1.in "Meter Split2.VCn_RMS" as Connection31
+            connect VLL_RMS1.in "Meter Split2.VLL_RMS" as Connection36
+            connect VLn_RMS.in "Meter Split2.VLn_RMS" as Connection32
+            connect "Three-phase Meter.A-" a as Connection67
+            connect A "Three-phase Meter.A+" as Connection68
+            connect "Three-phase Meter.B+" B as Connection69
+            connect "Three-phase Meter.B-" b as Connection70
+            connect c "Three-phase Meter.C-" as Connection71
+            connect "Three-phase Meter.C+" C as Connection72
+        }
+        [
+            position = 9384, 8952
+            rotation = right
+            size = 48, 136
+        ]
+
+        component "core/Variable Load (Generic)" "Variable EV2 (Generic)" {
+            Pnom = "40e3"
+            Snom = "41e3"
             Vnom_LL = "480"
             Vnom_sec_LL = "11900"
             fnom = "60"
@@ -3707,26 +4076,26 @@ model "campusgrid - ev" {
             resistance_cont = "1.0"
         }
         [
-            position = 9728, 9272
+            position = 9776, 9096
             size = 184, 144
         ]
 
-        component Subsystem "EV 2 (Generic) UI2" {
+        component Subsystem "Variable EV2 (Generic) UI" {
             layout = dynamic
-            component "core/Probe" Enable_fb {
+            component gen_probe Enable_fb {
             }
             [
                 position = 7952, 8024
             ]
 
-            component "core/Probe" PFmeas {
+            component gen_probe PFmeas {
                 streaming_en = "True"
             }
             [
                 position = 7600, 8200
             ]
 
-            component "core/SCADA Input" Qref {
+            component src_scada_input Qref {
                 execution_rate = "inherit"
                 max = "1e8"
                 min = "-1e8"
@@ -3736,7 +4105,7 @@ model "campusgrid - ev" {
                 position = 8600, 7736
             ]
 
-            component "core/SCADA Input" Enable {
+            component src_scada_input Enable {
                 execution_rate = "inherit"
                 max = "1"
                 min = "0"
@@ -3746,7 +4115,7 @@ model "campusgrid - ev" {
                 position = 8600, 7568
             ]
 
-            component "core/SCADA Input" Pref {
+            component src_scada_input Pref {
                 execution_rate = "inherit"
                 max = "1e8"
                 min = "0"
@@ -3756,91 +4125,91 @@ model "campusgrid - ev" {
                 position = 8600, 7680
             ]
 
-            component "core/Probe" Vload_rms_meas_V {
+            component gen_probe Vload_rms_meas_V {
                 streaming_en = "True"
             }
             [
                 position = 7568, 8216
             ]
 
-            component "core/Probe" Qmeas_kVAr {
+            component gen_probe Qmeas_kVAr {
                 streaming_en = "True"
             }
             [
                 position = 7664, 8168
             ]
 
-            component "core/Probe" Smeas_kVA {
+            component gen_probe Smeas_kVA {
             }
             [
                 position = 7632, 8184
             ]
 
-            component "core/Probe" Pnom_kW {
+            component gen_probe Pnom_kW {
             }
             [
                 position = 7856, 8072
             ]
 
-            component "core/Probe" Qref_fb_kVAr {
+            component gen_probe Qref_fb_kVAr {
                 streaming_en = "True"
             }
             [
                 position = 7888, 8056
             ]
 
-            component "core/Probe" Snom_kVA {
+            component gen_probe Snom_kVA {
             }
             [
                 position = 7792, 8104
             ]
 
-            component "core/Probe" Fmeas_Hz {
+            component gen_probe Fmeas_Hz {
                 streaming_en = "True"
             }
             [
                 position = 7760, 8120
             ]
 
-            component "core/Probe" Pref_fb_kW {
+            component gen_probe Pref_fb_kW {
                 streaming_en = "True"
             }
             [
                 position = 7920, 8040
             ]
 
-            component "core/Probe" Qnom_kVAr {
+            component gen_probe Qnom_kVAr {
             }
             [
                 position = 7824, 8088
             ]
 
-            component "core/Probe" Vgrid_rms_meas_kV {
+            component gen_probe Vgrid_rms_meas_kV {
             }
             [
                 position = 7728, 8136
             ]
 
-            component "core/Probe" Pmeas_kW {
+            component gen_probe Pmeas_kW {
                 streaming_en = "True"
             }
             [
                 position = 7696, 8152
             ]
 
-            component "core/Probe" MCB_status {
+            component gen_probe MCB_status {
             }
             [
                 position = 7536, 8232
             ]
 
-            component "core/Probe" alarm_msg {
+            component gen_probe alarm_msg {
             }
             [
                 position = 7504, 8248
             ]
 
-            component "core/SCADA Input" "Reset alarms" {
+            component src_scada_input "Reset alarms" {
                 execution_rate = "inherit"
                 max = "1"
                 min = "0"
@@ -3850,7 +4219,7 @@ model "campusgrid - ev" {
                 position = 8600, 7624
             ]
 
-            component "core/SCADA Input" "Pref rate of change" {
+            component src_scada_input "Pref rate of change" {
                 def_value = "0.1"
                 execution_rate = "inherit"
                 min = "0"
@@ -3860,7 +4229,7 @@ model "campusgrid - ev" {
                 position = 8600, 7792
             ]
 
-            component "core/SCADA Input" "Qref rate of change" {
+            component src_scada_input "Qref rate of change" {
                 def_value = "0.1"
                 execution_rate = "inherit"
                 min = "0"
@@ -3870,7 +4239,7 @@ model "campusgrid - ev" {
                 position = 8600, 7848
             ]
 
-            component "core/SCADA Input" "P dependency type" {
+            component src_scada_input "P dependency type" {
                 def_value = "0.0"
                 execution_rate = "inherit"
                 max = "2"
@@ -3881,7 +4250,7 @@ model "campusgrid - ev" {
                 position = 8600, 7904
             ]
 
-            component "core/SCADA Input" "Q dependency type" {
+            component src_scada_input "Q dependency type" {
                 def_value = "0.0"
                 execution_rate = "inherit"
                 max = "2"
@@ -3892,7 +4261,7 @@ model "campusgrid - ev" {
                 position = 8600, 7960
             ]
 
-            component "core/SCADA Input" "P(V) k1" {
+            component src_scada_input "P(V) k1" {
                 def_value = "0.0"
                 execution_rate = "inherit"
                 max = "100"
@@ -3903,7 +4272,7 @@ model "campusgrid - ev" {
                 position = 8600, 8016
             ]
 
-            component "core/SCADA Input" "P(V) k2" {
+            component src_scada_input "P(V) k2" {
                 def_value = "0.0"
                 execution_rate = "inherit"
                 max = "100"
@@ -3914,7 +4283,7 @@ model "campusgrid - ev" {
                 position = 8600, 8072
             ]
 
-            component "core/SCADA Input" "Q(V) k1" {
+            component src_scada_input "Q(V) k1" {
                 def_value = "0.0"
                 execution_rate = "inherit"
                 max = "100"
@@ -3925,7 +4294,7 @@ model "campusgrid - ev" {
                 position = 8600, 8248
             ]
 
-            component "core/SCADA Input" "Q(V) k2" {
+            component src_scada_input "Q(V) k2" {
                 def_value = "0.0"
                 execution_rate = "inherit"
                 max = "100"
@@ -3936,7 +4305,7 @@ model "campusgrid - ev" {
                 position = 8600, 8304
             ]
 
-            component "core/SCADA Input" "P(f) k1" {
+            component src_scada_input "P(f) k1" {
                 def_value = "0.0"
                 execution_rate = "inherit"
                 max = "100"
@@ -3947,7 +4316,7 @@ model "campusgrid - ev" {
                 position = 8600, 8128
             ]
 
-            component "core/SCADA Input" "P(f) k2" {
+            component src_scada_input "P(f) k2" {
                 def_value = "0.0"
                 execution_rate = "inherit"
                 max = "100"
@@ -3958,7 +4327,7 @@ model "campusgrid - ev" {
                 position = 8600, 8192
             ]
 
-            component "core/SCADA Input" "Q(f) k1" {
+            component src_scada_input "Q(f) k1" {
                 def_value = "0.0"
                 execution_rate = "inherit"
                 max = "100"
@@ -3969,7 +4338,7 @@ model "campusgrid - ev" {
                 position = 8600, 8360
             ]
 
-            component "core/SCADA Input" "Q(f) k2" {
+            component src_scada_input "Q(f) k2" {
                 def_value = "0.0"
                 execution_rate = "inherit"
                 max = "100"
@@ -4043,7 +4412,7 @@ model "campusgrid - ev" {
                 size = 192, 64
             ]
 
-            component "core/SCADA Input" "V alarm upper limit" {
+            component src_scada_input "V alarm upper limit" {
                 def_value = "1.5"
                 execution_rate = "inherit"
                 min = "1"
@@ -4053,7 +4422,7 @@ model "campusgrid - ev" {
                 position = 8600, 8480
             ]
 
-            component "core/SCADA Input" "V alarm lower limit" {
+            component src_scada_input "V alarm lower limit" {
                 def_value = "0.5"
                 execution_rate = "inherit"
                 max = "1"
@@ -4064,7 +4433,7 @@ model "campusgrid - ev" {
                 position = 8600, 8536
             ]
 
-            component "core/SCADA Input" "F alarm upper limit" {
+            component src_scada_input "F alarm upper limit" {
                 def_value = "1.5"
                 execution_rate = "inherit"
                 min = "1"
@@ -4074,7 +4443,7 @@ model "campusgrid - ev" {
                 position = 8600, 8592
             ]
 
-            component "core/SCADA Input" "F alarm lower limit" {
+            component src_scada_input "F alarm lower limit" {
                 def_value = "0.5"
                 execution_rate = "inherit"
                 max = "1"
@@ -4085,7 +4454,7 @@ model "campusgrid - ev" {
                 position = 8600, 8648
             ]
 
-            component "core/SCADA Input" "S alarm upper limit" {
+            component src_scada_input "S alarm upper limit" {
                 def_value = "1.5"
                 execution_rate = "inherit"
                 min = "1"
@@ -4095,7 +4464,7 @@ model "campusgrid - ev" {
                 position = 8600, 8704
             ]
 
-            component "core/SCADA Input" "I alarm upper limit" {
+            component src_scada_input "I alarm upper limit" {
                 def_value = "1.5"
                 execution_rate = "inherit"
                 min = "1"
@@ -4286,448 +4655,62 @@ model "campusgrid - ev" {
             }
         }
         [
-            position = 9560, 9272
+            position = 9616, 9096
             size = 56, 136
-        ]
-
-        component Subsystem "Meter (EV1)" {
-            layout = dynamic
-            component "core/Probe" VAn {
-            }
-            [
-                position = 7872, 7424
-                rotation = left
-            ]
-
-            component "core/Probe" VBn {
-            }
-            [
-                position = 7896, 7456
-                rotation = left
-            ]
-
-            component "core/Probe" VCn {
-            }
-            [
-                position = 7920, 7488
-                rotation = left
-            ]
-
-            component "core/Probe" VAB {
-            }
-            [
-                position = 7944, 7528
-                rotation = left
-            ]
-
-            component "core/Probe" VBC {
-            }
-            [
-                position = 7968, 7560
-                rotation = left
-            ]
-
-            component "core/Probe" VCA {
-            }
-            [
-                position = 7992, 7592
-                rotation = left
-            ]
-
-            component "core/Probe" VAn_RMS1 {
-            }
-            [
-                position = 8016, 7624
-                rotation = left
-            ]
-
-            component "core/Probe" VBn_RMS1 {
-            }
-            [
-                position = 8016, 7752
-                rotation = left
-                scale = -1, -1
-            ]
-
-            component "core/Probe" VCn_RMS1 {
-            }
-            [
-                position = 7992, 7784
-                rotation = left
-                scale = -1, -1
-            ]
-
-            component "core/Probe" VLn_RMS {
-            }
-            [
-                position = 7968, 7816
-                rotation = left
-                scale = -1, -1
-            ]
-
-            component "core/Probe" VAB_RMS1 {
-            }
-            [
-                position = 7944, 7848
-                rotation = left
-                scale = -1, -1
-            ]
-
-            component "core/Probe" VBC_RMS1 {
-            }
-            [
-                position = 7920, 7880
-                rotation = left
-                scale = -1, -1
-            ]
-
-            component "core/Probe" VCA_RMS1 {
-            }
-            [
-                position = 7896, 7912
-                rotation = left
-                scale = -1, -1
-            ]
-
-            component "core/Probe" VLL_RMS1 {
-            }
-            [
-                position = 7864, 7936
-                rotation = left
-                scale = -1, -1
-            ]
-
-            component "core/Probe" IA {
-            }
-            [
-                position = 7896, 8024
-                rotation = left
-            ]
-
-            component "core/Probe" IB {
-            }
-            [
-                position = 7920, 8056
-                rotation = left
-            ]
-
-            component "core/Probe" IC {
-            }
-            [
-                position = 7944, 8096
-                rotation = left
-            ]
-
-            component "core/Probe" Freq {
-            }
-            [
-                position = 7968, 8128
-                rotation = left
-            ]
-
-            component "core/Probe" IA_RMS1 {
-            }
-            [
-                position = 7992, 8160
-                rotation = left
-            ]
-
-            component "core/Probe" IB_RMS1 {
-            }
-            [
-                position = 8016, 8192
-                rotation = left
-            ]
-
-            component "core/Probe" IC_RMS1 {
-            }
-            [
-                position = 8016, 8320
-                rotation = left
-                scale = -1, -1
-            ]
-
-            component "core/Probe" I_RMS1 {
-            }
-            [
-                position = 7992, 8352
-                rotation = left
-                scale = -1, -1
-            ]
-
-            component "core/Probe" POWER_P1 {
-            }
-            [
-                position = 7968, 8384
-                rotation = left
-                scale = -1, -1
-            ]
-
-            component "core/Probe" POWER_Q1 {
-            }
-            [
-                position = 7944, 8416
-                rotation = left
-                scale = -1, -1
-            ]
-
-            component "core/Probe" POWER_S1 {
-            }
-            [
-                position = 7920, 8448
-                rotation = left
-                scale = -1, -1
-            ]
-
-            component "core/Probe" POWER_PF1 {
-            }
-            [
-                position = 7896, 8480
-                rotation = left
-                scale = -1, -1
-            ]
-
-            component "core/Meter Split" "Meter Split2" {
-                vab = "True"
-                vab_rms = "True"
-                van_rms = "True"
-                vbc = "True"
-                vbc_rms = "True"
-                vbn_rms = "True"
-                vca = "True"
-                vca_rms = "True"
-                vcn_rms = "True"
-                vll_rms = "True"
-                vln_rms = "True"
-            }
-            [
-                position = 7768, 7688
-                size = 96, 240
-            ]
-
-            component "core/Meter Split" "Meter Split3" {
-                freq = "True"
-                i_rms = "True"
-                ia = "True"
-                ia_rms = "True"
-                ib = "True"
-                ib_rms = "True"
-                ic = "True"
-                ic_rms = "True"
-                power_p = "True"
-                power_pf = "True"
-                power_q = "True"
-                power_s = "True"
-                van = "False"
-                vbn = "False"
-                vcn = "False"
-            }
-            [
-                position = 7776, 8240
-                size = 96, 240
-            ]
-
-            component "core/Three-phase Meter" "Three-phase Meter" {
-                I_avg_rms = "True"
-                I_rms = "True"
-                P_meas = "True"
-                P_method = "RMS based"
-                R = "10e3"
-                VAB = "True"
-                VBC = "True"
-                VCA = "True"
-                VLL_avg_rms = "True"
-                VLL_rms = "True"
-                VLn_avg_rms = "True"
-                VLn_rms = "True"
-                freq = "True"
-            }
-            [
-                position = 7360, 7936
-                size = 56, 240
-            ]
-
-            port C {
-                position = left:auto
-                kind = pe
-            }
-            [
-                position = 7224, 8032
-            ]
-
-            port c {
-                position = right:auto
-                kind = pe
-            }
-            [
-                position = 7504, 8032
-                scale = -1, 1
-            ]
-
-            port B {
-                position = left:auto
-                kind = pe
-            }
-            [
-                position = 7224, 7936
-            ]
-
-            port b {
-                position = right:auto
-                kind = pe
-            }
-            [
-                position = 7496, 7936
-                scale = -1, 1
-            ]
-
-            port A {
-                position = left:auto
-                kind = pe
-            }
-            [
-                position = 7224, 7840
-            ]
-
-            port a {
-                position = right:auto
-                kind = pe
-            }
-            [
-                position = 7496, 7840
-                scale = -1, 1
-            ]
-
-            tag Goto2 {
-                value = "Out"
-                scope = local
-                kind = sp
-                direction = in
-            }
-            [
-                position = 7432, 7776
-                hide_name = True
-                size = 60, 20
-            ]
-
-            tag From2 {
-                value = "Out"
-                scope = local
-                kind = sp
-                direction = out
-            }
-            [
-                position = 7616, 7688
-                hide_name = True
-                size = 60, 20
-            ]
-
-            tag From3 {
-                value = "Out"
-                scope = local
-                kind = sp
-                direction = out
-            }
-            [
-                position = 7640, 8240
-                hide_name = True
-                size = 60, 20
-            ]
-
-            connect From2 "Meter Split2.Input" as Connection63
-            connect From3 "Meter Split3.Input" as Connection29
-            connect Goto2 "Three-phase Meter.Out" as Connection27
-            connect IA_RMS1.in "Meter Split3.IA_RMS" as Connection38
-            connect I_RMS1.in "Meter Split3.I_RMS" as Connection44
-            connect "Meter Split3.Freq" Freq.in as Connection39
-            connect "Meter Split3.IA" IA.in as Connection42
-            connect "Meter Split3.IB" IB.in as Connection41
-            connect "Meter Split3.IB_RMS" IB_RMS1.in as Connection37
-            connect "Meter Split3.IC" IC.in as Connection40
-            connect "Meter Split3.IC_RMS" IC_RMS1.in as Connection43
-            connect POWER_P1.in "Meter Split3.POWER_P" as Connection45
-            connect POWER_PF1.in "Meter Split3.POWER_PF" as Connection48
-            connect POWER_Q1.in "Meter Split3.POWER_Q" as Connection46
-            connect POWER_S1.in "Meter Split3.POWER_S" as Connection47
-            connect VAB.in "Meter Split2.VAB" as Connection23
-            connect VAB_RMS1.in "Meter Split2.VAB_RMS" as Connection64
-            connect VAn.in "Meter Split2.VAn" as Connection20
-            connect VAn_RMS1.in "Meter Split2.VAn_RMS" as Connection26
-            connect VBC.in "Meter Split2.VBC" as Connection24
-            connect VBC_RMS1.in "Meter Split2.VBC_RMS" as Connection65
-            connect VBn.in "Meter Split2.VBn" as Connection21
-            connect VBn_RMS1.in "Meter Split2.VBn_RMS" as Connection30
-            connect VCA.in "Meter Split2.VCA" as Connection25
-            connect VCA_RMS1.in "Meter Split2.VCA_RMS" as Connection66
-            connect VCn.in "Meter Split2.VCn" as Connection22
-            connect VCn_RMS1.in "Meter Split2.VCn_RMS" as Connection31
-            connect VLL_RMS1.in "Meter Split2.VLL_RMS" as Connection36
-            connect VLn_RMS.in "Meter Split2.VLn_RMS" as Connection32
-            connect "Three-phase Meter.A-" a as Connection67
-            connect A "Three-phase Meter.A+" as Connection68
-            connect "Three-phase Meter.B+" B as Connection69
-            connect "Three-phase Meter.B-" b as Connection70
-            connect c "Three-phase Meter.C-" as Connection71
-            connect "Three-phase Meter.C+" C as Connection72
-        }
-        [
-            position = 9352, 9112
-            rotation = right
-            size = 48, 136
         ]
 
         component Subsystem "Meter (EV2)" {
             layout = dynamic
-            component "core/Probe" VAn {
+            component gen_probe VAn {
             }
             [
                 position = 7872, 7424
                 rotation = left
             ]
 
-            component "core/Probe" VBn {
+            component gen_probe VBn {
             }
             [
                 position = 7896, 7456
                 rotation = left
             ]
 
-            component "core/Probe" VCn {
+            component gen_probe VCn {
             }
             [
                 position = 7920, 7488
                 rotation = left
             ]
 
-            component "core/Probe" VAB {
+            component gen_probe VAB {
             }
             [
                 position = 7944, 7528
                 rotation = left
             ]
 
-            component "core/Probe" VBC {
+            component gen_probe VBC {
             }
             [
                 position = 7968, 7560
                 rotation = left
             ]
 
-            component "core/Probe" VCA {
+            component gen_probe VCA {
             }
             [
                 position = 7992, 7592
                 rotation = left
             ]
 
-            component "core/Probe" VAn_RMS1 {
+            component gen_probe VAn_RMS1 {
             }
             [
                 position = 8016, 7624
                 rotation = left
             ]
 
-            component "core/Probe" VBn_RMS1 {
+            component gen_probe VBn_RMS1 {
             }
             [
                 position = 8016, 7752
@@ -4735,7 +4718,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VCn_RMS1 {
+            component gen_probe VCn_RMS1 {
             }
             [
                 position = 7992, 7784
@@ -4743,7 +4726,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VLn_RMS {
+            component gen_probe VLn_RMS {
             }
             [
                 position = 7968, 7816
@@ -4751,7 +4734,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VAB_RMS1 {
+            component gen_probe VAB_RMS1 {
             }
             [
                 position = 7944, 7848
@@ -4759,7 +4742,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VBC_RMS1 {
+            component gen_probe VBC_RMS1 {
             }
             [
                 position = 7920, 7880
@@ -4767,7 +4750,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VCA_RMS1 {
+            component gen_probe VCA_RMS1 {
             }
             [
                 position = 7896, 7912
@@ -4775,7 +4758,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" VLL_RMS1 {
+            component gen_probe VLL_RMS1 {
             }
             [
                 position = 7864, 7936
@@ -4783,49 +4766,49 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" IA {
+            component gen_probe IA {
             }
             [
                 position = 7896, 8024
                 rotation = left
             ]
 
-            component "core/Probe" IB {
+            component gen_probe IB {
             }
             [
                 position = 7920, 8056
                 rotation = left
             ]
 
-            component "core/Probe" IC {
+            component gen_probe IC {
             }
             [
                 position = 7944, 8096
                 rotation = left
             ]
 
-            component "core/Probe" Freq {
+            component gen_probe Freq {
             }
             [
                 position = 7968, 8128
                 rotation = left
             ]
 
-            component "core/Probe" IA_RMS1 {
+            component gen_probe IA_RMS1 {
             }
             [
                 position = 7992, 8160
                 rotation = left
             ]
 
-            component "core/Probe" IB_RMS1 {
+            component gen_probe IB_RMS1 {
             }
             [
                 position = 8016, 8192
                 rotation = left
             ]
 
-            component "core/Probe" IC_RMS1 {
+            component gen_probe IC_RMS1 {
             }
             [
                 position = 8016, 8320
@@ -4833,7 +4816,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" I_RMS1 {
+            component gen_probe I_RMS1 {
             }
             [
                 position = 7992, 8352
@@ -4841,7 +4824,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" POWER_P1 {
+            component gen_probe POWER_P1 {
             }
             [
                 position = 7968, 8384
@@ -4849,7 +4832,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" POWER_Q1 {
+            component gen_probe POWER_Q1 {
             }
             [
                 position = 7944, 8416
@@ -4857,7 +4840,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" POWER_S1 {
+            component gen_probe POWER_S1 {
             }
             [
                 position = 7920, 8448
@@ -4865,7 +4848,7 @@ model "campusgrid - ev" {
                 scale = -1, -1
             ]
 
-            component "core/Probe" POWER_PF1 {
+            component gen_probe POWER_PF1 {
             }
             [
                 position = 7896, 8480
@@ -5057,7 +5040,7 @@ model "campusgrid - ev" {
             connect "Three-phase Meter.C+" C as Connection72
         }
         [
-            position = 9704, 9112
+            position = 9752, 8960
             rotation = right
             size = 48, 136
         ]
@@ -5109,7 +5092,7 @@ model "campusgrid - ev" {
 
         junction Junction14 pe
         [
-            position = 9024, 8544
+            position = 8992, 8496
         ]
 
         junction Junction15 pe
@@ -5119,7 +5102,22 @@ model "campusgrid - ev" {
 
         junction Junction16 pe
         [
-            position = 8992, 8504
+            position = 9024, 8544
+        ]
+
+        junction Junction17 pe
+        [
+            position = 9336, 8904
+        ]
+
+        junction Junction18 pe
+        [
+            position = 9384, 8888
+        ]
+
+        junction Junction19 pe
+        [
+            position = 9440, 8872
         ]
 
         connect "Grid UI1.ui_in" Grid1.ui_in as Connection7
@@ -5220,51 +5218,49 @@ model "campusgrid - ev" {
             breakpoints = 8176, 8544; 8176, 8544
         ]
         connect "Meter (PCC).c" Junction13 as Connection952
-        connect "EV 1 (Generic) UI1.ui_in" "EV 1.Out1" as Connection953
-        connect "EV 1.In2" "EV 1 (Generic) UI1.ui_out" as Connection954
-        connect "EV 1.ext" "EV 1 (Generic) UI1.ext" as Connection955
-        connect "RL coupled PV.c_out" Junction14 as Connection962
-        connect Junction14 Junction10 as Connection963
-        connect "RL coupled EV.c_out" Junction14 as Connection964
-        connect "RL coupled PV.b_out" Junction15 as Connection965
-        connect Junction15 Junction8 as Connection966
-        connect "RL coupled EV.b_out" Junction15 as Connection967
-        connect "RL coupled PV.a_out" Junction16 as Connection968
-        connect Junction16 Junction7 as Connection969
-        connect "RL coupled EV.a_out" Junction16 as Connection970
-        connect "EV 2 (Generic) UI2.ui_in" "EV 2.Out1" as Connection971
-        connect "EV 2.In2" "EV 2 (Generic) UI2.ui_out" as Connection972
-        connect "EV 2.ext" "EV 2 (Generic) UI2.ext" as Connection973
-        connect "Meter (EV1).a" "EV 1.A" as Connection986
-        connect "Meter (EV1).b" "EV 1.B" as Connection987
-        connect "Meter (EV1).c" "EV 1.C" as Connection988
-        connect "Meter (EV2).c" "EV 2.C" as Connection989
-        connect "EV 2.B" "Meter (EV2).b" as Connection990
-        connect "Meter (EV2).a" "EV 2.A" as Connection991
-        connect "RL coupled EV.a_in" "Meter (EV1).A" as Connection1005
+        connect "Variable EV1 (Generic) UI.ui_in" "Variable EV1 (Generic).Out1" as Connection953
+        connect "Variable EV1 (Generic).In2" "Variable EV1 (Generic) UI.ui_out" as Connection954
+        connect "Variable EV1 (Generic).ext" "Variable EV1 (Generic) UI.ext" as Connection955
+        connect "Meter (EV1).a" "Variable EV1 (Generic).A" as Connection959
+        connect "Meter (EV1).b" "Variable EV1 (Generic).B" as Connection960
+        connect "Meter (EV1).c" "Variable EV1 (Generic).C" as Connection961
+        connect "Variable EV2 (Generic) UI.ui_in" "Variable EV2 (Generic).Out1" as Connection962
+        connect "Variable EV2 (Generic).In2" "Variable EV2 (Generic) UI.ui_out" as Connection963
+        connect "Variable EV2 (Generic).ext" "Variable EV2 (Generic) UI.ext" as Connection964
+        connect "Meter (EV2).a" "Variable EV2 (Generic).A" as Connection965
+        connect "Meter (EV2).b" "Variable EV2 (Generic).B" as Connection966
+        connect "Meter (EV2).c" "Variable EV2 (Generic).C" as Connection967
+        connect "RL coupled PV.a_out" Junction14 as Connection968
+        connect Junction14 Junction7 as Connection969
+        connect "RL coupled Load1.a_out" Junction14 as Connection970
+        connect "RL coupled PV.b_out" Junction15 as Connection971
+        connect Junction15 Junction8 as Connection972
+        connect "RL coupled Load1.b_out" Junction15 as Connection973
+        connect "RL coupled PV.c_out" Junction16 as Connection974
+        connect Junction16 Junction10 as Connection975
+        connect "RL coupled Load1.c_out" Junction16 as Connection976
+        connect "RL coupled Load1.a_in" Junction17 as Connection977
         [
-            breakpoints = 9400, 9048
+            breakpoints = 9368, 8872; 9336, 8872
         ]
-        connect "Meter (EV1).B" "RL coupled EV.b_in" as Connection1004
+        connect Junction17 "Meter (EV1).A" as Connection978
+        connect "Meter (EV2).A" Junction17 as Connection979
+        connect "Meter (EV1).B" Junction18 as Connection980
+        connect Junction18 "RL coupled Load1.b_in" as Connection981
+        connect "Meter (EV2).B" Junction18 as Connection982
+        connect "RL coupled Load1.c_in" Junction19 as Connection983
         [
-            breakpoints = 9352, 9040; 9352, 9040
+            breakpoints = 9400, 8872
         ]
-        connect "Meter (EV1).C" "RL coupled EV.c_in" as Connection1006
+        connect Junction19 "Meter (EV1).C" as Connection984
         [
-            breakpoints = 9304, 9032; 9304, 9032
+            breakpoints = 9432, 8872
         ]
+        connect "Meter (EV2).C" Junction19 as Connection985
     }
 
     default {
-        "core/Capacitor" {
-            signal_access = "inherit"
-            capacitance = "1e-6"
-            initial_voltage = "0"
-            pole_shift_ignore = "False"
-            visible = "True"
-        }
-
-        "core/Probe" {
+        gen_probe {
             signal_access = "inherit"
             addr = "0"
             override_signal_name = "False"
@@ -5275,13 +5271,19 @@ model "campusgrid - ev" {
             execution_rate = "inherit"
         }
 
-        "core/Resistor" {
+        pas_capacitor {
+            capacitance = "1e-6"
+            initial_voltage = "0"
+            pole_shift_ignore = "False"
+            visible = "True"
+        }
+
+        pas_resistor {
             resistance = "1"
             param_set = ""
         }
 
-        "core/SCADA Input" {
-            signal_access = "inherit"
+        src_scada_input {
             addr = "0"
             format = "real"
             override_signal_name = "False"
@@ -5343,7 +5345,6 @@ model "campusgrid - ev" {
             Qref = "False"
             Frequency_droop_offset = "False"
             Frequency_droop_coeff = "False"
-            Voltage_droop_offset = "False"
             Voltage_droop_coeff = "False"
             Vrms_ref = "False"
             Fref = "False"
@@ -5436,8 +5437,6 @@ model "campusgrid - ev" {
             Fmeas_Hz = "False"
             Ibatt_A = "False"
             Vbatt_V = "False"
-            Vdc_V = "False"
-            Idc_A = "False"
             SOC = "False"
             SOH = "False"
             Available_Ppv_kW = "False"
