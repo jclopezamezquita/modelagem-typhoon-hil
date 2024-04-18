@@ -7,12 +7,12 @@ import requests
 
 
 # Load model of the Typhoon HIL - .cpd file
-#hil.load_model(file=r'C:\Users\deria\OneDrive\Code\modelagem-typhoon-hil\Modelagem Campusgrid no Typhoon\CAMPUSGRID - EV Target files\CAMPUSGRID - EV.cpd', offlineMode=False, vhil_device=True)
-hil.load_model(file=r'C:\Users\jessi\Downloads\Pós Doc\Atividades Derian\API_Campusgrid_Typhoon_HIL\modelagem-typhoon-hil\Modelagem Campusgrid no Typhoon\CAMPUSGRID - EV Target files\CAMPUSGRID - EV.cpd', offlineMode=False, vhil_device=True)
+hil.load_model(file=r'C:\Users\deria\OneDrive\Code\modelagem-typhoon-hil\Modelagem Campusgrid no Typhoon\CAMPUSGRID - EV Target files\CAMPUSGRID - EV.cpd', offlineMode=False, vhil_device=True)
+# hil.load_model(file=r'C:\Users\jessi\Downloads\Pós Doc\Atividades Derian\API_Campusgrid_Typhoon_HIL\modelagem-typhoon-hil\Modelagem Campusgrid no Typhoon\CAMPUSGRID - EV Target files\CAMPUSGRID - EV.cpd', offlineMode=False, vhil_device=True)
 
 # Load settings of model - .runx file
-#hil.load_settings_file(file=r'C:\Users\deria\OneDrive\Code\modelagem-typhoon-hil\Modelagem Campusgrid no Typhoon\CAMPUSGRID - EV Target files\init.runx')
-hil.load_settings_file(file=r'C:\Users\jessi\Downloads\Pós Doc\Atividades Derian\API_Campusgrid_Typhoon_HIL\modelagem-typhoon-hil\Modelagem Campusgrid no Typhoon\CAMPUSGRID - EV Target files\init.runx')
+hil.load_settings_file(file=r'C:\Users\deria\OneDrive\Code\modelagem-typhoon-hil\Modelagem Campusgrid no Typhoon\CAMPUSGRID - EV Target files\init.runx')
+# hil.load_settings_file(file=r'C:\Users\jessi\Downloads\Pós Doc\Atividades Derian\API_Campusgrid_Typhoon_HIL\modelagem-typhoon-hil\Modelagem Campusgrid no Typhoon\CAMPUSGRID - EV Target files\init.runx')
 
 # Start simulation
 hil.start_simulation()
@@ -168,14 +168,14 @@ def dispatch_requests():
         dispatch_file["load_curt"].append(dispatch_EMS[0]['load_curt_t' + str(x)])
     dispatch_file["ev_1_power"] = []
     for x in range(0,10):
-        dispatch_file["ev_1_power"].append(dispatch_EMS[0]['ev_1_power_t0' + str(x)])
+        dispatch_file["ev_1_power"].append(dispatch_EMS[0]['ev_1_power_t0' + str(x)]/40)
     for x in range(10,24):
-        dispatch_file["ev_1_power"].append(dispatch_EMS[0]['ev_1_power_t' + str(x)])
+        dispatch_file["ev_1_power"].append(dispatch_EMS[0]['ev_1_power_t' + str(x)]/40)
     dispatch_file["ev_2_power"] = []
     for x in range(0,10):
-        dispatch_file["ev_2_power"].append(dispatch_EMS[0]['ev_2_power_t0' + str(x)]/20)
+        dispatch_file["ev_2_power"].append(dispatch_EMS[0]['ev_2_power_t0' + str(x)]/40)
     for x in range(10,24):
-        dispatch_file["ev_2_power"].append(dispatch_EMS[0]['ev_2_power_t' + str(x)]/20) 
+        dispatch_file["ev_2_power"].append(dispatch_EMS[0]['ev_2_power_t' + str(x)]/40) 
 
     with open('dispatch_file.json', 'w') as outfile:
 	    json.dump(dispatch_file, outfile, indent=1)
@@ -183,7 +183,7 @@ def dispatch_requests():
 
 # Loop of simulation 
 while True:
-
+    break
     # First iteration is rejected
     if not new_data:
         try:

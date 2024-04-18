@@ -74,7 +74,7 @@
                 <is_closed>False</is_closed>
             </contactor>
             <contactor>
-                <name>EV 1.Grid Converter1.Contactor.S1</name>
+                <name>Grid1.Contactor.S1</name>
                 <type>three_phase_breaker</type>
                 <device>0</device>
                 <weight>2</weight>
@@ -83,28 +83,10 @@
                 <is_closed>False</is_closed>
             </contactor>
             <contactor>
-                <name>EV 2.Grid Converter1.Contactor.S1</name>
-                <type>three_phase_breaker</type>
-                <device>0</device>
-                <weight>0</weight>
-                <site>2</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
-            </contactor>
-            <contactor>
-                <name>Grid1.Contactor.S1</name>
-                <type>three_phase_breaker</type>
-                <device>0</device>
-                <weight>3</weight>
-                <site>0</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
-            </contactor>
-            <contactor>
                 <name>PCC.S1</name>
                 <type>three_phase_breaker</type>
                 <device>0</device>
-                <weight>4</weight>
+                <weight>3</weight>
                 <site>0</site>
                 <is_enabled>False</is_enabled>
                 <is_closed>False</is_closed>
@@ -119,10 +101,28 @@
                 <is_closed>False</is_closed>
             </contactor>
             <contactor>
-                <name>Variable Load (Generic)1.Grid Converter1.Contactor.S1</name>
+                <name>Variable EV1 (Generic).Grid Converter1.Contactor.S1</name>
+                <type>three_phase_breaker</type>
+                <device>0</device>
+                <weight>4</weight>
+                <site>0</site>
+                <is_enabled>False</is_enabled>
+                <is_closed>False</is_closed>
+            </contactor>
+            <contactor>
+                <name>Variable EV2 (Generic).Grid Converter1.Contactor.S1</name>
                 <type>three_phase_breaker</type>
                 <device>0</device>
                 <weight>5</weight>
+                <site>0</site>
+                <is_enabled>False</is_enabled>
+                <is_closed>False</is_closed>
+            </contactor>
+            <contactor>
+                <name>Variable Load (Generic)1.Grid Converter1.Contactor.S1</name>
+                <type>three_phase_breaker</type>
+                <device>0</device>
+                <weight>6</weight>
                 <site>0</site>
                 <is_enabled>False</is_enabled>
                 <is_closed>False</is_closed>
@@ -2125,226 +2125,6 @@
                 <value>0.1</value>
             </scada_input>
             <scada_input>
-                <name>EV 1 (Generic) UI1.Enable</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 1 (Generic) UI1.F alarm lower limit</name>
-                <device>0</device>
-                <value>0.5</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 1 (Generic) UI1.F alarm upper limit</name>
-                <device>0</device>
-                <value>1.5</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 1 (Generic) UI1.I alarm upper limit</name>
-                <device>0</device>
-                <value>1.5</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 1 (Generic) UI1.P dependency type</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 1 (Generic) UI1.P(V) k1</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 1 (Generic) UI1.P(V) k2</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 1 (Generic) UI1.P(f) k1</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 1 (Generic) UI1.P(f) k2</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 1 (Generic) UI1.Pref</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 1 (Generic) UI1.Pref rate of change</name>
-                <device>0</device>
-                <value>0.1</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 1 (Generic) UI1.Q dependency type</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 1 (Generic) UI1.Q(V) k1</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 1 (Generic) UI1.Q(V) k2</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 1 (Generic) UI1.Q(f) k1</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 1 (Generic) UI1.Q(f) k2</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 1 (Generic) UI1.Qref</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 1 (Generic) UI1.Qref rate of change</name>
-                <device>0</device>
-                <value>0.1</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 1 (Generic) UI1.Reset alarms</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 1 (Generic) UI1.S alarm upper limit</name>
-                <device>0</device>
-                <value>1.5</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 1 (Generic) UI1.V alarm lower limit</name>
-                <device>0</device>
-                <value>0.5</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 1 (Generic) UI1.V alarm upper limit</name>
-                <device>0</device>
-                <value>1.5</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 2 (Generic) UI2.Enable</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 2 (Generic) UI2.F alarm lower limit</name>
-                <device>0</device>
-                <value>0.5</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 2 (Generic) UI2.F alarm upper limit</name>
-                <device>0</device>
-                <value>1.5</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 2 (Generic) UI2.I alarm upper limit</name>
-                <device>0</device>
-                <value>1.5</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 2 (Generic) UI2.P dependency type</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 2 (Generic) UI2.P(V) k1</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 2 (Generic) UI2.P(V) k2</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 2 (Generic) UI2.P(f) k1</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 2 (Generic) UI2.P(f) k2</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 2 (Generic) UI2.Pref</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 2 (Generic) UI2.Pref rate of change</name>
-                <device>0</device>
-                <value>0.1</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 2 (Generic) UI2.Q dependency type</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 2 (Generic) UI2.Q(V) k1</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 2 (Generic) UI2.Q(V) k2</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 2 (Generic) UI2.Q(f) k1</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 2 (Generic) UI2.Q(f) k2</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 2 (Generic) UI2.Qref</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 2 (Generic) UI2.Qref rate of change</name>
-                <device>0</device>
-                <value>0.1</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 2 (Generic) UI2.Reset alarms</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 2 (Generic) UI2.S alarm upper limit</name>
-                <device>0</device>
-                <value>1.5</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 2 (Generic) UI2.V alarm lower limit</name>
-                <device>0</device>
-                <value>0.5</value>
-            </scada_input>
-            <scada_input>
-                <name>EV 2 (Generic) UI2.V alarm upper limit</name>
-                <device>0</device>
-                <value>1.5</value>
-            </scada_input>
-            <scada_input>
                 <name>Grid UI1.Connect</name>
                 <device>0</device>
                 <value>0.0</value>
@@ -2463,6 +2243,226 @@
                 <name>PV Power Plant (Generic) UI1.VoltWatt enable</name>
                 <device>0</device>
                 <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV1 (Generic) UI.Enable</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV1 (Generic) UI.F alarm lower limit</name>
+                <device>0</device>
+                <value>0.5</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV1 (Generic) UI.F alarm upper limit</name>
+                <device>0</device>
+                <value>1.5</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV1 (Generic) UI.I alarm upper limit</name>
+                <device>0</device>
+                <value>1.5</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV1 (Generic) UI.P dependency type</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV1 (Generic) UI.P(V) k1</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV1 (Generic) UI.P(V) k2</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV1 (Generic) UI.P(f) k1</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV1 (Generic) UI.P(f) k2</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV1 (Generic) UI.Pref</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV1 (Generic) UI.Pref rate of change</name>
+                <device>0</device>
+                <value>0.1</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV1 (Generic) UI.Q dependency type</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV1 (Generic) UI.Q(V) k1</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV1 (Generic) UI.Q(V) k2</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV1 (Generic) UI.Q(f) k1</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV1 (Generic) UI.Q(f) k2</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV1 (Generic) UI.Qref</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV1 (Generic) UI.Qref rate of change</name>
+                <device>0</device>
+                <value>0.1</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV1 (Generic) UI.Reset alarms</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV1 (Generic) UI.S alarm upper limit</name>
+                <device>0</device>
+                <value>1.5</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV1 (Generic) UI.V alarm lower limit</name>
+                <device>0</device>
+                <value>0.5</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV1 (Generic) UI.V alarm upper limit</name>
+                <device>0</device>
+                <value>1.5</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV2 (Generic) UI.Enable</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV2 (Generic) UI.F alarm lower limit</name>
+                <device>0</device>
+                <value>0.5</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV2 (Generic) UI.F alarm upper limit</name>
+                <device>0</device>
+                <value>1.5</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV2 (Generic) UI.I alarm upper limit</name>
+                <device>0</device>
+                <value>1.5</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV2 (Generic) UI.P dependency type</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV2 (Generic) UI.P(V) k1</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV2 (Generic) UI.P(V) k2</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV2 (Generic) UI.P(f) k1</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV2 (Generic) UI.P(f) k2</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV2 (Generic) UI.Pref</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV2 (Generic) UI.Pref rate of change</name>
+                <device>0</device>
+                <value>0.1</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV2 (Generic) UI.Q dependency type</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV2 (Generic) UI.Q(V) k1</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV2 (Generic) UI.Q(V) k2</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV2 (Generic) UI.Q(f) k1</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV2 (Generic) UI.Q(f) k2</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV2 (Generic) UI.Qref</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV2 (Generic) UI.Qref rate of change</name>
+                <device>0</device>
+                <value>0.1</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV2 (Generic) UI.Reset alarms</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV2 (Generic) UI.S alarm upper limit</name>
+                <device>0</device>
+                <value>1.5</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV2 (Generic) UI.V alarm lower limit</name>
+                <device>0</device>
+                <value>0.5</value>
+            </scada_input>
+            <scada_input>
+                <name>Variable EV2 (Generic) UI.V alarm upper limit</name>
+                <device>0</device>
+                <value>1.5</value>
             </scada_input>
             <scada_input>
                 <name>Variable Load (Generic) UI1.Enable</name>
