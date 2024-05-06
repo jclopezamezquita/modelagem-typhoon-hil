@@ -7,10 +7,12 @@ import requests
 
 
 # Load model of the Typhoon HIL - .cpd file
+# hil.load_model(file=r'C:\Users\deriantairo\OneDrive\Code\modelagem-typhoon-hil\Modelagem Campusgrid no Typhoon\CAMPUSGRID - EV Target files\CAMPUSGRID - EV.cpd', offlineMode=False, vhil_device=True)
 hil.load_model(file=r'C:\Users\deria\OneDrive\Code\modelagem-typhoon-hil\Modelagem Campusgrid no Typhoon\CAMPUSGRID - EV Target files\CAMPUSGRID - EV.cpd', offlineMode=False, vhil_device=True)
 # hil.load_model(file=r'C:\Users\jessi\Downloads\Pós Doc\Atividades Derian\API_Campusgrid_Typhoon_HIL\modelagem-typhoon-hil\Modelagem Campusgrid no Typhoon\CAMPUSGRID - EV Target files\CAMPUSGRID - EV.cpd', offlineMode=False, vhil_device=True)
 
 # Load settings of model - .runx file
+# hil.load_settings_file(file=r'C:\Users\deriantairo\OneDrive\Code\modelagem-typhoon-hil\Modelagem Campusgrid no Typhoon\CAMPUSGRID - EV Target files\init.runx')
 hil.load_settings_file(file=r'C:\Users\deria\OneDrive\Code\modelagem-typhoon-hil\Modelagem Campusgrid no Typhoon\CAMPUSGRID - EV Target files\init.runx')
 # hil.load_settings_file(file=r'C:\Users\jessi\Downloads\Pós Doc\Atividades Derian\API_Campusgrid_Typhoon_HIL\modelagem-typhoon-hil\Modelagem Campusgrid no Typhoon\CAMPUSGRID - EV Target files\init.runx')
 
@@ -19,8 +21,8 @@ hil.start_simulation()
 print ("\n------ Start Simulation ------\n")
 
 # Contactors closed (Main grid and PCC)
-hil.set_contactor('PCC.S1', swControl=True, swState=True) #PAC fechado 
-hil.set_scada_input_value('Grid UI1.Connect', 1.0) #Contactor rede fechado
+hil.set_contactor('PCC.S1', swControl=True, swState=True) #PCC closed 
+hil.set_scada_input_value('Grid UI1.Connect', 1.0) #Contactor rede closed
 
 # DERs contactors closed
 hil.set_scada_input_value('Battery ESS (Generic) UI1.Enable', 1.0) #BESS contactor closed 
@@ -31,7 +33,8 @@ hil.set_scada_input_value('Variable EV1 (Generic) UI.Enable', 1.0) #EV1 contacto
 hil.set_scada_input_value('Variable EV2 (Generic) UI.Enable', 1.0) #EV2 contactor closed
 
 #******************** Inputs BESS ***********************
-hil.set_scada_input_value('Battery ESS (Generic) UI1.Initial SOC', 40.0)
+# grid following mode (code 0) - droop (code 1) - isochronous (code 2)
+hil.set_scada_input_value('Battery ESS (Generic) UI1.Initial SOC', 20.0)
 hil.set_scada_input_value('Battery ESS (Generic) UI1.Initial SOH', 90.0)
 hil.set_scada_input_value('Battery ESS (Generic) UI1.Qref', 0.0)
 hil.set_scada_input_value('Battery ESS (Generic) UI1.Max SOC', 100.0)
@@ -123,8 +126,10 @@ initial_time = datetime.now()
 
 # Sets the first time to clean the data logger 
 time_clean_data_logger = initial_time + timedelta(hours=10,minutes=1)
-print("Iniciar limpeza do primeiro registro às: ", time_clean_data_logger) 
-print("\n")
+print(f"Iniciar limpeza do primeiro registro às: {time_clean_data_logger}\n") 
+
+# Define the outage hour 
+outage = "sim" # "sim" or "nao"
 
 # Maximum value of the irradiance to photovoltaic generation
 max_irradiance = 710.59
@@ -183,7 +188,6 @@ def dispatch_requests():
 
 # Loop of simulation 
 while True:
-    break
     # First iteration is rejected
     if not new_data:
         try:
@@ -206,6 +210,8 @@ while True:
     # Insert reference power of the bess and genset with dispatch file
     Pref_bat = dispatch_file["bess"][index]
     Pref_genset = dispatch_file["genset"][index]
+    Pref_pv_curt = dispatch_file["pv_curt"][index]
+    Pref_load_curt = dispatch_file["load_curt"][index]
     Pref_ev_1 = dispatch_file["ev_1_power"][index]
     Pref_ev_2 = dispatch_file["ev_2_power"][index]
 
@@ -216,14 +222,16 @@ while True:
     Pref_qload = profiles["qload"][index_5min]
     Irradiance = (profiles["irradiance"][index_5min]) * max_irradiance
     
-    print("Pref_bat: ", Pref_bat)
-    print("Pref_genset: ", Pref_genset)
-    print("Pref_pload: ", Pref_pload)
-    print("Pref_qload: ", Pref_qload)
-    print("Irradiance: ", Irradiance)
-    print("Pref_EV_1: ", Pref_ev_1)
-    print("Pref_EV_2: ", Pref_ev_2)
+    print(f"Pref_bat: {Pref_bat} pu")
+    print(f"Pref_genset: {Pref_genset} pu")
+    print(f"Pref_pload: {Pref_pload} pu")
+    print(f"Pref_qload: {Pref_qload} pu")
+    if Irradiance > 0:
+        print("Irradiance: ", Irradiance)
+    print(f"Pref_EV_1: {Pref_ev_1} pu")
+    print(f"Pref_EV_2: {Pref_ev_2} pu")
     print("------------------------\n")
+
 
     # Sets the input value of the EV 1, EV 2, BESS, Genset, load and PV
     hil.set_scada_input_value('Battery ESS (Generic) UI1.Pref', Pref_bat)
@@ -233,6 +241,56 @@ while True:
     hil.set_scada_input_value('PV Power Plant (Generic) UI1.Irradiance', Irradiance)
     hil.set_scada_input_value('Variable EV1 (Generic) UI.Pref', Pref_ev_1)
     hil.set_scada_input_value('Variable EV2 (Generic) UI.Pref', Pref_ev_2)
+
+    # # Check alarms 
+    # print("Alarm status of BESS:", hil.read_analog_signal(name = "Battery ESS (Generic) UI1.alarm_msg"))
+    # soc_bess = round(hil.read_analog_signal(name = 'Battery ESS (Generic) UI1.SOC'),2)
+    # print("Current SOC of BESS:", soc_bess)
+    
+    # if hil.read_analog_signal(name = "Battery ESS (Generic) UI1.alarm_msg") == 1.0:
+    #     hil.set_scada_input_value('Battery ESS (Generic) UI1.Reset alarms', 1.0)
+    # # elif hil.read_analog_signal(name = "Battery ESS (Generic) UI1.alarm_msg") == 5.0:
+    # #     hil.set_scada_input_value('Battery ESS (Generic) UI1.Reset alarms', 1.0)
+    # else:
+    #     hil.set_scada_input_value('Battery ESS (Generic) UI1.Reset alarms', 0.0)
+
+    
+    # Configurations to Islanded Operation Mode
+    if outage == "sim":
+        hour_outage = 16
+        if local_time[3] >= hour_outage and local_time[3] < hour_outage + 2:
+            print("\n ----------Islanded Operation Mode----------\n")
+            hil.set_contactor('PCC.S1', swControl=False, swState=False) # Open contactor
+            print('Contactor PCC Open')
+
+            hil.set_scada_input_value('Battery ESS (Generic) UI1.Converter mode', 2.0) # BESS Isochronous mode
+            print('The BESS is operating in Isochronous mode')
+
+            hil.set_scada_input_value('Variable Load (Generic) UI1.Pref', Pref_pload)
+            hil.set_scada_input_value('Variable Load (Generic) UI1.Qref', Pref_qload)
+
+            if Pref_pv_curt > 0:
+                print(f"We have PV curtailment: {Pref_pv_curt} W")
+                hil.set_scada_input_value('PV Power Plant (Generic) UI1.Enable', 0) # PV contactor open
+                print(hil.read_analog_signal(name='Meter (PV).Three-phase Meter.POWER_PA'))
+                print(hil.read_analog_signal(name='Meter (PV).Three-phase Meter.POWER_PB'))
+                print(hil.read_analog_signal(name='Meter (PV).Three-phase Meter.POWER_PC'))
+
+            if Pref_load_curt > 0:
+                print(f"We have Load curtailment: {Pref_load_curt} W")
+                hil.set_scada_input_value('Variable Load (Generic) UI1.Enable', 0)
+                print(hil.read_analog_signal(name='Meter (Load).Three-phase Meter.POWER_PA'))
+                print(hil.read_analog_signal(name='Meter (Load).Three-phase Meter.POWER_PB'))
+                print(hil.read_analog_signal(name='Meter (Load).Three-phase Meter.POWER_PC'))
+
+        # print(hil.read_analog_signal(name = "Variable Load (Generic) UI1.alarm_msg")) 
+        # print(hil.read_analog_signal(name = "Battery ESS (Generic) UI1.alarm_msg"))    
+        # print(hil.read_analog_signal(name = 'Variable Load (Generic) UI1.MCB_status'))   # Load status 1 = on, 0 = off
+        # print(hil.read_digital_signal(name = 'PCC.S1_fb'))  # PCC status 1 = on, 0 = off  
+        else:
+            hil.set_contactor('PCC.S1', swControl=True, swState=True) # Closed contactor
+            hil.set_scada_input_value('Battery ESS (Generic) UI1.Converter mode', 0.0) # BESS in grid following mode
+    
 
     # To compute angles and power flow at each node 
     PF_PCC_A  = hil.read_analog_signal(name='Meter (PCC).Three-phase Meter.POWER_PFA')
@@ -495,7 +553,8 @@ while True:
     local_time = time.localtime()
 
     # Update the dispatch at 23h e 58 min
-    if local_time[3] == 23 and local_time[4] == 59:
+    # Time struct: YYYY, MM, DD, HH, Mim, Sec, wday, yday
+    if local_time[3] == 23 and local_time[4] == 58:
         dispatch_requests()
 
     # Define the hour of the stop simulation

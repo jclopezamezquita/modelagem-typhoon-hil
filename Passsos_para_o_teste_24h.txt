@@ -1,0 +1,29 @@
+Passos para o teste de 24 horas
+
+EMS Software
+	1. Definir o SOC inicial da BESS (cronfunctions.py - linha 68)
+	2. Conferir se têm contingencia, se tiver conferir o horario.
+	3. Atualizar o horario para calcular o despacho pre definido.
+
+HIL
+
+	1. Conferir o SOC inicial da BESS de acordo com o horario do inicio da simulação (Campusgrid_aPI_HIL - linha 35)
+	2. Conferir se têm contingencia, se tiver conferir o horario (linha 130, sim para contingencia e nao sem contingencia)
+	3. Se tiver contingencia. definir a hora da contigencia hour_outage, caso contrario pular o seguiente passo.
+	4. Abrir o venv: .\venv\Scripts\activate
+	5. Executar microgrid API.py
+	6. Executar Campusgrid_API_HIL.py 
+	
+
+EMS Software
+	1. Comentar a linha 68 e descomentar as linhas que chamam o SOC da BESS da microrrede HIL (cronfunctions.py - linha 53 ate linha 63).
+	2. Conferir o URL2 na linha 54 para que seja o endereço da microgrid_API.py 
+	3. Conferir se têm contingencia, se tiver conferir o horario, perfils de demanda e geração PV.
+	4. Atualizar o horario para calcular o despacho para o dia seguinte [55,2 (23:55hrs)].
+	5. Reiniciar o Docker com rebuild.ps
+
+
+
+
+
+
